@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hurricane Solution – Protección Anticiclónica en Quintana Roo</title>
+
+  <!-- ============================================================
+       TODOS LOS ESTILOS CONSOLIDADOS AQUÍ
+       (Antes estaban en 4 bloques <style> dispersos en el HTML)
+       ============================================================ -->
+  <style>
+
+    /* ============================================================
+       VARIABLES GLOBALES
+       ============================================================ */
+    :root {
+      --hs-bg: #f5f5f5;
+      --hs-surface: #ffffff;
+      --hs-text: #111111;
+      --hs-text-soft: #5d5d5d;
+      --hs-border: rgba(17, 17, 17, 0.10);
+      --hs-border-soft: rgba(17, 17, 17, 0.08);
+      --hs-border-strong: rgba(17, 17, 17, 0.18);
+      --hs-primary: #111111;
+      --hs-primary-hover: #000000;
+      --hs-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      --hs-shadow-hover: 0 14px 30px rgba(0, 0, 0, 0.08);
+      --hs-radius: 18px;
+      --hs-max: 1280px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+
+    /* ============================================================
+       SECCIÓN: HERO
+       ============================================================ */
+    .hs-hero {
+      position: relative;
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-image: url("https://hurricanesolution.com/wp-content/uploads/2026/03/HurricanSolutionPortada-scaled.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .hs-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(0,0,0,0.65) 0%,
+          rgba(0,0,0,0.45) 42%,
+          rgba(0,0,0,0.16) 74%,
+          rgba(0,0,0,0.05) 100%);
+      z-index: 1;
+    }
+
+    .hs-hero__content {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 1200px);
+      margin: 0 auto;
+      padding: 78px 24px 70px;
+      color: #ffffff;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .hs-hero--visible .hs-hero__content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hs-hero__shell {
+      max-width: 620px;
+      padding: 18px 22px 20px;
+      border-radius: 22px;
+      background: rgba(5, 5, 5, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.40),
+        0 0 0 1px rgba(0, 0, 0, 0.35) inset;
+    }
+
+    .hs-hero__header > * {
+      max-width: 100%;
+    }
+
+    .hs-hero__eyebrow {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(0,0,0,0.32);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .hs-hero__title {
+      position: relative;
+      margin: 0 0 10px;
+      font-size: clamp(1.9rem, 3.1vw, 3.1rem);
+      line-height: 1.06;
+      letter-spacing: -0.045em;
+      color: #ffffff;
+      text-shadow: 0 10px 28px rgba(0,0,0,0.40);
+    }
+
+    .hs-hero__title-highlight {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hs-hero__title-highlight::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 3px;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.25) 100%);
+      transform-origin: left;
+      transition: width 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+
+    .hs-hero--visible .hs-hero__title-highlight::after {
+      width: 100%;
+    }
+
+    .hs-hero__text {
+      margin: 0 0 22px;
+      font-size: clamp(0.97rem, 1.05vw, 1.03rem);
+      line-height: 1.75;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .hs-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hs-hero__cta {
+      min-height: 46px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .hs-hero__cta--primary {
+      background: #111111;
+      color: #ffffff;
+      border: 1px solid #000000;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.36);
+    }
+
+    .hs-hero__cta--primary:hover {
+      transform: translateY(-1px);
+      background: #000000;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.42);
+    }
+
+    .hs-hero__cta--secondary {
+      border: 1px solid rgba(255,255,255,0.32);
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .hs-hero__cta--secondary:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.16);
+    }
+
+    .hs-hero__trust {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .hs-hero__trust-item {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .hs-hero__trust-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #ffffff;
+      transform: translateY(-50%);
+    }
+
+    .hs-hero__trust strong {
+      font-weight: 700;
+    }
+
+    .hs-hero--parallax {
+      background-attachment: fixed;
+    }
+
+    /* Hero – Responsive */
+    @media (max-width: 991px) {
+      .hs-hero {
+        background-position: center center;
+        min-height: 68vh;
+      }
+      .hs-hero__content {
+        padding: 64px 18px 56px;
+      }
+      .hs-hero__shell {
+        max-width: 100%;
+        padding: 18px 18px 20px;
+        border-radius: 18px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hs-hero {
+        min-height: 64vh;
+      }
+      .hs-hero__title {
+        font-size: clamp(1.7rem, 5.4vw, 2.4rem);
+      }
+      .hs-hero__text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+      .hs-hero__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hs-hero__cta {
+        width: 100%;
+      }
+      .hs-hero__trust {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
+
+    /* ============================================================
+       SECCIÓN: FEATURES / GARANTÍAS / TARJETAS
+       ============================================================ */
+    .hs-features {
+      padding: 64px 20px;
+      background: var(--hs-bg);
+    }
+
+    .hs-container {
+      width: min(100%, var(--hs-max));
+      margin: 0 auto;
+    }
+
+    .hs-section-heading {
+      max-width: 980px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+
+    .hs-section-heading h2 {
+      margin: 0 0 16px;
+      color: var(--hs-text);
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .hs-section-heading p {
+      margin: 0 auto;
+      max-width: 960px;
+      color: var(--hs-text-soft);
+      font-size: 1rem;
+      line-height: 1.85;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hs-assurance {
+      margin-bottom: 38px;
+      padding: 34px 0 10px;
+      border-top: 1px solid rgba(17, 17, 17, 0.08);
+      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .hs-assurance__intro {
+      max-width: 860px;
+      margin-bottom: 28px;
+    }
+
+    .hs-assurance__eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #111111;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.92;
+    }
+
+    .hs-assurance__intro h3 {
+      margin: 0 0 12px;
+      color: #111111;
+      font-size: clamp(1.9rem, 2.4vw, 2.9rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+    }
+
+    .hs-assurance__intro p {
+      margin: 0;
+      max-width: 72ch;
+      color: #5d5d5d;
+      font-size: 1rem;
+      line-height: 1.85;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hs-assurance__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.95fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .hs-assurance__heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .hs-assurance__icon {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(17, 17, 17, 0.10);
+      border-radius: 50%;
+      color: #111111;
+      background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .hs-assurance__icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .hs-assurance__label {
+      margin: 0 0 4px;
+      color: #111111;
+      font-size: 1.12rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .hs-assurance__subtext {
+      margin: 0;
+      color: #6a6a6a;
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .hs-warranty-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .hs-warranty-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 20px 8px 20px 0;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+      transition: transform 0.22s ease, background 0.22s ease, padding-left 0.22s ease;
+    }
+
+    .hs-warranty-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 1px;
+      background: #111111;
+      transform: translateY(-50%);
+      transition: width 0.25s ease;
+      opacity: 0.9;
+    }
+
+    .hs-warranty-item:hover {
+      padding-left: 12px;
+      background: linear-gradient(90deg, rgba(17,17,17,0.025) 0%, rgba(17,17,17,0) 60%);
+    }
+
+    .hs-warranty-item:hover::before {
+      width: 10px;
+    }
+
+    .hs-warranty-item__meta {
+      display: grid;
+      gap: 6px;
+    }
+
+    .hs-warranty-item__product {
+      color: #111111;
+      font-size: clamp(1.65rem, 2.4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+    }
+
+    .hs-warranty-item__desc {
+      color: #6a6a6a;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .hs-warranty-item__years {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      min-width: 0;
+      justify-content: flex-end;
+      white-space: nowrap;
+    }
+
+    .hs-warranty-item__years strong,
+    .hs-warranty-item__years span {
+      color: #111111;
+      font-size: clamp(1.65rem, 2.4vw, 2.4rem);
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .hs-support-block {
+      padding-left: 24px;
+      border-left: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .hs-support-block__content p {
+      margin: 0 0 14px;
+      color: #5d5d5d;
+      font-size: 0.98rem;
+      line-height: 1.82;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hs-support-block__content ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hs-support-block__content li {
+      position: relative;
+      padding-left: 18px;
+      color: #4e4e4e;
+      font-size: 0.95rem;
+      line-height: 1.72;
+    }
+
+    .hs-support-block__content li::before {
+      content: "";
+      position: absolute;
+      top: 0.75em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #111111;
+      transform: translateY(-50%);
+    }
+
+    .hs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .hs-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--hs-surface);
+      border: 1px solid var(--hs-border);
+      border-radius: var(--hs-radius);
+      overflow: hidden;
+      box-shadow: var(--hs-shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .hs-card.is-open {
+      border-color: var(--hs-border-strong);
+      box-shadow: var(--hs-shadow-hover);
+    }
+
+    .hs-card__media {
+      margin: 0;
+      height: 180px;
+      overflow: hidden;
+      background: #e7e7e7;
+    }
+
+    .hs-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hs-card__body {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 22px;
+    }
+
+    .hs-card__body h3 {
+      margin: 0;
+      color: var(--hs-text);
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .hs-card__excerpt {
+      margin: 0;
+      color: var(--hs-text-soft);
+      font-size: 0.98rem;
+      line-height: 1.75;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hs-card__actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .hs-card__toggle {
+      margin-top: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      width: fit-content;
+      min-height: 50px;
+      padding: 13px 18px;
+      border: 1px solid rgba(17, 17, 17, 0.10);
+      border-radius: 999px;
+      background: linear-gradient(180deg, #1a1a1a 0%, #111111 100%);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.1;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    }
+
+    .hs-card__toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(0,0,0,0.14);
+      background: linear-gradient(180deg, #222222 0%, #111111 100%);
+    }
+
+    .hs-card__toggle:focus-visible,
+    .hs-main-cta:focus-visible {
+      outline: 3px solid rgba(17, 17, 17, 0.14);
+      outline-offset: 3px;
+    }
+
+    .hs-card__icon {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      flex: 0 0 14px;
+    }
+
+    .hs-card__icon::before,
+    .hs-card__icon::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      transform: translate(-50%, -50%);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .hs-card__icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .hs-card.is-open .hs-card__icon::after {
+      opacity: 0;
+    }
+
+    .hs-card__panel {
+      height: 0;
+      overflow: hidden;
+      transition: height 0.32s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+
+    .hs-card__details-content {
+      padding-top: 14px;
+      margin-top: 2px;
+      border-top: 1px solid var(--hs-border-soft);
+      display: grid;
+      gap: 12px;
+    }
+
+    .hs-card__details-content p {
+      margin: 0;
+      color: var(--hs-text-soft);
+      font-size: 0.97rem;
+      line-height: 1.8;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hs-section-cta {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 24px;
+      background: var(--hs-surface);
+      border: 1px solid var(--hs-border);
+      border-radius: 20px;
+      box-shadow: var(--hs-shadow);
+    }
+
+    .hs-section-cta__content h3 {
+      margin: 0 0 10px;
+      color: var(--hs-text);
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .hs-section-cta__content p {
+      margin: 0;
+      color: var(--hs-text-soft);
+      line-height: 1.75;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .hs-main-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: #111111;
+      color: #ffffff;
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    }
+
+    .hs-main-cta:hover {
+      transform: translateY(-1px);
+      background: #000000;
+      box-shadow: 0 14px 24px rgba(0,0,0,0.14);
+    }
+
+    /* Features – Responsive */
+    @media (max-width: 1024px) {
+      .hs-card__media { height: 165px; }
+      .hs-assurance__grid { grid-template-columns: 1fr; gap: 24px; }
+      .hs-support-block { padding-left: 0; border-left: 0; border-top: 1px solid rgba(17, 17, 17, 0.08); padding-top: 24px; }
+      .hs-section-cta { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 991px) {
+      .hs-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 767px) {
+      .hs-features { padding: 48px 16px; }
+      .hs-section-heading { margin-bottom: 24px; text-align: left; }
+      .hs-section-heading p,
+      .hs-assurance__intro p,
+      .hs-support-block__content p,
+      .hs-card__excerpt,
+      .hs-card__details-content p,
+      .hs-section-cta__content p { text-align: left; text-justify: auto; }
+      .hs-assurance { padding: 26px 0 6px; margin-bottom: 30px; }
+      .hs-assurance__intro { margin-bottom: 22px; }
+      .hs-assurance__heading { gap: 12px; margin-bottom: 16px; }
+      .hs-assurance__icon { width: 42px; height: 42px; min-width: 42px; }
+      .hs-assurance__icon svg { width: 24px; height: 24px; }
+      .hs-warranty-item { grid-template-columns: 1fr; gap: 10px; padding: 18px 0; }
+      .hs-warranty-item:hover { padding-left: 0; background: none; }
+      .hs-warranty-item::before,
+      .hs-warranty-item:hover::before { width: 0; }
+      .hs-warranty-item__product,
+      .hs-warranty-item__years strong,
+      .hs-warranty-item__years span { font-size: 1.8rem; }
+      .hs-warranty-item__years { justify-content: flex-start; }
+      .hs-card__media { height: 140px; }
+      .hs-card__body { padding: 18px 16px; }
+      .hs-card__body h3,
+      .hs-assurance__intro h3 { font-size: 1.12rem; }
+      .hs-card__excerpt,
+      .hs-card__details-content p,
+      .hs-section-cta__content p,
+      .hs-support-block__content p,
+      .hs-support-block__content li { font-size: 0.95rem; line-height: 1.7; }
+      .hs-card__toggle,
+      .hs-main-cta { width: 100%; justify-content: center; }
+      .hs-section-cta { padding: 20px 16px; }
+      .hs-section-cta__content h3 { font-size: 1.15rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hs-card__media { height: 128px; }
+      .hs-card__body { padding: 16px 14px; }
+    }
+
+
+    /* ============================================================
+       SECCIÓN: TESTIMONIOS
+       ============================================================ */
+    .hs-testimonials-band button,
+    .hs-testimonials-band a {
+      outline: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .hs-testimonials-band button:focus,
+    .hs-testimonials-band button:active,
+    .hs-testimonials-band button:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .hs-testimonials-band {
+      position: relative;
+      left: 50%;
+      right: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 64px 0;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.92) 0%, rgba(244,244,242,1) 38%, rgba(236,236,233,1) 100%);
+      color: #111111;
+      overflow: hidden;
+    }
+
+    .hs-testimonials-band__inner {
+      width: min(100%, 1240px);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.3fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hs-testimonials-band__intro,
+    .hs-testimonials-band__slider {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.08),
+        0 0 0 1px rgba(255,255,255,0.34) inset;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px;
+    }
+
+    .hs-testimonials-band__intro {
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hs-testimonials-band__eyebrow {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6a6a6a;
+    }
+
+    .hs-testimonials-band__title {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 2.3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      color: #111111;
+    }
+
+    .hs-testimonials-band__text {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: #5a5a5a;
+      max-width: 42ch;
+    }
+
+    .hs-testimonials-band__stats {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hs-testimonials-band__stat {
+      padding: 14px 14px 12px;
+      border-radius: 16px;
+      background: rgba(17,17,17,0.04);
+    }
+
+    .hs-testimonials-band__stat strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .hs-testimonials-band__stat span {
+      font-size: 0.82rem;
+      color: #626262;
+      line-height: 1.45;
+    }
+
+    .hs-testimonials-band__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: #111111;
+      color: #ffffff !important;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none !important;
+      letter-spacing: 0.01em;
+      transition: background 0.2s ease, transform 0.2s ease;
+      align-self: flex-start;
+    }
+
+    .hs-testimonials-band__cta:hover,
+    .hs-testimonials-band__cta:focus,
+    .hs-testimonials-band__cta:active {
+      background: #333333;
+      transform: translateY(-1px);
+      color: #ffffff !important;
+      text-decoration: none !important;
+    }
+
+    .hs-testimonials-band__cta svg {
+      transition: transform 0.2s ease;
+    }
+
+    .hs-testimonials-band__cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    .hs-testimonials-band__slider {
+      position: relative;
+      padding: 24px 24px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hs-testimonials-band__track {
+      position: relative;
+      flex: 1 1 auto;
+    }
+
+    .hs-band-testimonial {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 4px 0 0;
+    }
+
+    .hs-band-testimonial.is-active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .hs-band-testimonial__top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .hs-band-testimonial__avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #151515 0%, #3a3a3a 100%);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+    }
+
+    .hs-band-testimonial__name {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      line-height: 1.2;
+      color: #111111;
+    }
+
+    .hs-band-testimonial__meta {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: #666666;
+    }
+
+    .hs-band-testimonial__quote {
+      margin: 0;
+      max-width: 58ch;
+      font-size: 0.94rem;
+      line-height: 1.72;
+      color: #242424;
+    }
+
+    .hs-band-testimonial__tags {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hs-band-testimonial__tags span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(17,17,17,0.07);
+      color: #242424;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .hs-testimonials-band__controls {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .hs-testimonials-band__arrow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 999px;
+      background: #ffffff;
+      color: #111111;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    .hs-testimonials-band__arrow:hover {
+      transform: translateY(-1px);
+      background: #111111;
+      color: #ffffff;
+      border-color: #111111;
+    }
+
+    .hs-testimonials-band__arrow:active {
+      transform: translateY(0);
+      background: #222222;
+      color: #ffffff;
+      border-color: #222222;
+    }
+
+    .hs-testimonials-band__arrow:focus,
+    .hs-testimonials-band__arrow:focus-visible {
+      background: #ffffff;
+      color: #111111;
+      border-color: #111111;
+    }
+
+    .hs-testimonials-band__arrow:focus:hover,
+    .hs-testimonials-band__arrow:focus-visible:hover {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .hs-testimonials-band__dots {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hs-testimonials-band__dot {
+      width: 7px;
+      height: 7px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(17,17,17,0.18);
+      cursor: pointer;
+      padding: 0;
+      transition: width 0.18s ease, background 0.18s ease;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    .hs-testimonials-band__dot:hover { background: rgba(17,17,17,0.4); }
+    .hs-testimonials-band__dot:active,
+    .hs-testimonials-band__dot:focus,
+    .hs-testimonials-band__dot:focus-visible { background: rgba(17,17,17,0.4); }
+    .hs-testimonials-band__dot.is-active { width: 22px; background: #111111; }
+    .hs-testimonials-band__dot.is-active:focus,
+    .hs-testimonials-band__dot.is-active:active { background: #111111; }
+
+    /* Testimonios – Responsive */
+    @media (max-width: 1024px) {
+      .hs-testimonials-band { left: auto; right: auto; width: 100%; margin-left: 0; margin-right: 0; padding: 54px 0; }
+      .hs-testimonials-band__inner { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    @media (max-width: 767px) {
+      .hs-testimonials-band { padding: 46px 0; }
+      .hs-testimonials-band__inner { padding: 0 16px; }
+      .hs-testimonials-band__intro,
+      .hs-testimonials-band__slider { border-radius: 20px; }
+      .hs-testimonials-band__intro { padding: 22px 18px; }
+      .hs-testimonials-band__slider { padding: 20px 18px 16px; }
+      .hs-testimonials-band__title { font-size: clamp(1.55rem, 7vw, 2rem); }
+      .hs-testimonials-band__text { font-size: 0.93rem; }
+      .hs-testimonials-band__stats { grid-template-columns: 1fr; }
+      .hs-testimonials-band__cta { width: 100%; justify-content: center; }
+      .hs-band-testimonial__top { align-items: flex-start; }
+      .hs-band-testimonial__quote { font-size: 0.9rem; line-height: 1.68; }
+      .hs-testimonials-band__controls { margin-top: 16px; padding-top: 14px; }
+      .hs-testimonials-band__arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+      .hs-testimonials-band__dots { gap: 4px; }
+      .hs-testimonials-band__dot { width: 6px; height: 6px; }
+      .hs-testimonials-band__dot.is-active { width: 18px; }
+    }
+
+
+    /* ============================================================
+       SECCIÓN: FOOTER PREMIUM
+       ============================================================ */
+    .hs-footer-premium {
+      position: relative;
+      left: 50%;
+      right: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: linear-gradient(180deg, #0b1016 0%, #06090d 100%);
+      color: #f4f6f8;
+      overflow: hidden;
+      padding: 58px 0 24px;
+    }
+
+    .hs-footer-premium__bg {
+      position: absolute;
+      inset: auto auto -180px -120px;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(19,130,150,0.24) 0%, rgba(19,130,150,0) 72%);
+      pointer-events: none;
+    }
+
+    .hs-footer-premium__wrap {
+      width: min(100%, 1280px);
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hs-footer-premium__main {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1.35fr);
+      gap: 38px;
+      align-items: start;
+    }
+
+    .hs-footer-premium__brand { padding-right: 10px; }
+
+    .hs-footer-premium__logo-link {
+      display: inline-block;
+      max-width: 255px;
+    }
+
+    .hs-footer-premium__logo {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hs-footer-premium__text {
+      margin: 18px 0 0;
+      max-width: 39ch;
+      color: rgba(244,246,248,0.78);
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .hs-footer-premium__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hs-footer-premium__cta,
+    .hs-footer-premium__phone {
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .hs-footer-premium__cta {
+      background: #ffffff;
+      color: #081018;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.24);
+    }
+
+    .hs-footer-premium__cta:hover {
+      transform: translateY(-2px);
+      background: #e9fbff;
+    }
+
+    .hs-footer-premium__phone {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #ffffff;
+    }
+
+    .hs-footer-premium__phone:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .hs-footer-premium__social {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 22px 0 0;
+    }
+
+    .hs-footer-premium__social li { margin: 0; }
+
+    .hs-footer-premium__social a {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.82);
+      transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .hs-footer-premium__social a:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.20);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .hs-footer-premium__social svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Footer – Responsive */
+    @media (max-width: 1024px) {
+      .hs-footer-premium {
+        left: auto;
+        right: auto;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 44px 0 20px;
+      }
+      .hs-footer-premium__wrap { padding: 0 16px; }
+      .hs-footer-premium__text { font-size: 0.94rem; max-width: none; }
+      .hs-footer-premium__actions { flex-direction: column; align-items: stretch; }
+      .hs-footer-premium__cta,
+      .hs-footer-premium__phone,
+      .hs-footer-premium__submit { width: 100%; }
+      .hs-footer-premium__panel { max-height: 0; overflow: hidden; padding: 0 20px; transition: max-height .28s ease, padding .28s ease; }
+      .hs-footer-premium__card.is-open .hs-footer-premium__panel { max-height: 560px; padding: 0 20px 20px; }
+      .hs-footer-premium__schedule li { flex-direction: column; align-items: flex-start; }
+      .hs-footer-premium__schedule strong { text-align: left; }
+      .hs-footer-premium__social a,
+      .hs-footer-premium__top { min-width: 44px; min-height: 44px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SECCIÓN 1: HERO PRINCIPAL
+       ============================================================ -->
+  <section class="hs-hero" aria-labelledby="hs-hero-title">
+    <div class="hs-hero__overlay"></div>
+    <div class="hs-hero__content">
+      <div class="hs-hero__shell">
+        <header class="hs-hero__header">
+          <p class="hs-hero__eyebrow">Protección anticiclónica en Quintana Roo</p>
+          <h1 class="hs-hero__title" id="hs-hero-title">
+            Protección contra huracanes
+            <br>
+            para residencias, hoteles y comercios
+          </h1>
+          <p class="hs-hero__text">
+            Sistemas anticiclónicos diseñados para proteger puertas, ventanas y fachadas frente a vientos extremos,
+            escombros y lluvia intensa en Playa del Carmen, Cancún, Tulum y toda la Riviera Maya.
+          </p>
+        </header>
+
+        <div class="hs-hero__actions">
+          <a href="https://hurricanesolution.com/cotizar/" class="hs-hero__cta hs-hero__cta--primary">
+            Solicitar cotización
+          </a>
+          <a href="#sistemas-anticiclonicos" class="hs-hero__cta hs-hero__cta--secondary">
+            Ver sistemas de protección
+          </a>
+        </div>
+
+        <ul class="hs-hero__trust">
+          <li class="hs-hero__trust-item"><strong>10</strong> años de garantía máxima</li>
+          <li class="hs-hero__trust-item">Instalación especializada certificada</li>
+          <li class="hs-hero__trust-item">Cobertura en Playa del Carmen, Cancún y Riviera Maya</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 2: CARACTERÍSTICAS Y GARANTÍAS
+       ============================================================ -->
+  <section class="hs-features" aria-labelledby="hs-features-title">
+    <div class="hs-container">
+
+      <div class="hs-section-heading">
+        <h2 id="hs-features-title">
+          Sistemas de protección contra huracanes en Playa del Carmen, Cancún, Tulum y Riviera Maya
+        </h2>
+        <p>
+          Conozca las ventajas de nuestros sistemas anticiclónicos certificados para residencias, hoteles,
+          desarrollos inmobiliarios y propiedades comerciales expuestas a huracanes y tormentas severas.
+        </p>
+      </div>
+
+      <div class="hs-assurance">
+        <div class="hs-assurance__intro">
+          <span class="hs-assurance__eyebrow">Confianza y respaldo</span>
+          <h3>Garantías e instalación con respaldo real</h3>
+          <p>
+            Nuestros sistemas están diseñados para ofrecer protección duradera, instalación especializada
+            y soporte confiable para propiedades en Playa del Carmen, Cancún, Tulum y Riviera Maya.
+          </p>
+        </div>
+
+        <div class="hs-assurance__grid">
+          <!-- Lista garantías -->
+          <div>
+            <div class="hs-assurance__heading">
+              <span class="hs-assurance__icon">
+                <svg viewBox="0 0 64 64" fill="none">
+                  <circle cx="32" cy="24" r="14" stroke="currentColor" stroke-width="4"/>
+                  <circle cx="32" cy="24" r="9" stroke="currentColor" stroke-width="3"/>
+                  <path d="M22 36l-4 18 10-6 4 8 4-20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M42 36l4 18-10-6-4 8-4-20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div>
+                <p class="hs-assurance__label">Garantías a largo plazo</p>
+                <p class="hs-assurance__subtext">Cobertura clara según el sistema seleccionado.</p>
+              </div>
+            </div>
+
+            <ul class="hs-warranty-list">
+              <li class="hs-warranty-item">
+                <div class="hs-warranty-item__meta">
+                  <span class="hs-warranty-item__product">HS-1500</span>
+                  <span class="hs-warranty-item__desc">Máxima protección y mayor cobertura.</span>
+                </div>
+                <div class="hs-warranty-item__years">
+                  <strong>10</strong><span>AÑOS</span>
+                </div>
+              </li>
+              <li class="hs-warranty-item">
+                <div class="hs-warranty-item__meta">
+                  <span class="hs-warranty-item__product">HS-1250</span>
+                  <span class="hs-warranty-item__desc">Equilibrio entre desempeño y durabilidad.</span>
+                </div>
+                <div class="hs-warranty-item__years">
+                  <strong>7</strong><span>AÑOS</span>
+                </div>
+              </li>
+              <li class="hs-warranty-item">
+                <div class="hs-warranty-item__meta">
+                  <span class="hs-warranty-item__product">HS-875</span>
+                  <span class="hs-warranty-item__desc">Protección confiable con excelente rendimiento.</span>
+                </div>
+                <div class="hs-warranty-item__years">
+                  <strong>5</strong><span>AÑOS</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Bloque soporte -->
+          <aside class="hs-support-block">
+            <div class="hs-assurance__heading">
+              <span class="hs-assurance__icon">
+                <svg viewBox="0 0 64 64" fill="none">
+                  <circle cx="32" cy="24" r="14" stroke="currentColor" stroke-width="4"/>
+                  <circle cx="32" cy="24" r="9" stroke="currentColor" stroke-width="3"/>
+                  <path d="M22 36l-4 18 10-6 4 8 4-20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M42 36l4 18-10-6-4 8-4-20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div>
+                <p class="hs-assurance__label">Instalación y soporte</p>
+                <p class="hs-assurance__subtext">Acompañamiento técnico para una implementación correcta.</p>
+              </div>
+            </div>
+            <div class="hs-support-block__content">
+              <p>
+                Incluye guía rápida de montaje y soporte especializado para la correcta instalación
+                de los sistemas de protección contra huracanes.
+              </p>
+              <ul>
+                <li>Revisión técnica del sistema elegido.</li>
+                <li>Guía clara para instalación y montaje.</li>
+                <li>Soporte para asegurar desempeño y durabilidad.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Tarjetas accordion -->
+      <div class="hs-grid">
+
+        <article class="hs-card" data-accordion-item>
+          <figure class="hs-card__media">
+            <img
+              src="https://hurricanesolution.com/wp-content/uploads/2026/03/amazing-blue-planet-earth-with-clouds-and-hurrican-2024-09-09-20-04-16-utc-scaled-1.jpg"
+              alt="Sistema de protección contra huracanes categoría 5 en Playa del Carmen y Cancún"
+              width="800" height="450" loading="lazy" decoding="async">
+          </figure>
+          <div class="hs-card__body">
+            <h3>Resistencia comprobada a huracanes categoría 5</h3>
+            <p class="hs-card__excerpt">
+              Sistemas de protección contra huracanes diseñados para resguardar puertas, ventanas y fachadas
+              frente a vientos extremos, presión intensa e impacto de escombros en Quintana Roo.
+            </p>
+            <div class="hs-card__actions">
+              <button type="button" class="hs-card__toggle" aria-expanded="false">
+                Saber más sobre la resistencia
+                <span class="hs-card__icon" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="hs-card__panel">
+              <div class="hs-card__details-content">
+                <p>Nuestros sistemas de protección contra huracanes ofrecen una solución certificada para proteger residencias, hoteles, desarrollos inmobiliarios y negocios en Playa del Carmen, Cancún, Tulum y toda la Riviera Maya.</p>
+                <p>Cada componente, desde la malla anticiclónica hasta los anclajes estructurales, ha sido diseñado para responder ante condiciones severas asociadas a huracanes categoría 5.</p>
+                <p>Esta combinación de ingeniería, materiales de alto rendimiento e instalación especializada convierte a nuestros sistemas anticiclónicos en una alternativa confiable para quienes buscan seguridad, durabilidad y protección preventiva en Quintana Roo.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hs-card" data-accordion-item>
+          <figure class="hs-card__media">
+            <img
+              src="https://hurricanesolution.com/wp-content/uploads/2026/03/hs-875-1.jpg"
+              alt="Materiales anticiclónicos de nylon balístico y poliéster con aramida para protección contra huracanes"
+              width="800" height="450" loading="lazy" decoding="async">
+          </figure>
+          <div class="hs-card__body">
+            <h3>Materiales de última generación</h3>
+            <p class="hs-card__excerpt">
+              Nuestras mallas anticiclónicas están fabricadas con nylon balístico y poliéster con aramida
+              de grado industrial para ofrecer resistencia, flexibilidad y larga vida útil.
+            </p>
+            <div class="hs-card__actions">
+              <button type="button" class="hs-card__toggle" aria-expanded="false">
+                Saber más sobre los materiales
+                <span class="hs-card__icon" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="hs-card__panel">
+              <div class="hs-card__details-content">
+                <p>Los sistemas de protección anticiclónica de Hurricane Solution utilizan materiales importados de Estados Unidos y seleccionados para ofrecer desempeño confiable en propiedades ubicadas en zonas costeras de alta exposición.</p>
+                <p>Entre sus componentes destacan el nylon balístico y el poliéster con aramida, materiales reconocidos por su resistencia ante presión, tensión, desgaste e impactos en aplicaciones de alto esfuerzo.</p>
+                <p>Gracias a ello, estas cortinas y mallas contra huracanes son ideales para residencias, comercios y hoteles en Playa del Carmen, Cancún y Riviera Maya.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hs-card" data-accordion-item>
+          <figure class="hs-card__media">
+            <img
+              src="https://hurricanesolution.com/wp-content/uploads/2026/04/Sin-titulo.jpg"
+              alt="Sistema de anclaje patentado para mallas y cortinas anticiclónicas en Riviera Maya"
+              width="800" height="450" loading="lazy" decoding="async">
+          </figure>
+          <div class="hs-card__body">
+            <h3>Sistemas de anclaje patentados y seguros</h3>
+            <p class="hs-card__excerpt">
+              Nuestro sistema de anclaje distribuye mejor la presión del viento para aumentar la estabilidad,
+              reducir puntos de tensión y mejorar el desempeño estructural.
+            </p>
+            <div class="hs-card__actions">
+              <button type="button" class="hs-card__toggle" aria-expanded="false">
+                Saber más sobre el sistema de anclaje
+                <span class="hs-card__icon" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="hs-card__panel">
+              <div class="hs-card__details-content">
+                <p>El sistema de anclaje de Hurricane Solution está inspirado en tecnologías de sujeción utilizadas en velas náuticas, lo que permite repartir de manera más uniforme la fuerza del viento sobre toda la superficie protegida.</p>
+                <p>Este diseño ayuda a reducir tensiones localizadas, mejora el comportamiento del sistema durante tormentas severas y refuerza el desempeño general de las cortinas anticiclónicas frente a condiciones de alto impacto.</p>
+                <p>Para clientes que buscan protección contra huracanes en Cancún, Playa del Carmen o Tulum, este tipo de anclaje representa una ventaja técnica importante en seguridad, resistencia y durabilidad.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hs-card" data-accordion-item>
+          <figure class="hs-card__media">
+            <img
+              src="https://hurricanesolution.com/wp-content/uploads/2026/03/image-gen-49-1.png"
+              alt="Instalación profesional de sistemas de protección contra huracanes en Quintana Roo"
+              width="800" height="450" loading="lazy" decoding="async">
+          </figure>
+          <div class="hs-card__body">
+            <h3>Instalación profesional y certificada</h3>
+            <p class="hs-card__excerpt">
+              Técnicos especializados realizan medición, anclaje, ajuste y prueba operativa para asegurar
+              una instalación confiable y duradera en toda la Riviera Maya.
+            </p>
+            <div class="hs-card__actions">
+              <button type="button" class="hs-card__toggle" aria-expanded="false">
+                Saber más sobre la instalación
+                <span class="hs-card__icon" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="hs-card__panel">
+              <div class="hs-card__details-content">
+                <p>Cada instalación de sistema anticiclónico es realizada por personal capacitado para asegurar precisión en la medición, correcta colocación de anclajes y funcionamiento adecuado del sistema de protección.</p>
+                <p>El proceso incluye revisión de aberturas, fijación de componentes, ajuste estructural y validación final, con el objetivo de entregar una solución estética, funcional y duradera para cada tipo de propiedad.</p>
+                <p>Este servicio de instalación profesional está pensado para propietarios, desarrolladores y operadores hoteleros que necesitan protección contra huracanes en Playa del Carmen, Cancún, Tulum y otras zonas de Quintana Roo.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.hs-grid -->
+
+      <div class="hs-section-cta">
+        <div class="hs-section-cta__content">
+          <h3>Obtenga una cotización gratuita para proteger su propiedad</h3>
+          <p>
+            Reciba asesoría especializada para elegir el sistema anticiclónico ideal según el tipo de
+            inmueble, ubicación y nivel de exposición al viento.
+          </p>
+        </div>
+        <a href="https://hurricanesolution.com/cotizar/" class="hs-main-cta">
+          Obtenga una cotización gratuita
+        </a>
+      </div>
+
+    </div><!-- /.hs-container -->
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 3: SISTEMAS DE PROTECCIÓN
+       ============================================================ -->
+  <section id="sistemas-anticiclonicos" aria-labelledby="hs-systems-title">
+    <p>Materiales resistentes, anclajes patentados e instalación profesional</p>
+    <h2 id="hs-systems-title">
+      Sistemas de protección anticiclónica según distancia al mar y tipo de propiedad
+    </h2>
+    <p>
+      Nuestros sistemas anticiclónicos combinan materiales importados, tecnología de anclaje patentada y
+      servicios de instalación profesional para proteger ventanas, fachadas y frentes de playa en
+      Playa del Carmen, Cancún, Tulum y toda la Riviera Maya.
+    </p>
+
+    <nav aria-label="Seleccione un sistema anticiclónico">
+      <button type="button" data-hs-system="hs-875">HS-875 — Aperturas pequeñas &lt; 1 km</button>
+      <button type="button" data-hs-system="hs-1250">HS-1250 — Entre 500 m y 2 km</button>
+      <button type="button" data-hs-system="hs-1500">HS-1500 Beach Front — Frentes de playa</button>
+      <button type="button" data-hs-system="grid">GRID — Fachadas y grandes superficies</button>
+      <button type="button" data-hs-system="clip">Clip categoría 5 — Tecnología patentada</button>
+    </nav>
+
+    <!-- Panel HS-875 -->
+    <article data-hs-panel="hs-875">
+      <img src="https://hurricanesolution.com/wp-content/uploads/2025/05/Screenshot-2025-05-10-at-12.47.56 PM.png"
+           alt="Sistema HS-875 para aperturas pequeñas con protección anticiclónica compacta">
+      <span>Ideal para aperturas pequeñas</span>
+      <h3>HS-875 – Protección anticiclónica compacta para aperturas pequeñas</h3>
+      <ul>
+        <li>Hasta 875 PSI</li>
+        <li>Distancia recomendada: &lt; 1 km de la costa</li>
+        <li>Polipropileno de alta densidad importado de EE. UU.</li>
+      </ul>
+      <p>Sistema diseñado para ventanas, puertas y accesos menores a 1 km de la costa. Fabricado con polipropileno de alta densidad importado de Estados Unidos, reforzado con costuras perimetrales y resistencia comprobada de hasta 875 PSI.</p>
+      <p>Incluye un sistema de sujeción de ocho puntos mediante clip patentado, que garantiza una instalación firme y segura incluso bajo vientos de huracán categoría 5.</p>
+      <p>Uso ideal: ventanas, puertas y accesos menores. Zona: propiedades cercanas al mar (&lt; 1 km).</p>
+    </article>
+
+    <!-- Panel HS-1250 -->
+    <article data-hs-panel="hs-1250">
+      <img src="https://hurricanesolution.com/wp-content/uploads/2025/05/Screenshot-2025-05-10-at-12.50.26 PM.png"
+           alt="Sistema HS-1250 para propiedades entre 500 m y 2 km del mar con protección reforzada contra huracanes">
+      <span>Protección reforzada</span>
+      <h3>HS-1250 – Protección contra huracanes reforzada para propiedades entre 500 m y 2 km del mar</h3>
+      <ul>
+        <li>Hasta 1,250 PSI</li>
+        <li>Vientos de hasta 380 km/h</li>
+        <li>Poliéster + fibras de aramida</li>
+      </ul>
+      <p>Diseñado para residencias y desarrollos ubicados entre 500 metros y 2 kilómetros del mar, este sistema combina tejido de poliéster importado de Estados Unidos con fibras de aramida, reforzado con costuras perimetrales de alta resistencia.</p>
+      <p>Uso ideal: residencias y desarrollos medios. Zona: entre 500 m y 2 km de la costa.</p>
+    </article>
+
+    <!-- Panel HS-1500 -->
+    <article data-hs-panel="hs-1500">
+      <img src="https://hurricanesolution.com/wp-content/uploads/2025/05/Screenshot-2025-05-10-at-12.53.53 PM.png"
+           alt="Sistema HS-1500 Ideal Beach Front para propiedades frente al mar con protección máxima">
+      <span>Máxima protección Beach Front</span>
+      <h3>HS-1500 Ideal Beach Front – Protección máxima para propiedades frente al mar</h3>
+      <ul>
+        <li>Hasta 1,500 PSI</li>
+        <li>Vientos &gt; 380 km/h</li>
+        <li>Nylon balístico + resina UV patentada</li>
+      </ul>
+      <p>El sistema Ideal Beach Front está diseñado para propiedades costeras y frentes de playa expuestos a vientos extremos, utilizando nylon balístico importado de Estados Unidos recubierto con resina UV patentada.</p>
+      <p>Uso ideal: frentes de playa y villas frente al mar. Zona: primera línea de costa.</p>
+    </article>
+
+    <!-- Panel GRID -->
+    <article data-hs-panel="grid">
+      <img src="https://hurricanesolution.com/wp-content/uploads/2025/06/Imagen-de-WhatsApp-2025-06-27-a-las-11.58.34_070b8e95.jpg"
+           alt="Sistema anticiclónico GRID para fachadas y grandes superficies">
+      <span>Fachadas y grandes superficies</span>
+      <h3>GRID – Protección anticiclónica para fachadas y grandes superficies</h3>
+      <ul>
+        <li>Nylon técnico de alta resistencia</li>
+        <li>Estructuras &gt; 30 m²</li>
+      </ul>
+      <p>GRID es un sistema especializado fabricado con nylon técnico de alta resistencia, ideal para fachadas amplias y estructuras mayores a 30 m². Su diseño permite el paso controlado de aire y agua, reduciendo la presión estructural durante un huracán.</p>
+      <p>Uso ideal: fachadas, edificios y proyectos comerciales. Zona: ambientes costeros de alta salinidad.</p>
+    </article>
+
+    <!-- Panel CLIP -->
+    <article data-hs-panel="clip">
+      <img src="https://hurricanesolution.com/wp-content/uploads/2025/05/Screenshot-2025-05-10-at-12.55.42 PM.png"
+           alt="Clip categoría 5 con tecnología patentada de Hurricane Solution">
+      <span>Tecnología de anclaje patentada</span>
+      <h3>Clip categoría 5 – Tecnología patentada en protección anticiclónica</h3>
+      <ul>
+        <li>Fibra de carbono en forma triangular</li>
+        <li>Ocho puntos de anclaje</li>
+      </ul>
+      <p>El clip categoría 5 de Hurricane Solution está fabricado con fibra de carbono en forma triangular, diseñada para distribuir las fuerzas de anclaje de manera uniforme entre las secciones de la fibra.</p>
+      <p>Cuenta con ocho puntos de anclaje y un sistema hembra–macho que garantiza una fijación perfecta y segura incluso bajo las condiciones más extremas.</p>
+    </article>
+
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 4: TESTIMONIOS
+       ============================================================ -->
+  <section class="hs-testimonials-band" aria-labelledby="hs-testimonials-band-title">
+    <div class="hs-testimonials-band__inner">
+
+      <!-- Columna izquierda: intro -->
+      <div class="hs-testimonials-band__intro">
+        <p class="hs-testimonials-band__eyebrow">Clientes satisfechos</p>
+        <h2 class="hs-testimonials-band__title" id="hs-testimonials-band-title">
+          Confianza real de quienes ya protegieron su propiedad
+        </h2>
+        <p class="hs-testimonials-band__text">
+          Instalaciones diseñadas para brindar seguridad, estética y tranquilidad en propiedades
+          frente al mar y desarrollos residenciales de alto valor.
+        </p>
+        <div class="hs-testimonials-band__stats">
+          <div class="hs-testimonials-band__stat">
+            <strong>+500</strong>
+            <span>Instalaciones realizadas</span>
+          </div>
+          <div class="hs-testimonials-band__stat">
+            <strong>4.9/5</strong>
+            <span>Clientes satisfechos</span>
+          </div>
+        </div>
+        <a href="/testimonios/" class="hs-testimonials-band__cta">
+          Ver todos los testimonios
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Columna derecha: slider -->
+      <div class="hs-testimonials-band__slider">
+        <div class="hs-testimonials-band__track">
+
+          <!-- Testimonio 1 -->
+          <article class="hs-band-testimonial is-active">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">SC</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Stu Clark</h3>
+                <p class="hs-band-testimonial__meta">Margate, Florida · Clarks</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Puedo decir oficialmente que elegir el tejido anticiclónico para proteger la puerta de mi
+              garaje fue una gran decisión. El tejido es económico, fácil de instalar, fácil de almacenar,
+              y fácil de colocar rápidamente cuando llega el momento.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Residencia</span>
+              <span>Gran decisión</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 2 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">BR</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Brian R.</h3>
+                <p class="hs-band-testimonial__meta">Florida · Propietario de vivienda</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              ¡Qué facilidad! Solo usando herramientas básicas del hogar. La aseguradora del comprador
+              quería más documentación. Solo bastó una llamada al servicio al cliente. En 4 días recibí
+              por correo todo lo solicitado. Este tipo de soporte post-venta es difícil de encontrar.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Soporte post-venta</span>
+              <span>Facilidad de uso</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 3 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">KN</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Ken</h3>
+                <p class="hs-band-testimonial__meta">Venice, Florida · Propietario de vivienda</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              La versatilidad de almacenamiento, manejo e instalación hizo que el tejido anticiclónico
+              fuera el claro ganador. La persona que me atendió fue muy amable, informativa y respondió
+              mis dudas. Quedé muy impresionado con su profesionalismo y producto.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Venice, Florida</span>
+              <span>Volverá a ordenar</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 4 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">ST</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Sarah &amp; Mark Triton</h3>
+                <p class="hs-band-testimonial__meta">Sarasota, Florida · Triton Studios</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Su producto recibió una calificación "A" y nuestra nueva prima de seguro será de $945,
+              ¡un ahorro de $522! ¡La mejor calificación de protección y un 36% de ahorro!
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Triton Studios</span>
+              <span>Ahorro en seguro</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 5 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">GS</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Guy M. Shir, Esq.</h3>
+                <p class="hs-band-testimonial__meta">Boca Raton, Florida · Khan Shir P.L. Attorneys at Law</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Siendo abogado, reconozco que el servicio al cliente es lo que realmente te distingue.
+              Fueron más allá de todas las expectativas que podría haber tenido. Ya era fan de su
+              producto; ahora soy fan de su empresa.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Abogado</span>
+              <span>Servicio excepcional</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 6 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">BT</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Bruce Taylor</h3>
+                <p class="hs-band-testimonial__meta">Northwest Florida · Lt. Colonel (U.S.A.F.R)</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Después de meses de investigación, seleccioné Hurricane Fabric para proteger mis ventanas
+              y puertas. Era superior a la competencia. La instalación fue rápida y sencilla.
+              El costo también fue sustancialmente menor.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Teniente Coronel</span>
+              <span>Casa frente al agua</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 7 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">CF</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Carlos Felix</h3>
+                <p class="hs-band-testimonial__meta">Miami, Florida · Propietario de vivienda</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              El inspector estaba realmente interesado en el producto y me dijo que va a recomendar
+              su producto a muchas personas que le preguntan qué usar para sus protecciones.
+              ¡Esa es publicidad gratuita para ustedes!
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Recomendado por inspector</span>
+              <span>Miami</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 8 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">RH</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Richard Hammond</h3>
+                <p class="hs-band-testimonial__meta">Haití · Friends of the Children of Haiti</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Quedamos muy satisfechos con la protección que nos brindaron durante el reciente huracán.
+              Muy poca agua penetró los paneles y el ruido del viento fue considerablemente menor
+              de lo esperado. Que Dios los bendiga.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Haití</span>
+              <span>Protección comprobada</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 9 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">HB</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Henry Bollmann, P.E.</h3>
+                <p class="hs-band-testimonial__meta">Florida · Ingeniero Estructural Registrado</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Quedó INCREÍBLE. La ayuda de su empresa fue muy buena y muy rápida. Todo encajó
+              perfectamente y la ferretería es de excelente calidad. Soy ingeniero estructural
+              registrado en Florida y estoy impresionado con el producto.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Ingeniero Estructural</span>
+              <span>Calidad profesional</span>
+            </div>
+          </article>
+
+          <!-- Testimonio 10 -->
+          <article class="hs-band-testimonial">
+            <div class="hs-band-testimonial__top">
+              <div class="hs-band-testimonial__avatar">JT</div>
+              <div>
+                <h3 class="hs-band-testimonial__name">Joe Tonelli</h3>
+                <p class="hs-band-testimonial__meta">Delray Beach, Florida · Propietario de vivienda</p>
+              </div>
+            </div>
+            <p class="hs-band-testimonial__quote">
+              Descubrí que podía ordenar las mismas mallas en línea e instalarlas yo mismo por 1/3
+              del precio. Con el dinero que ahorramos pudimos cubrir tres ventanas más.
+              La instalación fue facilísima. Ojalá lo hubiera sabido antes.
+            </p>
+            <div class="hs-band-testimonial__tags">
+              <span>Ahorro significativo</span>
+              <span>Auto-instalación</span>
+            </div>
+          </article>
+
+        </div><!-- /.hs-testimonials-band__track -->
+
+        <div class="hs-testimonials-band__controls">
+          <button type="button" class="hs-testimonials-band__arrow" aria-label="Ver testimonio anterior">&#8249;</button>
+          <div class="hs-testimonials-band__dots">
+            <button type="button" class="hs-testimonials-band__dot is-active" aria-label="Testimonio 1"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 2"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 3"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 4"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 5"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 6"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 7"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 8"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 9"></button>
+            <button type="button" class="hs-testimonials-band__dot" aria-label="Testimonio 10"></button>
+          </div>
+          <button type="button" class="hs-testimonials-band__arrow" aria-label="Ver siguiente testimonio">&#8250;</button>
+        </div>
+
+      </div><!-- /.hs-testimonials-band__slider -->
+    </div><!-- /.hs-testimonials-band__inner -->
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 5: ¿POR QUÉ HURRICANE SOLUTION?
+       (Materiales, características y ADN de marca)
+       ============================================================ -->
+  <section aria-labelledby="hs-why-title">
+
+    <h2 id="hs-why-title">La mejor opción para su propiedad</h2>
+    <p>
+      Sabemos que dos de los inconvenientes más comunes de la protección contra huracanes son que no se
+      puedan montar a tiempo y la fiabilidad de que no fallen en la protección de las propiedades.
+      Por suerte, con estas lonas anticiclónicas, no sufrirás ninguno de los dos casos.
+    </p>
+
+    <img
+      width="500" height="500"
+      src="https://hurricanesolution.com/wp-content/uploads/2025/07/Diseno-sin-titulo-4-1.png"
+      alt="Protección anticiclónica Hurricane Solution"
+      loading="lazy">
+
+    <h2>Materiales de Alta Resistencia – Protección Anticiclónica Certificada</h2>
+
+    <p>
+      En <strong>Hurricane Solution</strong>, nuestra promesa es la
+      <strong>excelencia en protección contra huracanes</strong>. Por eso,
+      <strong>seleccionamos materiales de primera calidad</strong> utilizados en la fabricación de nuestras
+      <strong>mallas y lonas anticiclónicas</strong>, cuidadosamente sometidos a
+      <strong>estrictos controles de calidad</strong> para cumplir con los
+      <strong>estándares internacionales de resistencia y seguridad</strong>.
+    </p>
+    <p>
+      Cada componente, desde los tejidos técnicos hasta los anclajes de acero, ha sido probado para
+      garantizar un desempeño confiable frente a los
+      <strong>huracanes más intensos en Playa del Carmen, Cancún y todo Quintana Roo</strong>.
+    </p>
+    <!-- NOTA: El párrafo siguiente tenía metadatos JSON internos del editor de contenido.
+         Se limpió y solo se conservó el texto visible. -->
+    <p>
+      Este proceso meticuloso asegura
+      <strong>durabilidad superior, protección anticiclónica certificada y la tranquilidad total que su propiedad merece</strong>.
+    </p>
+
+    <img
+      width="1603" height="1280"
+      src="https://hurricanesolution.com/wp-content/uploads/2025/07/Diseno-sin-titulo-e1750774316844-1.jpg"
+      alt="Materiales anticiclónicos Hurricane Solution"
+      loading="lazy">
+
+    <!-- Características principales (tabs/paneles) -->
+    <h2>Nuestras características más importantes.</h2>
+
+    <article id="adn-hs">
+
+      <section data-panel="seguridad"
+        style="--bg-image:url(https://hurricanesolution.com/wp-content/uploads/2025/07/PHOTO-2025-05-09-10-25-23-3-1.jpg);">
+        <button type="button">Seguridad</button>
+        <div>
+          <p>En Hurricane Solution, nuestra prioridad es tu seguridad. Ofrecemos soluciones anticiclónicas de última generación diseñadas para proteger tu propiedad frente a huracanes categoría 5 y condiciones climáticas extremas.</p>
+          <p>Nuestras lunas y lonas anticiclónicas están fabricadas con materiales de ingeniería avanzada y tecnología aprobada por el Código de Construcción de Florida, garantizando resistencia, flexibilidad y larga vida útil incluso en zonas costeras de alta exposición como Playa del Carmen, Cancún y Tulum.</p>
+          <p>Cada sistema está diseñado para brindar protección contra huracanes confiable, estética y duradera, respaldada por más de 15 años de experiencia en el Caribe Mexicano.</p>
+        </div>
+      </section>
+
+      <section data-panel="operatividad"
+        style="--bg-image:url(https://hurricanesolution.com/wp-content/uploads/2025/07/portada-4-1-1.jpg);">
+        <button type="button">Operatividad</button>
+        <div>
+          <p>Los sistemas de lona y malla anticiclónica de Hurricane Solution se distinguen por su facilidad de instalación y desmontaje, permitiendo una operatividad rápida, ágil y segura antes, durante y después de cada contingencia climática.</p>
+          <p>Gracias a nuestra experiencia en protección contra huracanes en Quintana Roo, hemos desarrollado soluciones anticiclónicas ligeras y prácticas que pueden colocarse sin herramientas pesadas ni complicaciones.</p>
+        </div>
+      </section>
+
+      <section data-panel="estetica"
+        style="--bg-image:url(https://hurricanesolution.com/wp-content/uploads/2025/07/PHOTO-2025-05-09-10-25-22-3-1.jpg);">
+        <button type="button">Estética</button>
+        <div>
+          <p>Con más de 15 años de experiencia en protección contra huracanes en Playa del Carmen y Cancún, diseñamos e instalamos mallas y cortinas anticiclónicas que combinan resistencia, estética y funcionalidad.</p>
+          <p>Cada proyecto es totalmente a medida, pensado para integrarse de forma armoniosa con la arquitectura de tu hogar, hotel o comercio.</p>
+        </div>
+      </section>
+
+    </article>
+
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 6: EQUIPO Y CONTACTO
+       ============================================================ -->
+  <section id="hs-equipo-newsletter" aria-labelledby="hs-team-main-title">
+
+    <span>Hurricane Solution</span>
+    <h2 id="hs-team-main-title">El corazón del éxito de Hurricane Solution</h2>
+    <p>
+      El equipo de Hurricane Solution es más que un grupo de instaladores; somos especialistas dedicados
+      a proteger hogares, hoteles y espacios comerciales contra los daños causados por huracanes.
+    </p>
+    <a href="#hs-contacto-form">Quiero asesoría</a>
+
+    <figure>
+      <img
+        src="https://hurricanesolution.com/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-22-at-10.45.16-AM-e1761148009639.jpeg"
+        alt="Equipo de Hurricane Solution durante labores de instalación y supervisión"
+        loading="lazy" decoding="async" width="1600" height="900">
+      <figcaption>Especialistas en instalación, supervisión y protección anticiclónica.</figcaption>
+    </figure>
+
+    <div>
+      <span>Nuestro equipo</span>
+      <h3>Nuestro equipo de especialistas</h3>
+      <p>Unimos experiencia técnica, instalación especializada y atención cercana para que cada proyecto quede protegido con criterio profesional.</p>
+      <div>
+        <strong data-target="15">0</strong> Años de experiencia
+        <strong data-target="325">0</strong> Tipos de proyectos
+        <strong data-target="100">0</strong> Enfoque en protección
+      </div>
+      <article>
+        <h4>¿Qué hace diferente a nuestro equipo?</h4>
+        <p>Combinamos ingeniería, instalación certificada y conocimiento del clima en el Caribe mexicano para diseñar soluciones anticiclónicas que realmente funcionan cuando más las necesitas.</p>
+        <ul>
+          <li>Experiencia en residencias, hoteles y proyectos comerciales frente al mar.</li>
+          <li>Instalaciones cuidadas, limpias y alineadas a la arquitectura de cada proyecto.</li>
+          <li>Acompañamiento antes, durante y después de cada temporada de huracanes.</li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Bloque de contacto con formulario -->
+    <section id="hs-contacto-form" aria-labelledby="hs-contact-title">
+      <h2>Contáctanos</h2>
+      <h3 id="hs-contact-title">¿Tienes dudas o necesitas asesoría?</h3>
+      <p>
+        Completa el formulario y cuéntanos qué tipo de propiedad quieres proteger.
+        Un especialista de Hurricane Solution te contactará para orientarte sin compromiso.
+      </p>
+
+      <!-- Formulario externo embebido -->
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/79fypBQZgW7pYshL4q1M"
+        id="hs-contact-iframe"
+        title="Formulario de contacto Hurricane Solution"
+        loading="lazy"
+        scrolling="yes"
+        style="width:100%; min-height:500px; border:none; border-radius:4px;">
+      </iframe>
+
+      <!-- Info de contacto -->
+      <div>
+        <div>
+          <span>📞</span>
+          <small>¿Tienes dudas? Llámanos</small>
+          <a href="tel:+529848035014">+52 (984) 803 5014</a>
+        </div>
+        <div>
+          <span>✉️</span>
+          <small>También puedes escribirnos</small>
+          <a href="mailto:info@hurricanesolution.com">info@hurricanesolution.com</a>
+        </div>
+        <div>
+          <h4>Calificación de clientes</h4>
+          <p>★★★★☆ 4.8 / 5.0</p>
+          <p>Basado en reseñas de propietarios, administradores de hoteles y desarrolladores inmobiliarios.</p>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 7: BLOG
+       ============================================================ -->
+  <section aria-labelledby="hs-home-blog-title">
+
+    <header>
+      <p>Protección inteligente</p>
+      <h2 id="hs-home-blog-title">Consejos y noticias sobre huracanes</h2>
+      <p>Artículos claros y guías técnicas para preparar hoteles, residencias y negocios antes de la temporada de huracanes.</p>
+      <a href="/blog/">Ver todos los artículos →</a>
+    </header>
+
+    <!-- Card 1 -->
+    <article itemscope itemtype="https://schema.org/Article">
+      <a href="/blog/">
+        <img src="URL_IMAGEN_DESTACADA" alt="Título post destacado" loading="lazy" itemprop="image">
+        <span>Guía destacada</span>
+        <p>Hoteles · Lectura 8 min</p>
+        <h3 itemprop="headline">Título del post destacado sobre protección anticiclónica en hoteles</h3>
+        <p itemprop="description">Resumen de 2–3 líneas que explique el beneficio principal para el lector y lo invite a seguir leyendo.</p>
+        <span>Leer artículo</span>
+      </a>
+    </article>
+
+    <!-- Card 2 -->
+    <article itemscope itemtype="https://schema.org/Article">
+      <a href="/blog/">
+        <img src="URL_IMAGEN_2" alt="Título post 2" loading="lazy" itemprop="image">
+        <p>Residencial · Lectura 5 min</p>
+        <h3 itemprop="headline">Cómo preparar tu casa para la temporada de huracanes</h3>
+        <p itemprop="description">Checklist básico para reforzar ventanas, accesos y zonas críticas de tu hogar.</p>
+        <span>Ver consejos</span>
+      </a>
+    </article>
+
+    <!-- Card 3 -->
+    <article itemscope itemtype="https://schema.org/Article">
+      <a href="/blog/">
+        <img src="URL_IMAGEN_3" alt="Título post 3" loading="lazy" itemprop="image">
+        <p>Comercial · Caso real</p>
+        <h3 itemprop="headline">Cómo un centro comercial redujo daños con malla anticiclónica</h3>
+        <p itemprop="description">Estudio de caso con resultados medibles que muestran el impacto de una buena protección.</p>
+        <span>Leer caso</span>
+      </a>
+    </article>
+
+    <!-- Card 4 -->
+    <article itemscope itemtype="https://schema.org/Article">
+      <a href="/blog/">
+        <img src="URL_IMAGEN_4" alt="Título post 4" loading="lazy" itemprop="image">
+        <p>Guía técnica · 7 min</p>
+        <h3 itemprop="headline">Malla anticiclónica vs panel rígido: ventajas y desventajas</h3>
+        <p itemprop="description">Comparativa clara para tomar decisiones de inversión en protección.</p>
+        <span>Comparar opciones</span>
+      </a>
+    </article>
+
+    <a href="/blog/">Ir al blog completo</a>
+
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 8: FOOTER
+       ============================================================ -->
+  <footer class="hs-footer-premium" role="contentinfo" aria-label="Footer Hurricane Solution">
+    <div class="hs-footer-premium__bg" aria-hidden="true"></div>
+    <div class="hs-footer-premium__wrap">
+
+      <div class="hs-footer-premium__main">
+
+        <!-- Columna marca -->
+        <div class="hs-footer-premium__brand">
+          <a href="https://hurricanesolution.com/" class="hs-footer-premium__logo-link" aria-label="Ir al inicio de Hurricane Solution">
+            <img
+              class="hs-footer-premium__logo"
+              src="https://hurricanesolution.com/wp-content/uploads/2025/05/Logos-companias_Mesa-de-trabajo-1-06-1-768x384.png"
+              alt="Hurricane Solution"
+              loading="lazy" decoding="async" width="768" height="384">
+          </a>
+          <p class="hs-footer-premium__text">
+            Protección premium contra huracanes para residencias, hoteles y proyectos comerciales
+            en Playa del Carmen, Cancún, Tulum y zonas costeras de México.
+          </p>
+          <div class="hs-footer-premium__actions">
+            <a href="https://hurricanesolution.com/contactanos/" class="hs-footer-premium__cta">
+              Solicitar cotización
+            </a>
+            <a href="tel:+529848035014" class="hs-footer-premium__phone">
+              +52 984 803 5014
+            </a>
+          </div>
+
+          <!-- Redes sociales -->
+          <ul class="hs-footer-premium__social" aria-label="Redes sociales de Hurricane Solution">
+            <li>
+              <a href="https://www.facebook.com/share/16cZAdbkjj/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg viewBox="0 0 320 512" aria-hidden="true">
+                  <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06H297V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://youtube.com/@hurricanesolution?si=mZww1_uc-jrSRr9s" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <svg viewBox="0 0 576 512" aria-hidden="true">
+                  <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zM232.15 337.591V175.185l142.739 81.205-142.739 81.201z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/hurricanesolution?igsh=MnRuNXExem9kM2Ry" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 448 512" aria-hidden="true">
+                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@hurricane.solutio?_t=ZS-8x41rB2ptcQ&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg viewBox="0 0 448 512" aria-hidden="true">
+                  <path d="M448 209.9a210.1 210.1 0 0 1-122.8-39.2v178.7A162.6 162.6 0 1 1 185 188.3v89.9a74.6 74.6 0 1 0 52.2 71.2V0h88a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div><!-- /.hs-footer-premium__brand -->
+
+        <!-- Columna navegación / cards accordion -->
+        <div>
+
+          <!-- Card: Te puede interesar -->
+          <div class="hs-footer-premium__card">
+            <button type="button" aria-expanded="true">Te puede interesar</button>
+            <div class="hs-footer-premium__panel">
+              <ul>
+                <li><a href="https://hurricanesolution.com/">Hurricane Solution</a></li>
+                <li><a href="https://hurricanesolution.com/residencial/">Residencial</a></li>
+                <li><a href="https://hurricanesolution.com/hoteles/">Hoteles</a></li>
+                <li><a href="https://hurricanesolution.com/comercial/">Comercial</a></li>
+                <li><a href="https://hurricanesolution.com/contactanos/">Cotizar ahora</a></li>
+                <li><a href="https://hurricanesolution.com/blog/">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card: Nuestras oficinas -->
+          <div class="hs-footer-premium__card">
+            <button type="button" aria-expanded="true">Nuestras oficinas</button>
+            <div class="hs-footer-premium__panel">
+              <p>10 Avenida Nte. entre 14 norte bis y 16 norte, Centro, 77500 Playa del Carmen, Q.R.</p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=10+Avenida+Nte.+entre+14+norte+bis+y+16+norte,+Centro,+77500+Playa+del+Carmen,+Quintana+Roo"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Abrir ubicación de Hurricane Solution en Google Maps">
+                <svg viewBox="0 0 384 512" width="16" height="16">
+                  <path d="M172.3 501.7C26.97 291 0 269.4 0 192 0 85.96 85.96 0 192 0s192 85.96 192 192c0 77.4-26.97 99-172.3 309.7-9.5 13.8-29.9 13.8-39.4 0zM192 272c44.18 0 80-35.82 80-80S236.2 112 192 112s-80 35.82-80 80 35.8 80 80 80z"/>
+                </svg>
+                Ver ubicación
+              </a>
+              <p>Horario de atención</p>
+              <ul class="hs-footer-premium__schedule">
+                <li>Lunes a viernes <strong>9:00 AM - 6:00 PM</strong></li>
+                <li>Sábado <strong>9:00 AM - 1:00 PM</strong></li>
+                <li>Domingo <strong>Cerrado</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card: Contacto -->
+          <div class="hs-footer-premium__card">
+            <button type="button" aria-expanded="true">Contacto</button>
+            <div class="hs-footer-premium__panel">
+              <ul>
+                <li><a href="mailto:info@hurricanesolution.com">info@hurricanesolution.com</a></li>
+                <li><a href="tel:+529848035014">984 803 5014</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3>Newsletter</h3>
+            <p>Recibe novedades, promociones y consejos para proteger tu propiedad ante temporada de huracanes.</p>
+            <form novalidate>
+              <label for="hs-footer-newsletter-email">Correo electrónico</label>
+              <input
+                type="email"
+                id="hs-footer-newsletter-email"
+                name="email"
+                placeholder="Tu correo electrónico"
+                aria-label="Tu correo electrónico"
+                required>
+              <button type="submit" class="hs-footer-premium__submit">Suscribirme</button>
+            </form>
+            <p aria-live="polite"></p>
+          </div>
+
+        </div>
+      </div><!-- /.hs-footer-premium__main -->
+
+      <!-- Pie del footer -->
+      <div>
+        <p>© 2025 Hurricane Solution. All Rights Reserved.</p>
+        <a href="https://hurricanesolution.com/terms-service/">Terms of Service</a>
+        |
+        <a href="https://hurricanesolution.com/privacy-policy/">Privacy Policy</a>
+      </div>
+
+      <!-- Botón volver arriba -->
+      <button type="button" class="hs-footer-premium__top" aria-label="Volver arriba">↑</button>
+
+    </div><!-- /.hs-footer-premium__wrap -->
+  </footer>
+
+  <!--
+  =================================================================
+  NOTA PARA EL EQUIPO DE DESARROLLO:
+  =================================================================
+  Este archivo es una versión organizada del código original.
+  Los cambios realizados fueron:
+
+  1. Se agregó estructura HTML base: DOCTYPE, <html>, <head>, <body>
+  2. Se consolidaron los 4 bloques <style> dispersos en uno solo en <head>
+  3. Se organizaron las secciones con comentarios claros
+  4. Se limpiaron los metadatos JSON del editor que estaban dentro
+     de un atributo data-pm-slice en la Sección 5
+  5. Se eliminaron los elementos sueltos del inicio del archivo original
+     (imagen y links de redes sociales duplicados)
+  6. Se añadieron clases CSS faltantes a la sección Hero
+
+  IMPORTANTE: Los estilos del archivo original NO tenían CSS para
+  las secciones 3 (Sistemas), 5 (¿Por qué?), 6 (Equipo) y 7 (Blog).
+  Esas secciones necesitan que su CSS sea agregado cuando esté listo.
+  =================================================================
+  -->
+
+</body>
+</html>
