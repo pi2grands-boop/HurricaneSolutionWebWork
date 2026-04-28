@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hurricane Solution — Protección Contra Huracanes en México</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0D2137;--navy2:#163552;--blue:#1B6CA8;--blue2:#2E8FD8;--accent:#E8A020;--white:#fff;--off:#F4F7FA;--gray:#6B7A8D;--light:#E8EDF2;--text:#1A2733;--border:#D4DCE5;--teal:#0E7C86}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;color:var(--text);font-size:16px;line-height:1.6}
+h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif}
+a{text-decoration:none;color:inherit}
+.page{display:none}.page.active{display:block}
+.topbar{background:var(--navy);padding:.45rem 2rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.65)}
+.topbar a{color:rgba(255,255,255,.85)}.tb-right{display:flex;gap:1.5rem;align-items:center}
+.lang-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;padding:.18rem .65rem;border-radius:3px;font-size:.72rem;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:700}
+nav{background:#fff;border-bottom:2px solid var(--light);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);padding:.9rem 0;cursor:pointer}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;flex-wrap:wrap}
+.nav-links a{padding:1.1rem .65rem;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:600;color:var(--navy);letter-spacing:.03em;text-transform:uppercase;border-bottom:3px solid transparent;transition:all .2s;cursor:pointer;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--blue);border-color:var(--blue)}
+.nav-cta{background:var(--accent)!important;color:var(--navy)!important;padding:.5rem 1rem!important;border-radius:3px;border-bottom:none!important;margin-left:.5rem;font-weight:700!important}
+.nav-ag{color:var(--teal)!important}.nav-ag:hover,.nav-ag.active{color:var(--teal)!important;border-color:var(--teal)!important}
+.wrap{max-width:1180px;margin:0 auto}
+section{padding:4rem 2rem}
+.stag{font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+.stit{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:.8rem}
+.stit span{color:var(--blue)}
+.sintro{font-size:.97rem;color:var(--gray);font-weight:300;line-height:1.7;max-width:600px}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.vis{opacity:1;transform:none}
+.btn-primary{display:inline-block;background:var(--accent);color:var(--navy);padding:.8rem 2rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;border:none;cursor:pointer;transition:background .2s}
+.btn-primary:hover{background:#d4901a}
+.btn-outline{display:inline-block;background:transparent;color:var(--blue);padding:.75rem 1.8rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.85rem;text-transform:uppercase;border:2px solid var(--blue);cursor:pointer;transition:all .2s}
+.btn-outline:hover{background:var(--blue);color:#fff}
+.card{background:#fff;border:1.5px solid var(--border);border-radius:6px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.hero-wrap{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%)}
+.hero{max-width:1180px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 375px;gap:3rem;align-items:start}
+.hero-eye{font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem}
+.hero h1{font-size:clamp(1.75rem,3vw,2.65rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:1.1rem}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-sub{font-size:.97rem;color:rgba(255,255,255,.7);font-weight:300;margin-bottom:1.75rem;line-height:1.7}
+.hero-stats{display:flex;gap:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.1)}
+.hsn{font-family:'Montserrat',sans-serif;font-size:1.9rem;font-weight:800;color:#fff}
+.hsn em{color:var(--accent);font-style:normal;font-size:1rem}
+.hsl{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-top:.15rem;font-family:'Montserrat',sans-serif;font-weight:600}
+.fcard{background:#fff;border-radius:6px;padding:1.6rem;box-shadow:0 8px 40px rgba(0,0,0,.25)}
+.fcard h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.fcard>p{font-size:.78rem;color:var(--gray);margin-bottom:1.1rem}
+.fg{margin-bottom:.75rem}
+.fg label{display:block;font-size:.68rem;font-weight:700;color:var(--navy);margin-bottom:.22rem;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.fg input,.fg select{width:100%;padding:.58rem .78rem;border:1.5px solid var(--border);border-radius:4px;font-family:'Source Sans 3',sans-serif;font-size:.9rem;color:var(--text);background:#fff;transition:border-color .2s}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--blue)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.fsub{width:100%;background:var(--accent);color:var(--navy);border:none;padding:.82rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:background .2s;margin-top:.35rem}
+.fsub:hover{background:#d4901a}
+.fnote{font-size:.71rem;color:var(--gray);text-align:center;margin-top:.55rem}
+.trust{background:var(--off);border-bottom:1px solid var(--border);padding:.9rem 2rem}
+.trust-in{max-width:1180px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:.75rem}
+.ti{display:flex;align-items:center;gap:.45rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+.tic{width:26px;height:26px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;flex-shrink:0}
+.ben3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.2rem}
+.bcard{padding:1.6rem;border-top:3px solid var(--blue)}
+.bcard h3{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.bcard p{font-size:.87rem;color:var(--gray);line-height:1.65}
+.stats-band{background:var(--navy)}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07);margin-top:2rem;border:1px solid rgba(255,255,255,.07)}
+.sbox{background:var(--navy);padding:1.6rem 1.2rem;text-align:center}
+.sbig{font-family:'Montserrat',sans-serif;font-size:2.3rem;font-weight:800;color:#fff;line-height:1}
+.sbig em{color:var(--accent);font-style:normal}
+.sdesc{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.07em;margin-top:.35rem;font-family:'Montserrat',sans-serif;font-weight:600}
+.storms{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1.75rem}
+.st{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:.22rem .65rem;border-radius:3px;font-size:.72rem;font-family:'Montserrat',sans-serif;font-weight:600}
+.st.major{background:rgba(232,160,32,.1);border-color:rgba(232,160,32,.3);color:var(--accent)}
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-top:2.2rem}
+.wcard{padding:1.6rem}
+.wnum{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:var(--light);line-height:1;margin-bottom:.35rem}
+.wcard h3{font-size:.92rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.wcard p{font-size:.87rem;color:var(--gray);line-height:1.65}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.2rem}
+.pcard{overflow:hidden}
+.pcard.feat{border-color:var(--blue);border-width:2px}
+.pbadge{font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .9rem;text-align:center}
+.pbadge.b1{background:var(--blue);color:#fff}
+.pbadge.b2{background:var(--accent);color:var(--navy)}
+.pbadge.b3{background:#8a9aaa;color:#fff}
+.pbody{padding:1.4rem}
+.pname{font-size:1.25rem;font-weight:800;color:var(--navy);margin-bottom:.18rem}
+.prat{font-size:.72rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+.pdesc{font-size:.86rem;color:var(--gray);line-height:1.6;margin-bottom:.9rem}
+.pfeats{list-style:none;margin-bottom:1.1rem}
+.pfeats li{font-size:.83rem;color:var(--text);padding:.27rem 0;border-bottom:1px solid var(--light);display:flex;align-items:flex-start;gap:.35rem}
+.pfeats li::before{content:'✓';color:var(--blue);font-weight:700;font-size:.78rem;flex-shrink:0;margin-top:.1rem}
+.pideal{background:var(--off);border-radius:4px;padding:.6rem;font-size:.78rem;color:var(--gray);font-style:italic}
+.pideal strong{color:var(--navy);font-style:normal}
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:2.2rem;position:relative}
+.proc::before{content:'';position:absolute;top:2rem;left:12.5%;right:12.5%;height:2px;background:var(--light);z-index:0}
+.pstep{text-align:center;padding:0 .65rem;position:relative;z-index:1}
+.pcirc{width:42px;height:42px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;color:#fff}
+.pstep h4{font-size:.87rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.pstep p{font-size:.78rem;color:var(--gray);line-height:1.55}
+.segs{background:var(--off)}
+.sgr{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.2rem}
+.seg{padding:1.6rem}
+.seg-ico{font-size:1.6rem;margin-bottom:.75rem}
+.seg h3{font-size:.92rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.seg p{font-size:.86rem;color:var(--gray);line-height:1.65;margin-bottom:.75rem}
+.seg-ex{font-size:.75rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.2rem}
+.tcard{padding:1.4rem}
+.tstars{color:var(--accent);font-size:.82rem;margin-bottom:.55rem}
+.tq{font-size:.88rem;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:.9rem}
+.tau strong{display:block;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:var(--navy)}
+.tau span{font-size:.73rem;color:var(--gray)}
+.cov{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.zones{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.2rem}
+.zt{background:var(--off);border:1.5px solid var(--border);padding:.32rem .8rem;border-radius:3px;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+.map-box{background:var(--off);border:1.5px solid var(--border);border-radius:6px;height:250px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.mdot{position:absolute;width:9px;height:9px;background:var(--blue);border-radius:50%;border:2px solid #fff;animation:dp 2.5s ease-in-out infinite}
+@keyframes dp{0%,100%{box-shadow:0 0 0 3px rgba(27,108,168,.2)}50%{box-shadow:0 0 0 6px rgba(27,108,168,.08)}}
+.mlab{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:var(--gray);text-align:center;text-transform:uppercase;letter-spacing:.08em;line-height:2}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:2.2rem}
+.ccer{padding:1.4rem;text-align:center}
+.ccer.hl{border-color:var(--accent);border-width:2px}
+.cname{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:800;color:var(--navy);margin-bottom:.3rem}
+.ccer.hl .cname{color:var(--accent)}
+.cdesc{font-size:.78rem;color:var(--gray);line-height:1.5}
+.faq-list{margin-top:2rem;max-width:800px}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;padding:1.1rem 0;text-align:left;font-family:'Montserrat',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-q .arr{font-size:.85rem;color:var(--blue);transition:transform .25s;flex-shrink:0}
+.faq-item.open .arr{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:400px}
+.faq-a p{font-size:.88rem;color:var(--gray);line-height:1.7;padding-bottom:1rem}
+.cta-band{background:var(--blue);padding:3.25rem 2rem;text-align:center}
+.cta-band h2{font-size:clamp(1.35rem,2.5vw,1.85rem);font-weight:800;color:#fff;margin-bottom:.55rem}
+.cta-band p{color:rgba(255,255,255,.78);font-size:.95rem;margin-bottom:1.6rem;font-weight:300}
+.cta-btns{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.btn-w{background:#fff;color:var(--navy);padding:.8rem 1.9rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.83rem;text-transform:uppercase;letter-spacing:.04em;transition:background .2s;cursor:pointer;border:none}
+.btn-wout{background:transparent;color:#fff;padding:.8rem 1.9rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.83rem;text-transform:uppercase;border:2px solid rgba(255,255,255,.45);cursor:pointer;transition:border-color .2s;display:inline-block}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:2rem}
+.photo-grid img{width:100%;height:220px;object-fit:cover;border-radius:4px;border:1.5px solid var(--border)}
+.photo-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:.75rem}
+.photo-grid-2 img{width:100%;height:260px;object-fit:cover;border-radius:4px;border:1.5px solid var(--border)}
+.ag-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);margin-top:2rem;border:1px solid rgba(255,255,255,.1)}
+.ag-sbox{background:#0a2a2e;padding:1.6rem;text-align:center}
+.ag-num{font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:800;color:#fff;line-height:1}
+.ag-num em{color:#4DD8E0;font-style:normal}
+.ag-label{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.07em;margin-top:.35rem;font-family:'Montserrat',sans-serif;font-weight:600}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.team-card{padding:2rem;text-align:center}
+.team-avatar{width:80px;height:80px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;margin:0 auto 1rem}
+.team-card h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.team-card .role{font-size:.75rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.65rem}
+.team-card p{font-size:.87rem;color:var(--gray);line-height:1.65}
+.team-placeholder{border:2px dashed var(--border);background:var(--off)}
+.team-placeholder .team-avatar{background:var(--light);color:var(--gray)}
+.ip-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:3.5rem 2rem;text-align:center}
+.ip-hero h1{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;margin-bottom:.65rem}
+.ip-hero h1 em{color:var(--accent);font-style:normal}
+.ip-hero p{color:rgba(255,255,255,.7);font-size:1rem;font-weight:300;max-width:580px;margin:0 auto 1.5rem}
+footer{background:var(--navy);padding:2.75rem 2rem}
+.fin{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.25rem}
+.fbrand{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:.55rem;cursor:pointer}
+.fbrand span{color:var(--blue2)}
+.ftag{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.65}
+.fc h4{font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#fff;margin-bottom:.75rem}
+.fc ul{list-style:none}
+.fc ul li{font-size:.82rem;padding:.2rem 0}
+.fc ul li a{color:rgba(255,255,255,.45);transition:color .2s;cursor:pointer}
+.fc ul li a:hover{color:#fff}
+.fbot{max-width:1180px;margin:1.6rem auto 0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.73rem;color:rgba(255,255,255,.3)}
+.wa{position:fixed;bottom:1.6rem;right:1.6rem;background:#25D366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:200;font-size:1.35rem;transition:transform .2s}
+.wa:hover{transform:scale(1.1)}
+@media(max-width:960px){
+  .hero,.cov{grid-template-columns:1fr}
+  .ben3,.wgrid,.pgrid,.sgr,.tgrid,.cgrid,.team-grid,.photo-grid{grid-template-columns:1fr}
+  .sgrid,.ag-stats,.proc{grid-template-columns:repeat(2,1fr)}
+  .photo-grid-2{grid-template-columns:1fr}
+  .proc::before{display:none}
+  .fin{grid-template-columns:1fr 1fr}
+  .nav-links a:not(.nav-cta){font-size:.58rem;padding:.9rem .4rem}
+}
+</style>
+</head>
+<body>
+ 
+<div class="topbar">
+  <span>🌀 Temporada de huracanes activa — Playa del Carmen, Q. Roo</span>
+  <div class="tb-right">
+    <a href="tel:+529848035014">📞 984 803 5014</a>
+    <a href="https://wa.me/5219987052145">💬 WhatsApp</a>
+    <button class="lang-btn">EN</button>
+  </div>
+</div>
+ 
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Hurricane<span>Solution</span></div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" id="nav-home" class="active">Inicio</a>
+    <a onclick="showPage('hoteles')" id="nav-hoteles">Hotelero</a>
+    <a onclick="showPage('residencial')" id="nav-residencial">Residencial</a>
+    <a onclick="showPage('comercial')" id="nav-comercial">Comercial</a>
+    <a onclick="showPage('aquagrid')" id="nav-aquagrid" class="nav-ag">AquaGrid</a>
+    <a onclick="showPage('rain')" id="nav-rain">Rain Protection</a>
+    <a onclick="showPage('equipo')" id="nav-equipo">El Equipo</a>
+    <a onclick="showPage('faq')" id="nav-faq">FAQ</a>
+    <a onclick="showPage('contacto')" class="nav-cta">Cotizar Ahora</a>
+  </div>
+</nav>
+ 
+<!-- HOME -->
+<div id="page-home" class="page active">
+<div class="hero-wrap"><div class="hero">
+  <div>
+    <div class="hero-eye">Riviera Maya · Los Cabos · Vallarta · Mazatlán · Acapulco</div>
+    <h1>El único sistema de protección contra huracanes en México con <em>certificación militar Level E.</em></h1>
+    <p class="hero-sub">Su propiedad tiene 48 horas cuando llega el aviso. ¿Puede su equipo desplegarlo a tiempo? Desde 2008 protegemos hoteles, empresas y residencias de lujo en las costas de México.</p>
+    <div class="hero-stats">
+      <div><div class="hsn">30<em>+</em></div><div class="hsl">Tormentas superadas</div></div>
+      <div><div class="hsn">Cat<em> 5</em></div><div class="hsl">Nivel máximo probado</div></div>
+      <div><div class="hsn">0</div><div class="hsl">Fallas en inst. correctas</div></div>
+    </div>
+  </div>
+  <div class="fcard">
+    <h3>Solicite su evaluación gratuita</h3>
+    <p>Sin costo · Sin compromiso · Presencial o videollamada</p>
+    <form onsubmit="submitForm(event,this)">
+      <div class="frow">
+        <div class="fg"><label>Nombre</label><input type="text" placeholder="Nombre" required></div>
+        <div class="fg"><label>Apellido</label><input type="text" placeholder="Apellido"></div>
+      </div>
+      <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+52 984 000 0000" required></div>
+      <div class="fg"><label>Correo electrónico</label><input type="email" placeholder="correo@empresa.com" required></div>
+      <div class="fg"><label>Tipo de propiedad</label>
+        <select required><option value="">Seleccione...</option><option>Hotel / Resort</option><option>Empresa con múltiples ubicaciones</option><option>Residencia de lujo</option><option>Agencia de autos</option><option>Hospital / Clínica</option><option>Desarrollo inmobiliario</option><option>Apertura gran escala (AquaGrid)</option><option>Otro</option></select>
+      </div>
+      <div class="fg"><label>Zona</label>
+        <select><option value="">¿Dónde está su propiedad?</option><option>Riviera Maya / Playa del Carmen</option><option>Cancún</option><option>Cozumel</option><option>Los Cabos</option><option>Puerto Vallarta</option><option>Mazatlán</option><option>Acapulco</option><option>Otra</option></select>
+      </div>
+      <button type="submit" class="fsub">Solicitar evaluación gratuita →</button>
+      <p class="fnote">Le contactamos en menos de 24 horas.</p>
+    </form>
+  </div>
+</div></div>
+ 
+<div class="trust"><div class="trust-in">
+  <div class="ti"><div class="tic">★</div>Único Level E en México</div>
+  <div class="ti"><div class="tic">✓</div>Miami-Dade Aprobado</div>
+  <div class="ti"><div class="tic">M</div>Único miembro IHPA en México</div>
+  <div class="ti"><div class="tic">P</div>Sistema Patentado</div>
+  <div class="ti"><div class="tic">G</div>Garantía hasta 10 años</div>
+</div></div>
+ 
+<section><div class="wrap">
+  <div class="stag reveal">Por qué Hurricane Solution</div>
+  <h2 class="stit reveal">Somos los expertos. <span>No hay segundo lugar.</span></h2>
+  <p class="sintro reveal">En protección contra huracanes, la diferencia entre un sistema que funciona y uno que falla puede ser semanas de cierre y millones en daños.</p>
+  <div class="wgrid">
+    <div class="card wcard reveal"><div class="wnum">01</div><h3>El único Level E en México</h3><p>Miami-Dade y Florida Building Code prueban viento, agua, proyectiles y presión barométrica — pero por separado. Level E los prueba todos al mismo tiempo. Somos los únicos en México con esta certificación.</p></div>
+    <div class="card wcard reveal"><div class="wnum">02</div><h3>Funciona. Siempre.</h3><p>Más de 30 tormentas hasta Categoría 5. Cero fallas en instalaciones correctamente ejecutadas. Las únicas fallas documentadas ocurren cuando la estructura cede antes que el sistema — o cuando no fuimos nosotros quienes instalamos.</p></div>
+    <div class="card wcard reveal"><div class="wnum">03</div><h3>Se puede desplegar a tiempo</h3><p>Un sistema que no puede instalarse antes de la tormenta no es protección. Cada instalación está diseñada para que su propio equipo lo despliegue en horas. Capacitamos a su personal y dejamos un manual escrito.</p></div>
+    <div class="card wcard reveal"><div class="wnum">04</div><h3>Ingeniería real, no solo ventas</h3><p>Somos una empresa de construcción. Nuestros ingenieros resuelven problemas que otros no pueden. La fachada de 14 metros sin solución — la creamos. El hotel de 2,500 habitaciones en un día — lo logramos.</p></div>
+  </div>
+</div></section>
+ 
+<section class="stats-band"><div class="wrap">
+  <div class="stag reveal" style="color:var(--accent)">Historial comprobado</div>
+  <h2 class="stit reveal" style="color:#fff">30+ tormentas. <span style="color:var(--accent)">Cero fallas en instalaciones correctas.</span></h2>
+  <p class="sintro reveal" style="color:rgba(255,255,255,.6)">Nuestros sistemas han estado presentes en cada tormenta significativa en la Riviera Maya desde 2008.</p>
+  <div class="sgrid reveal">
+    <div class="sbox"><div class="sbig">30<em>+</em></div><div class="sdesc">Tormentas superadas</div></div>
+    <div class="sbox"><div class="sbig">Cat<em> 5</em></div><div class="sdesc">Nivel máximo probado</div></div>
+    <div class="sbox"><div class="sbig">2008</div><div class="sdesc">Operando en México</div></div>
+    <div class="sbox"><div class="sbig">10<em>yr</em></div><div class="sdesc">Garantía escrita</div></div>
+  </div>
+  <div class="storms reveal">
+    <span class="st major">Delta 2020 — Cat 2, Puerto Morelos</span>
+    <span class="st major">Odile 2014 — Cat 3, Los Cabos</span>
+    <span class="st major">Irma 2017 — Cat 5</span>
+    <span class="st major">Ian 2022 — Cat 4</span>
+    <span class="st major">Michael 2018 — Cat 5</span>
+    <span class="st major">Milton 2024 — Cat 5</span>
+    <span class="st">Gamma 2020</span><span class="st">Franklin 2017</span>
+    <span class="st">Grace 2021</span><span class="st">Nicole 2022</span>
+    <span class="st">Zeta 2020</span><span class="st">Dorian 2019</span><span class="st">+ 18 más</span>
+  </div>
+</div></section>
+ 
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Nuestros sistemas</div>
+  <h2 class="stit reveal">La protección correcta <span>para cada propiedad</span></h2>
+  <p class="sintro reveal">Tres sistemas. Todos fabricados en EUA. Somos honestos sobre cuál necesita su propiedad.</p>
+  <div class="pgrid">
+    <div class="card pcard feat reveal"><div class="pbadge b1">Nuestro sistema insignia</div><div class="pbody"><div class="pname">HS-1500</div><div class="prat">Certificación Level E · Cat 5</div><p class="pdesc">Tela balística — el mismo material del airbag de su automóvil. El único sistema en México con certificación Level E.</p><ul class="pfeats"><li>Más de 1,500 psi (Cat 5 = 1,200 psi)</li><li>Certificación Level E — Instalaciones Esenciales</li><li>Miami-Dade NOA y Florida Building Code</li><li>Anclaje flexible patentado — 8 puntos</li><li>100% fabricado en EUA · Garantía 10 años</li></ul><div class="pideal"><strong>Ideal para:</strong> Hoteles de playa, edificios corporativos, primera línea.</div></div></div>
+    <div class="card pcard reveal"><div class="pbadge b2">Cat 5 · Disponible en blanco</div><div class="pbody"><div class="pname">HS-1250</div><div class="prat">Certificación Cat 5 · Translúcido</div><p class="pdesc">Cat 5 certificado, translúcido y disponible en blanco. Ideal cuando la estética es prioridad.</p><ul class="pfeats"><li>Resistencia Cat 5 certificada</li><li>Disponible en blanco — sin degradación UV</li><li>Translúcido — visibilidad durante la tormenta</li><li>Miami-Dade Aprobado</li><li>Anclaje flexible patentado · Garantía 7 años</li></ul><div class="pideal"><strong>Ideal para:</strong> Hoteles modernos, condominios, propiedades de diseño.</div></div></div>
+    <div class="card pcard reveal"><div class="pbadge b3">Residencial · Presupuesto controlado</div><div class="pbody"><div class="pname">HS-875</div><div class="prat">Certificación Cat 3 · Polipropileno</div><p class="pdesc">Más accesible. Honestamente: no para hoteles de playa — un Cat 5 supera su límite. Para residencias alejadas de la costa, es sólido.</p><ul class="pfeats"><li>Resistencia hasta 875 psi</li><li>Certificación Categoría 3</li><li>Translúcido — visibilidad durante la tormenta</li><li>Florida Building Code Aprobado</li><li>Anclaje flexible patentado · Garantía 5 años</li></ul><div class="pideal"><strong>Ideal para:</strong> Residencias a 3+ km de la costa, presupuesto controlado.</div></div></div>
+  </div>
+</div></section>
+ 
+<section><div class="wrap">
+  <div class="stag reveal">Cómo trabajamos</div>
+  <h2 class="stit reveal">Simple. <span>Sin sorpresas.</span></h2>
+  <p class="sintro reveal">Hacemos lo que decimos, cuando lo decimos.</p>
+  <div class="proc">
+    <div class="pstep reveal"><div class="pcirc">1</div><h4>Evaluación gratuita</h4><p>Visitamos su propiedad o videollamada. Sin costo, sin compromiso.</p></div>
+    <div class="pstep reveal"><div class="pcirc">2</div><h4>Propuesta de ingeniería</h4><p>Plan específico. Sin venderle más de lo necesario.</p></div>
+    <div class="pstep reveal"><div class="pcirc">3</div><h4>Instalación certificada</h4><p>Nuestro equipo. Cada pantalla a medida. Fechas respetadas.</p></div>
+    <div class="pstep reveal"><div class="pcirc">4</div><h4>Capacitación y manual</h4><p>Capacitamos a su personal. Manual escrito para la próxima tormenta.</p></div>
+  </div>
+</div></section>
+ 
+<section class="segs"><div class="wrap">
+  <div class="stag reveal">A quién servimos</div>
+  <h2 class="stit reveal">Tres tipos de cliente. <span>Un mismo estándar.</span></h2>
+  <div class="sgr">
+    <div class="card seg reveal"><div class="seg-ico">🏨</div><h3>Hoteles y Resorts</h3><p>Grandes propiedades con cientos o miles de habitaciones. Despliegue masivo en horas con su propio personal.</p><div class="seg-ex">Vidanta · Barceló · Iberostar · Marriott</div></div>
+    <div class="card seg reveal"><div class="seg-ico">🏢</div><h3>Empresas Multi-ubicación</h3><p>Cadenas con decenas o cientos de sucursales. Programas corporativos estandarizados.</p><div class="seg-ex">Agencias de autos · Hospitales · Desarrollos</div></div>
+    <div class="card seg reveal"><div class="seg-ico">🏠</div><h3>Residencias de Lujo</h3><p>Propiedades de alto valor donde la estética importa tanto como la protección.</p><div class="seg-ex">Villas · Penthouses · Frente al mar</div></div>
+  </div>
+</div></section>
+ 
+<section><div class="wrap">
+  <div class="stag reveal">Lo que dicen nuestros clientes</div>
+  <h2 class="stit reveal">Resultados reales. <span>Propiedades reales.</span></h2>
+  <div class="tgrid">
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Cuando Delta tocó tierra en Puerto Morelos en 2020, nuestro hotel estaba completamente protegido. Nuestros vecinos tardaron semanas en reabrir. Nosotros abrimos al tercer día."</p><div class="tau"><strong>Director de Operaciones</strong><span>Hotel, Puerto Morelos, Q. Roo</span></div></div>
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Teníamos una fachada de vidrio de 14 metros sin solución en el mercado. Hurricane Solution la diseñó desde cero. No existía el sistema. Lo inventaron para nosotros."</p><div class="tau"><strong>Gerente General</strong><span>Hotel de lujo, Riviera Maya</span></div></div>
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"La instalación fue rápida y profesional. Lo que más nos gustó fue la confianza del especialista al explicarnos todo. Se nota que es un producto serio."</p><div class="tau"><strong>Karla L.</strong><span>Residente, Ciudad Mayakoba</span></div></div>
+  </div>
+</div></section>
+ 
+<section style="background:var(--off)"><div class="wrap">
+  <div class="cov">
+    <div class="reveal">
+      <div class="stag">Dónde operamos</div>
+      <h2 class="stit">Basados en Riviera Maya. <span>Viajamos a toda la costa.</span></h2>
+      <p style="color:var(--gray);font-size:.9rem;line-height:1.7;margin-top:.65rem">Playa del Carmen es nuestra base. Desde Los Cabos hasta Acapulco, mismo equipo y mismos estándares.</p>
+      <div class="zones"><span class="zt">Riviera Maya</span><span class="zt">Cancún</span><span class="zt">Cozumel</span><span class="zt">Los Cabos</span><span class="zt">Vallarta</span><span class="zt">Mazatlán</span><span class="zt">Acapulco</span></div>
+    </div>
+    <div class="map-box reveal">
+      <div class="mdot" style="top:44%;left:70%"></div>
+      <div class="mdot" style="top:39%;left:66%;animation-delay:.5s"></div>
+      <div class="mdot" style="top:34%;left:25%;animation-delay:1s"></div>
+      <div class="mdot" style="top:47%;left:20%;animation-delay:1.5s"></div>
+      <div class="mdot" style="top:58%;left:30%;animation-delay:.3s"></div>
+      <div class="mdot" style="top:67%;left:42%;animation-delay:.8s"></div>
+      <div class="mlab">Cobertura Nacional<br>México Costa a Costa</div>
+    </div>
+  </div>
+</div></section>
+ 
+<section><div class="wrap">
+  <div class="stag reveal">Certificaciones</div>
+  <h2 class="stit reveal">Los papeles respaldan <span>lo que el huracán confirma</span></h2>
+  <div class="cgrid">
+    <div class="card ccer hl reveal"><div class="cname">Level E</div><div class="cdesc">Certificación militar de EUA. La única que prueba las 4 fuerzas simultáneamente. Somos los únicos en México.</div></div>
+    <div class="card ccer reveal"><div class="cname">Miami-Dade NOA</div><div class="cdesc">Notice of Acceptance del condado con la normativa de huracanes más exigente de EUA.</div></div>
+    <div class="card ccer reveal"><div class="cname">IHPA</div><div class="cdesc">Únicos miembros de la International Hurricane Protection Association fuera de los Estados Unidos.</div></div>
+    <div class="card ccer reveal"><div class="cname">Florida Building Code</div><div class="cdesc">El estándar de referencia internacional para zonas de huracanes. Nuestros tres sistemas cumplen.</div></div>
+  </div>
+</div></section>
+ 
+<div class="cta-band">
+  <h2>¿Cuándo va a proteger su propiedad?</h2>
+  <p>La evaluación es gratuita. La tormenta no avisa con más de 48 horas.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')">Solicitar evaluación gratuita</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 Escribir por WhatsApp</a>
+  </div>
+</div>
+</div><!-- /home -->
+ 
+ 
+<!-- HOTELES -->
+<div id="page-hoteles" class="page">
+<div class="ip-hero">
+  <h1>Protección para <em>Hoteles y Resorts</em></h1>
+  <p>Una tormenta no destruye solo su edificio — destruye semanas de ingresos y la confianza de sus huéspedes. Nuestros sistemas están diseñados para que usted abra sus puertas al día siguiente.</p>
+  <button class="btn-primary" onclick="showPage('contacto')">Solicitar evaluación gratuita</button>
+</div>
+<section><div class="wrap">
+  <div class="stag reveal">Por qué nos eligen los hoteles</div>
+  <h2 class="stit reveal">Lo que más importa <span>a su operación</span></h2>
+  <div class="ben3">
+    <div class="card bcard reveal"><h3>🏗 Propiedad segura</h3><p>Prevenga daños estructurales, rotura de vidrios, inundaciones interiores y pérdida de contenidos. Mantenga su operación activa cuando la competencia cierra.</p></div>
+    <div class="card bcard reveal"><h3>🔧 Bajo mantenimiento</h3><p>Su propio personal de mantenimiento puede desplegar el sistema completo en horas, sin grúas ni especialistas externos. Lo capacitamos y dejamos un manual escrito para cuando cambie el equipo.</p></div>
+    <div class="card bcard reveal"><h3>📋 Descuentos de seguro</h3><p>Aseguradoras como Chubb, AIG y Mapfre reconocen nuestros sistemas como medida de mitigación certificada. En muchos casos esto reduce significativamente la prima anual de su póliza.</p></div>
+  </div>
+</div></section>
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">El problema real</div>
+  <h2 class="stit reveal">48 horas. <span>¿Puede desplegarlo a tiempo?</span></h2>
+  <p class="sintro reveal">La mayoría de los sistemas en el mercado tienen un problema que sus vendedores no mencionan: no pueden instalarse en tiempo real antes de una tormenta. Requieren grúas, andamios o especialistas que no estarán disponibles cuando los necesite.</p>
+  <br><br>
+  <p class="sintro reveal">Nuestros sistemas están diseñados desde el principio para ser desplegados por el personal de mantenimiento de su hotel. Cada pantalla está fabricada a medida y etiquetada para que el montaje sea simple y rápido.</p>
+  <div style="margin-top:1.75rem" class="reveal"><button class="btn-primary" onclick="showPage('contacto')">Ver cómo funciona en su hotel</button></div>
+</div></section>
+<section><div class="wrap">
+  <div class="stag reveal">Caso de estudio</div>
+  <h2 class="stit reveal">Hotel de <span>2,500 habitaciones.</span> Un día.</h2>
+  <div style="max-width:720px" class="reveal">
+    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">Un hotel con edificios de nueve pisos necesitaba proteger 2,500 habitaciones antes de una tormenta. Era humanamente imposible mover ese número de pantallas y subirlas nueve pisos en el tiempo disponible.</p><br>
+    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">Desarrollamos compartimentos de almacenamiento en el balcón de cada habitación. Cuando llega el aviso, un empleado por habitación desenvuelve la pantalla y la ancla. Esa habitación queda protegida.</p><br>
+    <p style="color:var(--gray);font-size:.95rem;line-height:1.75"><strong style="color:var(--navy)">Tiempo por habitación: 3 a 5 minutos. El hotel completo: un día.</strong></p>
+  </div>
+</div></section>
+<div class="cta-band">
+  <h2>¿Cuántas habitaciones tiene su hotel?</h2>
+  <p>Cuéntenos y diseñamos un programa específico para su propiedad.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')">Solicitar evaluación gratuita</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 WhatsApp</a>
+  </div>
+</div>
+</div><!-- /hoteles -->
+ 
+ 
+<!-- RESIDENCIAL -->
+<div id="page-residencial" class="page">
+<div class="ip-hero">
+  <h1>Protección para <em>Residencias de Lujo</em></h1>
+  <p>Su hogar es su mayor inversión. Nuestros sistemas protegen lo que más importa — sin afear la estética de su propiedad.</p>
+  <button class="btn-primary" onclick="showPage('contacto')">Solicitar evaluación gratuita</button>
+</div>
+<section><div class="wrap">
+  <div class="stag reveal">Por qué nos eligen los propietarios</div>
+  <h2 class="stit reveal">Tres razones <span>que marcan la diferencia</span></h2>
+  <div class="ben3">
+    <div class="card bcard reveal"><h3>🛡 Protección real Cat 5</h3><p>No todos los sistemas son iguales. Nuestro HS-1500 supera los 1,500 psi — más que la fuerza de un Categoría 5. Cuando llegue la tormenta, su casa estará protegida de verdad, no solo en papel.</p></div>
+    <div class="card bcard reveal"><h3>🎨 Sin comprometer la estética</h3><p>Los anclajes de acero inoxidable son prácticamente invisibles cuando no los necesita. El HS-1250 viene en blanco para propiedades de diseño moderno. Protección que no afea su propiedad.</p></div>
+    <div class="card bcard reveal"><h3>📋 Descuentos de seguro</h3><p>Aseguradoras como Chubb, AIG y Mapfre reconocen nuestros sistemas como medida certificada de mitigación. Su inversión puede reducir significativamente su prima anual.</p></div>
+  </div>
+</div></section>
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">¿Qué sistema necesita?</div>
+  <h2 class="stit reveal">Depende de <span>dónde está su propiedad</span></h2>
+  <div class="pgrid">
+    <div class="card pcard reveal"><div class="pbadge b1">Frente al mar · Máxima protección</div><div class="pbody"><div class="pname">HS-1500</div><div class="prat">Level E · Beachfront</div><p class="pdesc">Para propiedades directamente en la costa. La fuerza es mayor en exposición directa — necesita el sistema más fuerte.</p><div class="pideal"><strong>Ideal para:</strong> Villas y condominios frente al mar.</div></div></div>
+    <div class="card pcard feat reveal"><div class="pbadge b2">500m – 2km · El más elegido</div><div class="pbody"><div class="pname">HS-1250</div><div class="prat">Cat 5 · Viene en blanco</div><p class="pdesc">El más popular entre nuestros clientes residenciales. Cat 5 certificado, disponible en blanco para diseño moderno.</p><div class="pideal"><strong>Ideal para:</strong> Riviera Maya, PlayaCar, Mayakoba.</div></div></div>
+    <div class="card pcard reveal"><div class="pbadge b3">3+ km · Presupuesto controlado</div><div class="pbody"><div class="pname">HS-875</div><div class="prat">Cat 3 · Más accesible</div><p class="pdesc">Para propiedades alejadas de la costa. Si está en primera línea, le recomendaremos honestamente otra opción.</p><div class="pideal"><strong>Ideal para:</strong> Residencias interiores sin exposición directa.</div></div></div>
+  </div>
+</div></section>
+<section><div class="wrap">
+  <div class="stag reveal">Lo que dicen nuestros clientes</div>
+  <h2 class="stit reveal">Propietarios que <span>ya están protegidos</span></h2>
+  <div class="tgrid">
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Desde que instalamos las mallas, sentimos mucha más tranquilidad. La instalación fue rápida y profesional. Se nota que es un producto serio."</p><div class="tau"><strong>Marco R.</strong><span>Propietario, Playa del Carmen</span></div></div>
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Después del último huracán, decidimos invertir en protección seria. Elegimos Hurricane Solution por su reputación y las certificaciones. Hoy nos sentimos mucho más seguros."</p><div class="tau"><strong>Cinthya G.</strong><span>Dueña de negocio, Cancún</span></div></div>
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Lo que más nos impresionó fue la rapidez de respuesta. Necesitábamos una solución urgente y nos atendieron de inmediato."</p><div class="tau"><strong>Karla L.</strong><span>Residente, Ciudad Mayakoba</span></div></div>
+  </div>
+</div></section>
+<div class="cta-band">
+  <h2>Proteja su hogar antes de la próxima temporada</h2>
+  <p>Evaluación gratuita, presencial o por videollamada. Sin compromiso.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')">Solicitar evaluación gratuita</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 WhatsApp</a>
+  </div>
+</div>
+</div><!-- /residencial -->
+ 
+ 
+<!-- COMERCIAL -->
+<div id="page-comercial" class="page">
+<div class="ip-hero">
+  <h1>Protección para <em>Empresas</em></h1>
+  <p>Si tiene múltiples ubicaciones en zonas de huracanes, cada tormenta es una amenaza multiplicada. Un solo programa corporativo para todas sus sucursales.</p>
+  <button class="btn-primary" onclick="showPage('contacto')">Solicitar programa corporativo</button>
+</div>
+<section><div class="wrap">
+  <div class="stag reveal">Por qué nos eligen las empresas</div>
+  <h2 class="stit reveal">Un solo proveedor. <span>Todas sus ubicaciones.</span></h2>
+  <div class="ben3">
+    <div class="card bcard reveal"><h3>📐 Sistema estandarizado</h3><p>Un solo protocolo para todas sus sucursales. Su equipo de cada ubicación sabe exactamente qué hacer y cuándo — sin depender de nadie externo cuando llega el aviso.</p></div>
+    <div class="card bcard reveal"><h3>🔧 Bajo mantenimiento</h3><p>Capacitamos al personal de cada sucursal y entregamos manuales escritos. El sistema fue diseñado para desplegarse en horas con su propio equipo, sin especialistas externos.</p></div>
+    <div class="card bcard reveal"><h3>📋 Descuentos de seguro</h3><p>Nuestros sistemas son reconocidos por aseguradoras como medida de mitigación certificada. Para empresas con múltiples ubicaciones, el ahorro en primas puede ser muy significativo.</p></div>
+  </div>
+</div></section>
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Sectores que atendemos</div>
+  <h2 class="stit reveal">Si opera en zona costera, <span>podemos ayudarle</span></h2>
+  <div class="sgr">
+    <div class="card seg reveal"><div class="seg-ico">🚗</div><h3>Agencias de Autos</h3><p>Su inventario en el estacionamiento representa millones. Una tormenta puede destruirlo en minutos. Nuestros sistemas protegen su exhibición exterior con despliegue rápido antes del impacto.</p><div class="seg-ex">Distribuidores · Agencias · Lotes de autos</div></div>
+    <div class="card seg reveal"><div class="seg-ico">🏥</div><h3>Hospitales y Clínicas</h3><p>Una instalación de salud no puede cesar operaciones durante una emergencia. Nuestros sistemas están clasificados para instalaciones esenciales — el mismo estándar que hospitales militares.</p><div class="seg-ex">Hospitales · Clínicas · Centros médicos</div></div>
+    <div class="card seg reveal"><div class="seg-ico">🏗</div><h3>Desarrollos Inmobiliarios</h3><p>Condominios en construcción o entrega, desarrollos turísticos y bienes raíces de lujo. Protección integrada desde el diseño o como retrofit. Un diferenciador que sus compradores valorarán.</p><div class="seg-ex">Desarrolladoras · Administradoras · HOA</div></div>
+  </div>
+</div></section>
+<div class="cta-band">
+  <h2>¿Cuántas ubicaciones necesita proteger?</h2>
+  <p>Cuéntenos y diseñamos un programa a la medida de su empresa.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')">Solicitar programa corporativo</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 WhatsApp</a>
+  </div>
+</div>
+</div><!-- /comercial -->
+ 
+ 
+<!-- AQUAGRID -->
+<div id="page-aquagrid" class="page">
+<div class="ip-hero" style="background:linear-gradient(135deg,#0a2a2e 0%,#0E4A52 100%)">
+  <h1 style="color:#fff">Aperturas que nadie más <em style="color:#4DD8E0">puede proteger.</em></h1>
+  <p>AquaGrid es el único sistema de protección para grandes aperturas donde las pantallas convencionales no funcionan — ni ingeniería ni logísticamente.</p>
+  <button class="btn-primary" onclick="showPage('contacto')" style="background:#4DD8E0;color:#0a2a2e">Solicitar información</button>
+</div>
+ 
+<section style="background:#f0f8f9"><div class="wrap">
+  <div class="stag reveal" style="color:var(--teal)">El problema que AquaGrid resuelve</div>
+  <h2 class="stit reveal">Cuando el sistema estándar <span style="color:var(--teal)">no puede instalarse.</span></h2>
+  <div style="max-width:720px" class="reveal">
+    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">Los sistemas de pantalla convencionales tienen un límite de ingeniería: no pueden abarcar aperturas de más de 3.8 metros entre puntos de anclaje sin comprometer su integridad estructural.</p><br>
+    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">En el mercado hay empresas que instalan sus sistemas a 20 metros de apertura cuando su propia ingeniería dice que fallarán a partir de 3. Nosotros nos negamos a hacer eso.</p><br>
+    <p style="color:var(--gray);font-size:.95rem;line-height:1.75"><strong style="color:var(--navy)">AquaGrid fue desarrollado por Hurricane Solution para resolver lo que el mercado ignoraba:</strong> lobbies de hotel de doble altura, fachadas de vidrio de gran formato, aperturas curvas, concesionarios de autos y cualquier espacio donde la ingeniería convencional no alcanza.</p>
+  </div>
+</div></section>
+ 
+<section style="background:#0a2a2e"><div class="wrap">
+  <div class="stag reveal" style="color:#4DD8E0">Ventajas clave</div>
+  <h2 class="stit reveal" style="color:#fff">Tres razones por las que <span style="color:#4DD8E0">no hay alternativa.</span></h2>
+  <div class="ben3" style="margin-top:2rem">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(77,216,224,.2);border-top:3px solid #4DD8E0;border-radius:6px;padding:1.6rem" class="reveal">
+      <h3 style="color:#fff;font-size:.95rem;margin-bottom:.5rem">📐 Aperturas imposibles</h3>
+      <p style="color:rgba(255,255,255,.65);font-size:.87rem;line-height:1.65">Protege aperturas de más de 20 metros entre puntos de anclaje. Donde cualquier otro sistema fallaría o no puede instalarse, AquaGrid funciona.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(77,216,224,.2);border-top:3px solid #4DD8E0;border-radius:6px;padding:1.6rem" class="reveal">
+      <h3 style="color:#fff;font-size:.95rem;margin-bottom:.5rem">💪 Mayor resistencia tensil de la industria</h3>
+      <p style="color:rgba(255,255,255,.65);font-size:.87rem;line-height:1.65">7,800 lbs de resistencia tensil. Trama 50% abierta que permite pasar la mitad de la carga, reduciendo drásticamente las fuerzas sobre la estructura y los anclajes.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(77,216,224,.2);border-top:3px solid #4DD8E0;border-radius:6px;padding:1.6rem" class="reveal">
+      <h3 style="color:#fff;font-size:.95rem;margin-bottom:.5rem">✅ Ingeniería honesta</h3>
+      <p style="color:rgba(255,255,255,.65);font-size:.87rem;line-height:1.65">Desarrollamos AquaGrid porque nos negamos a instalar sistemas por encima de sus límites de ingeniería. Si su apertura supera lo que puede proteger el sistema estándar, AquaGrid es la respuesta — no la improvisación.</p>
+    </div>
+  </div>
+  <div class="ag-stats reveal">
+    <div class="ag-sbox"><div class="ag-num">20<em>m+</em></div><div class="ag-label">Apertura máxima cubierta</div></div>
+    <div class="ag-sbox"><div class="ag-num">7,800<em>lbs</em></div><div class="ag-label">Resistencia tensil</div></div>
+    <div class="ag-sbox"><div class="ag-num">50<em>%</em></div><div class="ag-label">Reducción de carga estructural</div></div>
+  </div>
+</div></section>
+ 
+<section><div class="wrap">
+  <div class="stag reveal" style="color:var(--teal)">Instalaciones reales</div>
+  <h2 class="stit reveal">AquaGrid en <span style="color:var(--teal)">campo</span></h2>
+  <p class="sintro reveal">Hoteles, condominios de lujo y edificios corporativos en la Riviera Maya y Los Cabos.</p>
+  <div class="photo-grid reveal">
+    <img src="ag1.jpg" alt="AquaGrid instalación hotel lobby">
+    <img src="ag2.jpg" alt="AquaGrid fachada alta">
+    <img src="ag3.jpg" alt="AquaGrid instalación frente edificio">
+  </div>
+  <div class="photo-grid-2 reveal">
+    <img src="ag4.jpg" alt="AquaGrid interior hotel">
+    <img src="ag5.jpg" alt="AquaGrid fachada residencial">
+  </div>
+  <div class="photo-grid reveal" style="margin-top:.75rem">
+    <img src="ag6.jpg" alt="AquaGrid edificio residencial">
+    <img src="ag7.jpg" alt="AquaGrid instalación completa">
+    <div style="background:var(--off);border:1.5px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;height:220px">
+      <div style="text-align:center;color:var(--gray)"><div style="font-size:2rem;margin-bottom:.5rem">📸</div><div style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em">Más fotos disponibles<br>en consulta</div></div>
+    </div>
+  </div>
+</div></section>
+ 
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal" style="color:var(--teal)">Ideal para</div>
+  <h2 class="stit reveal">¿Su propiedad tiene <span style="color:var(--teal)">grandes aperturas?</span></h2>
+  <div class="sgr">
+    <div class="card seg reveal"><div class="seg-ico">🚗</div><h3>Agencias de Autos</h3><p>Los showrooms tienen aperturas masivas diseñadas para exhibición. AquaGrid las protege sin comprometer el diseño ni la operación del negocio.</p></div>
+    <div class="card seg reveal"><div class="seg-ico">🏨</div><h3>Lobbies de Hotel</h3><p>Fachadas de doble altura, aperturas panorámicas y accesos de gran formato. Donde el HS-1500 no puede cubrir la distancia, AquaGrid resuelve.</p></div>
+    <div class="card seg reveal"><div class="seg-ico">🏥</div><h3>Hospitales</h3><p>Instalaciones esenciales que no pueden dejar de operar. AquaGrid fue diseñado con el mismo espíritu que las instalaciones militares — para mantenerse cuando más se le necesita.</p></div>
+  </div>
+</div></section>
+ 
+<div class="cta-band" style="background:var(--teal)">
+  <h2>¿Tiene una apertura que nadie ha podido proteger?</h2>
+  <p>Cuéntenos el desafío. Si hay solución, la encontramos.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')" style="color:var(--teal)">Solicitar consulta de ingeniería</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 WhatsApp</a>
+  </div>
+</div>
+</div><!-- /aquagrid -->
+ 
+ 
+<!-- RAIN PROTECTION -->
+<div id="page-rain" class="page">
+<div class="ip-hero">
+  <h1>HS <em>Rain Protection</em></h1>
+  <p>Protección contra lluvia, arena y sol para terrazas, restaurantes, pergolas y áreas abiertas. Tres sistemas de operación para adaptarse a cualquier espacio y presupuesto.</p>
+  <button class="btn-primary" onclick="showPage('contacto')">Solicitar cotización</button>
+</div>
+<section><div class="wrap">
+  <div class="stag reveal">Por qué nos eligen</div>
+  <h2 class="stit reveal">Tres ventajas <span>que importan</span></h2>
+  <div class="ben3">
+    <div class="card bcard reveal"><h3>🌧 Más días de operación</h3><p>Sus áreas exteriores siguen funcionando durante lluvia intensa. Más mesas, más clientes, más ingresos — sin importar el clima. Para hoteles y restaurantes esto se traduce directamente en resultados.</p></div>
+    <div class="card bcard reveal"><h3>🎨 Sin afear el espacio</h3><p>Diseñado para integrarse a la arquitectura. Cuando no lo necesita, permanece recogido ordenadamente. Cuando lo necesita, se despliega en minutos sin herramientas especiales.</p></div>
+    <div class="card bcard reveal"><h3>🔧 Bajo mantenimiento</h3><p>Tela técnica resistente a UV, humedad y salinidad. Solo lavado ocasional con agua y jabón. No se oxida, no se decolora. Diseñado para el clima costero de México.</p></div>
+  </div>
+</div></section>
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Opciones de instalación</div>
+  <h2 class="stit reveal">Tres sistemas. <span>Una solución a su medida.</span></h2>
+  <div class="wgrid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card wcard reveal"><div class="wnum">01</div><h3>Sistema de Manivela</h3><p>Operación manual simple. Ideal para áreas donde se requiere control directo. Acción rápida con una sola persona. La opción más accesible de nuestra línea.</p></div>
+    <div class="card wcard reveal"><div class="wnum">02</div><h3>Sistema Mecánico</h3><p>Mayor comodidad para áreas medianas. Despliegue eficiente sin esfuerzo físico. Ideal para terrazas de hotel, restaurantes y áreas de piscina de uso intensivo.</p></div>
+    <div class="card wcard reveal"><div class="wnum">03</div><h3>Sistema Eléctrico</h3><p>Despliegue automático con control remoto. Para espacios donde la comodidad es prioridad. Puede programarse con sensores de lluvia para despliegue automático.</p></div>
+  </div>
+</div></section>
+<section><div class="wrap">
+  <div class="stag reveal">Aplicaciones</div>
+  <h2 class="stit reveal">¿Dónde lo <span>necesita?</span></h2>
+  <div class="sgr">
+    <div class="card seg reveal"><div class="seg-ico">🏨</div><h3>Hoteles</h3><p>Protección para terrazas, restaurantes, bares y áreas de alberca. Mantenga sus espacios exteriores operativos durante la temporada de lluvias.</p></div>
+    <div class="card seg reveal"><div class="seg-ico">🍽</div><h3>Restaurantes</h3><p>Más mesas disponibles todo el año. Incluso durante lluvia intensa, sus clientes disfrutan del exterior.</p></div>
+    <div class="card seg reveal"><div class="seg-ico">🏠</div><h3>Residencial</h3><p>Ideal para patios, balcones, pérgolas y penthouses. Disfrute sus espacios exteriores sin importar el clima.</p></div>
+  </div>
+</div></section>
+<div class="cta-band">
+  <h2>Proteja sus espacios exteriores</h2>
+  <p>Solicite una cotización gratuita para su terraza, restaurante o área exterior.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')">Solicitar cotización</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 WhatsApp</a>
+  </div>
+</div>
+</div><!-- /rain -->
+ 
+ 
+<!-- EQUIPO -->
+<div id="page-equipo" class="page">
+<div class="ip-hero">
+  <h1>El <em>Equipo</em></h1>
+  <p>Expertos en protección contra huracanes con más de 15 años operando en las costas de México. Somos una empresa de construcción que resuelve problemas de ingeniería.</p>
+</div>
+<section><div class="wrap">
+  <div class="stag reveal">Nuestro equipo</div>
+  <h2 class="stit reveal">Las personas detrás de <span>cada instalación</span></h2>
+  <p class="sintro reveal">Cuando Hurricane Solution llega a su propiedad, llegan expertos — no vendedores.</p>
+  <div class="team-grid">
+    <div class="card team-card reveal">
+      <div class="team-avatar">HS</div>
+      <h3>[Nombre del fundador]</h3>
+      <div class="role">Fundador y Director</div>
+      <p>Más de 15 años en protección contra huracanes en México. Ha estado presente en más de 30 tormentas y desarrollado soluciones que no existían en el mercado.</p>
+    </div>
+    <div class="card team-card team-placeholder reveal">
+      <div class="team-avatar" style="background:var(--light);color:var(--gray)">+</div>
+      <h3>Próximamente</h3>
+      <div class="role">Equipo de Ingeniería</div>
+      <p>Nuestros ingenieros y arquitectos trabajan en cada proyecto asegurando que la solución funcione — no solo que pase una prueba.</p>
+    </div>
+    <div class="card team-card team-placeholder reveal">
+      <div class="team-avatar" style="background:var(--light);color:var(--gray)">+</div>
+      <h3>Próximamente</h3>
+      <div class="role">Equipo de Instalación</div>
+      <p>Personal certificado con años de experiencia instalando en condiciones reales. Cada instalación supervisada desde el primer hasta el último ancla.</p>
+    </div>
+  </div>
+</div></section>
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Nuestra filosofía</div>
+  <h2 class="stit reveal">Dos preguntas. <span>Siempre.</span></h2>
+  <div class="wgrid">
+    <div class="card wcard reveal"><div class="wnum">01</div><h3>¿Va a funcionar cuando llegue la tormenta?</h3><p>Cada decisión de instalación parte de esta pregunta. No cerramos un trabajo si la respuesta es no — aunque el cliente quiera algo diferente. Nuestra reputación vale más que un contrato.</p></div>
+    <div class="card wcard reveal"><div class="wnum">02</div><h3>¿Puede su equipo instalarlo a tiempo?</h3><p>Un sistema que no puede desplegarse antes de la tormenta no protege nada. Diseñamos cada instalación pensando en el personal que va a usarla — con o sin nosotros presentes.</p></div>
+  </div>
+</div></section>
+<div class="cta-band">
+  <h2>¿Quiere conocer al equipo?</h2>
+  <p>Solicite una visita o videollamada. Que hable el trabajo.</p>
+  <div class="cta-btns">
+    <button class="btn-w" onclick="showPage('contacto')">Agendar una visita</button>
+    <a href="https://wa.me/5219987052145" class="btn-wout">💬 WhatsApp</a>
+  </div>
+</div>
+</div><!-- /equipo -->
+ 
+ 
+<!-- FAQ -->
+<div id="page-faq" class="page">
+<div class="ip-hero">
+  <h1>Preguntas <em>Frecuentes</em></h1>
+  <p>Todo lo que necesita saber sobre protección contra huracanes en México.</p>
+</div>
+<section><div class="wrap">
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué diferencia a Hurricane Solution de otras empresas en México?<span class="arr">▼</span></button><div class="faq-a"><p>Somos la única empresa en México con certificación militar Level E — la única que prueba las 4 fuerzas de un huracán al mismo tiempo. También somos el único miembro de la International Hurricane Protection Association fuera de los Estados Unidos, y nuestro sistema de anclaje es el único patentado en México. Llevamos operando desde 2008 con cero fallas en instalaciones correctamente ejecutadas.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué es la certificación Level E y por qué importa?<span class="arr">▼</span></button><div class="faq-a"><p>Level E es una certificación desarrollada por el ejército de los Estados Unidos para proteger instalaciones esenciales. Es la única certificación que prueba viento, lluvia, proyectiles y cambio de presión barométrica al mismo tiempo. Las otras certificaciones los prueban por separado. Somos los únicos en México con esta certificación.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuál es la diferencia entre HS-1500, HS-1250 y HS-875?<span class="arr">▼</span></button><div class="faq-a"><p>El HS-1500 es nuestra línea insignia — tela balística con certificación Level E, más de 1,500 psi y garantía de 10 años. El HS-1250 es Cat 5 certificado, disponible en blanco, garantía 7 años — ideal cuando la estética es prioridad. El HS-875 es más accesible, certificado hasta Cat 3, garantía 5 años — adecuado para residencias alejadas de la costa.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué es AquaGrid y cuándo lo necesito?<span class="arr">▼</span></button><div class="faq-a"><p>AquaGrid es un sistema de malla de alta resistencia para aperturas que los sistemas convencionales no pueden cubrir. Los sistemas estándar tienen un límite de 3.8 metros — AquaGrid puede cubrir más de 20 metros. Ideal para lobbies de hotel, showrooms de autos, hospitales y cualquier espacio con grandes aperturas.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿En cuánto tiempo se puede desplegar antes de una tormenta?<span class="arr">▼</span></button><div class="faq-a"><p>Para un hotel grande, un empleado por habitación puede proteger su espacio en 3 a 5 minutos. Para una residencia, el despliegue total suele tomar 1 a 3 horas con 2 personas. Capacitamos a su personal y dejamos un manual escrito.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Los sistemas ayudan a reducir el costo del seguro?<span class="arr">▼</span></button><div class="faq-a"><p>Sí. Aseguradoras como Chubb, AIG y Mapfre reconocen los sistemas HS-1500 como medida de mitigación certificada. Le proporcionamos la documentación necesaria para presentar a su aseguradora.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto dura el sistema y qué mantenimiento requiere?<span class="arr">▼</span></button><div class="faq-a"><p>La vida útil es de 15 a 20 años. El mantenimiento es mínimo: lavado ocasional con agua y jabón. Resistentes a UV, moho y salinidad — diseñados para el clima costero.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Dónde ofrecen servicio y cómo solicito una evaluación?<span class="arr">▼</span></button><div class="faq-a"><p>Estamos basados en Playa del Carmen y nos desplazamos a Los Cabos, Vallarta, Mazatlán y Acapulco. Puede solicitar su evaluación llamando al 984 803 5014, por WhatsApp al +52 1 998 705 2145, o por el formulario en esta página. Sin costo y sin compromiso.</p></div></div>
+  </div>
+  <div style="margin-top:2.5rem" class="reveal">
+    <button class="btn-primary" onclick="showPage('contacto')">¿Más preguntas? Contáctenos</button>
+  </div>
+</div></section>
+</div><!-- /faq -->
+ 
+ 
+<!-- CONTACTO -->
+<div id="page-contacto" class="page">
+<div class="ip-hero">
+  <h1>Solicite su <em>evaluación gratuita</em></h1>
+  <p>Sin costo, sin compromiso. Presencial o por videollamada. Le contactamos en menos de 24 horas.</p>
+</div>
+<section><div class="wrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+    <div class="fcard reveal">
+      <h3>Formulario de contacto</h3>
+      <p>Respuesta en menos de 24 horas hábiles</p>
+      <form onsubmit="submitForm(event,this)">
+        <div class="frow">
+          <div class="fg"><label>Nombre</label><input type="text" placeholder="Nombre" required></div>
+          <div class="fg"><label>Apellido</label><input type="text" placeholder="Apellido"></div>
+        </div>
+        <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+52 984 000 0000" required></div>
+        <div class="fg"><label>Correo electrónico</label><input type="email" placeholder="correo@empresa.com" required></div>
+        <div class="fg"><label>Tipo de propiedad</label>
+          <select required><option value="">Seleccione...</option><option>Hotel / Resort</option><option>Empresa con múltiples ubicaciones</option><option>Residencia de lujo</option><option>Agencia de autos</option><option>Hospital / Clínica</option><option>Desarrollo inmobiliario</option><option>Apertura gran escala (AquaGrid)</option><option>Terraza / Área exterior (Rain)</option><option>Otro</option></select>
+        </div>
+        <div class="fg"><label>Zona</label>
+          <select><option value="">¿Dónde está su propiedad?</option><option>Riviera Maya / Playa del Carmen</option><option>Cancún</option><option>Cozumel</option><option>Tulum</option><option>Los Cabos</option><option>Puerto Vallarta</option><option>Mazatlán</option><option>Acapulco</option><option>Otra</option></select>
+        </div>
+        <div class="fg"><label>Mensaje (opcional)</label><input type="text" placeholder="Cuéntenos brevemente sobre su propiedad..."></div>
+        <button type="submit" class="fsub">Enviar solicitud →</button>
+        <p class="fnote">Le contactamos en menos de 24 horas.</p>
+      </form>
+    </div>
+    <div class="reveal">
+      <div class="stag">O contáctenos directamente</div>
+      <h2 class="stit" style="font-size:1.4rem">Le atendemos <span>de inmediato</span></h2>
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <a href="https://wa.me/5219987052145" style="display:flex;align-items:center;gap:1rem;background:#25D366;color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">💬</span><div><div>WhatsApp</div><div style="font-weight:400;font-size:.78rem;opacity:.85">+52 1 998 705 2145 — Respuesta inmediata</div></div>
+        </a>
+        <a href="tel:+529848035014" style="display:flex;align-items:center;gap:1rem;background:var(--blue);color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">📞</span><div><div>Teléfono</div><div style="font-weight:400;font-size:.78rem;opacity:.85">984 803 5014 — Lun a Vie 9am–6pm</div></div>
+        </a>
+        <a href="mailto:info@hurricanesolution.com" style="display:flex;align-items:center;gap:1rem;background:var(--navy);color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">✉️</span><div><div>Correo electrónico</div><div style="font-weight:400;font-size:.78rem;opacity:.85">info@hurricanesolution.com</div></div>
+        </a>
+      </div>
+      <div style="margin-top:1.25rem;padding:1.5rem;background:var(--off);border-radius:6px;border:1.5px solid var(--border)">
+        <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem">📍 Nuestras oficinas</h4>
+        <p style="font-size:.84rem;color:var(--gray);line-height:1.65">10 Avenida Norte entre 14 Norte bis y 16 Norte<br>Centro, 77500 Playa del Carmen, Q.R.<br>México</p>
+      </div>
+      <div style="margin-top:1rem;padding:1.25rem;background:var(--off);border-radius:6px;border:1.5px solid var(--border)">
+        <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem">📱 Redes sociales</h4>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.35rem">
+          <a href="https://www.facebook.com/share/16cZAdbkjj/" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">Facebook</a>
+          <a href="https://www.instagram.com/hurricanesolution" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">Instagram</a>
+          <a href="https://youtube.com/@hurricanesolution" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">YouTube</a>
+          <a href="https://www.tiktok.com/@hurricane.solutio" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+</div><!-- /contacto -->
+ 
+ 
+<footer>
+  <div class="fin wrap">
+    <div>
+      <div class="fbrand" onclick="showPage('home')">Hurricane<span>Solution</span></div>
+      <p class="ftag">El único sistema con certificación militar Level E en México. Protegiendo hoteles, empresas y residencias desde 2008.</p>
+      <div style="display:flex;gap:.85rem;margin-top:1rem;flex-wrap:wrap">
+        <a href="https://www.facebook.com/share/16cZAdbkjj/" style="font-size:.78rem;color:rgba(255,255,255,.45)">Facebook</a>
+        <a href="https://www.instagram.com/hurricanesolution" style="font-size:.78rem;color:rgba(255,255,255,.45)">Instagram</a>
+        <a href="https://youtube.com/@hurricanesolution" style="font-size:.78rem;color:rgba(255,255,255,.45)">YouTube</a>
+        <a href="https://www.tiktok.com/@hurricane.solutio" style="font-size:.78rem;color:rgba(255,255,255,.45)">TikTok</a>
+      </div>
+    </div>
+    <div class="fc"><h4>Servicios</h4><ul>
+      <li><a onclick="showPage('hoteles')">Hotelero</a></li>
+      <li><a onclick="showPage('residencial')">Residencial</a></li>
+      <li><a onclick="showPage('comercial')">Comercial</a></li>
+      <li><a onclick="showPage('aquagrid')">AquaGrid</a></li>
+      <li><a onclick="showPage('rain')">Rain Protection</a></li>
+    </ul></div>
+    <div class="fc"><h4>Empresa</h4><ul>
+      <li><a onclick="showPage('equipo')">El Equipo</a></li>
+      <li><a onclick="showPage('faq')">FAQ</a></li>
+      <li><a onclick="showPage('home')">HS-1500</a></li>
+      <li><a onclick="showPage('home')">HS-1250</a></li>
+      <li><a onclick="showPage('home')">HS-875</a></li>
+    </ul></div>
+    <div class="fc"><h4>Contacto</h4><ul>
+      <li><a href="tel:+529848035014">984 803 5014</a></li>
+      <li><a href="https://wa.me/5219987052145">WhatsApp</a></li>
+      <li><a href="mailto:info@hurricanesolution.com">info@hurricanesolution.com</a></li>
+      <li><a onclick="showPage('contacto')">Cotizar ahora</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot wrap">
+    <span>© 2025 Hurricane Solution. Todos los derechos reservados.</span>
+    <span>Playa del Carmen, Quintana Roo, México</span>
+  </div>
+</footer>
+ 
+<a href="https://wa.me/5219987052145" class="wa">💬</a>
+ 
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const el=document.getElementById('nav-'+id);
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initReveals,100);
+}
+function initReveals(){
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*55);});
+  },{threshold:0.07});
+  document.querySelectorAll('.page.active .reveal:not(.vis)').forEach(r=>obs.observe(r));
+}
+initReveals();
+function toggleFaq(btn){
+  const item=btn.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+function submitForm(e,form){
+  e.preventDefault();
+  const btn=form.querySelector('.fsub');
+  btn.textContent='✓ Solicitud enviada — le contactamos pronto';
+  btn.style.background='#2a9d5c';
+  btn.style.color='#fff';
+  btn.disabled=true;
+}
+</script>
+</body>
+</html>
