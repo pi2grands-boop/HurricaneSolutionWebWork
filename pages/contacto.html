@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hurricane Solution — Contacto y Cotización</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <span>🌀 Temporada de huracanes activa — Playa del Carmen, Q. Roo</span>
+  <div class="tb-right">
+    <a href="tel:+529848035014">📞 984 803 5014</a>
+    <a href="https://wa.me/5219987052145">💬 WhatsApp</a>
+    <button class="lang-btn">EN</button>
+  </div>
+
+<nav>
+  <div class="nav-logo"><a href="../index.html">Hurricane<span>Solution</span></a></div>
+  <div class="nav-links">
+    <a href="../index.html" id="nav-home">Inicio</a>
+    <a href="hoteles.html" id="nav-hoteles">Hotelero</a>
+    <a href="residencial.html" id="nav-residencial">Residencial</a>
+    <a href="comercial.html" id="nav-comercial">Comercial</a>
+    <a href="aquagrid.html" id="nav-aquagrid" class="nav-ag">AquaGrid</a>
+    <a href="rain.html" id="nav-rain">Rain Protection</a>
+    <a href="equipo.html" id="nav-equipo">El Equipo</a>
+    <a href="faq.html" id="nav-faq">FAQ</a>
+    <a href="contacto.html" class="nav-cta">Cotizar Ahora</a>
+  </div>
+</nav>
+
+<div class="ip-hero">
+  <h1>Solicite su <em>evaluación gratuita</em></h1>
+  <p>Sin costo, sin compromiso. Presencial o por videollamada. Le contactamos en menos de 24 horas.</p>
+</div>
+<section><div class="wrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+    <div class="fcard reveal">
+      <h3>Formulario de contacto</h3>
+      <p>Respuesta en menos de 24 horas hábiles</p>
+      <form onsubmit="submitForm(event,this)">
+        <div class="frow">
+          <div class="fg"><label>Nombre</label><input type="text" placeholder="Nombre" required></div>
+          <div class="fg"><label>Apellido</label><input type="text" placeholder="Apellido"></div>
+        </div>
+        <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+52 984 000 0000" required></div>
+        <div class="fg"><label>Correo electrónico</label><input type="email" placeholder="correo@empresa.com" required></div>
+        <div class="fg"><label>Tipo de propiedad</label>
+          <select required><option value="">Seleccione...</option><option>Hotel / Resort</option><option>Empresa con múltiples ubicaciones</option><option>Residencia de lujo</option><option>Agencia de autos</option><option>Hospital / Clínica</option><option>Desarrollo inmobiliario</option><option>Apertura gran escala (AquaGrid)</option><option>Terraza / Área exterior (Rain)</option><option>Otro</option></select>
+        </div>
+        <div class="fg"><label>Zona</label>
+          <select><option value="">¿Dónde está su propiedad?</option><option>Riviera Maya / Playa del Carmen</option><option>Cancún</option><option>Cozumel</option><option>Tulum</option><option>Los Cabos</option><option>Puerto Vallarta</option><option>Mazatlán</option><option>Acapulco</option><option>Otra</option></select>
+        </div>
+        <div class="fg"><label>Mensaje (opcional)</label><input type="text" placeholder="Cuéntenos brevemente sobre su propiedad..."></div>
+        <button type="submit" class="fsub">Enviar solicitud →</button>
+        <p class="fnote">Le contactamos en menos de 24 horas.</p>
+      </form>
+    </div>
+    <div class="reveal">
+      <div class="stag">O contáctenos directamente</div>
+      <h2 class="stit" style="font-size:1.4rem">Le atendemos <span>de inmediato</span></h2>
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <a href="https://wa.me/5219987052145" style="display:flex;align-items:center;gap:1rem;background:#25D366;color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">💬</span><div><div>WhatsApp</div><div style="font-weight:400;font-size:.78rem;opacity:.85">+52 1 998 705 2145 — Respuesta inmediata</div></div>
+        </a>
+        <a href="tel:+529848035014" style="display:flex;align-items:center;gap:1rem;background:var(--blue);color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">📞</span><div><div>Teléfono</div><div style="font-weight:400;font-size:.78rem;opacity:.85">984 803 5014 — Lun a Vie 9am–6pm</div></div>
+        </a>
+        <a href="mailto:info@hurricanesolution.com" style="display:flex;align-items:center;gap:1rem;background:var(--navy);color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">✉️</span><div><div>Correo electrónico</div><div style="font-weight:400;font-size:.78rem;opacity:.85">info@hurricanesolution.com</div></div>
+        </a>
+      </div>
+      <div style="margin-top:1.25rem;padding:1.5rem;background:var(--off);border-radius:6px;border:1.5px solid var(--border)">
+        <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem">📍 Nuestras oficinas</h4>
+        <p style="font-size:.84rem;color:var(--gray);line-height:1.65">10 Avenida Norte entre 14 Norte bis y 16 Norte<br>Centro, 77500 Playa del Carmen, Q.R.<br>México</p>
+      </div>
+      <div style="margin-top:1rem;padding:1.25rem;background:var(--off);border-radius:6px;border:1.5px solid var(--border)">
+        <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem">📱 Redes sociales</h4>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.35rem">
+          <a href="https://www.facebook.com/share/16cZAdbkjj/" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">Facebook</a>
+          <a href="https://www.instagram.com/hurricanesolution" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">Instagram</a>
+          <a href="https://youtube.com/@hurricanesolution" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">YouTube</a>
+          <a href="https://www.tiktok.com/@hurricane.solutio" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="fin wrap">
+    <div>
+      <div class="fbrand" href="../index.html">Hurricane<span>Solution</span></div>
+      <p class="ftag">El único sistema con certificación militar Level E en México. Protegiendo hoteles, empresas y residencias desde 2008.</p>
+      <div style="display:flex;gap:.85rem;margin-top:1rem;flex-wrap:wrap">
+        <a href="https://www.facebook.com/share/16cZAdbkjj/" style="font-size:.78rem;color:rgba(255,255,255,.45)">Facebook</a>
+        <a href="https://www.instagram.com/hurricanesolution" style="font-size:.78rem;color:rgba(255,255,255,.45)">Instagram</a>
+        <a href="https://youtube.com/@hurricanesolution" style="font-size:.78rem;color:rgba(255,255,255,.45)">YouTube</a>
+        <a href="https://www.tiktok.com/@hurricane.solutio" style="font-size:.78rem;color:rgba(255,255,255,.45)">TikTok</a>
+      </div>
+    </div>
+    <div class="fc"><h4>Servicios</h4><ul>
+      <li><a href="hoteles.html">Hotelero</a></li>
+      <li><a href="residencial.html">Residencial</a></li>
+      <li><a href="comercial.html">Comercial</a></li>
+      <li><a href="aquagrid.html">AquaGrid</a></li>
+      <li><a href="rain.html">Rain Protection</a></li>
+    </ul></div>
+    <div class="fc"><h4>Empresa</h4><ul>
+      <li><a href="equipo.html">El Equipo</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="../index.html">HS-1500</a></li>
+      <li><a href="../index.html">HS-1250</a></li>
+      <li><a href="../index.html">HS-875</a></li>
+    </ul></div>
+    <div class="fc"><h4>Contacto</h4><ul>
+      <li><a href="tel:+529848035014">984 803 5014</a></li>
+      <li><a href="https://wa.me/5219987052145">WhatsApp</a></li>
+      <li><a href="mailto:info@hurricanesolution.com">info@hurricanesolution.com</a></li>
+      <li><a href="contacto.html">Cotizar ahora</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot wrap">
+    <span>© 2025 Hurricane Solution. Todos los derechos reservados.</span>
+    <span>Playa del Carmen, Quintana Roo, México</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/5219987052145" class="wa">💬</a>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
