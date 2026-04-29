@@ -4,7 +4,7 @@
  */
 
 import pino from 'pino';
-import pinoHttp from 'pino-http';
+import { pinoHttp } from 'pino-http';
 import { env, isDevelopment } from '../config/env.js';
 
 export const logger = pino({
