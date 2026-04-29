@@ -1,9 +1,165 @@
-<%# STUB DE FASE 3 — el contenido real del home llega en Fase 5. %>
-<section style="padding: 4rem 2rem; max-width: 1180px; margin: 0 auto;">
-  <p class="stag">Fase 3 · Layout activo</p>
-  <h1 class="stit">Layout EJS funcionando</h1>
-  <p class="sintro">
-    Topbar, navegación, footer y botón flotante WhatsApp están renderizando desde
-    partials. El contenido real de la home se porta en Fase 5.
-  </p>
-</section>
+<%# Home — portada desde index.html legacy (Fase 5). %>
+<%# El form action se conecta a /api/lead en Fase 8. data-form="lead" %>
+<%# permite que client/contact-form.ts (Fase 8) lo descubra y maneje. %>
+
+<div class="hero-wrap"><div class="hero">
+  <div>
+    <div class="hero-eye">Riviera Maya · Los Cabos · Vallarta · Mazatlán · Acapulco</div>
+    <h1>El único sistema de protección contra huracanes en México con <em>certificación militar Level E.</em></h1>
+    <p class="hero-sub">Su propiedad tiene 48 horas cuando llega el aviso. ¿Puede su equipo desplegarlo a tiempo? Desde 2008 protegemos hoteles, empresas y residencias de lujo en las costas de México.</p>
+    <div class="hero-stats">
+      <div><div class="hsn">30<em>+</em></div><div class="hsl">Tormentas superadas</div></div>
+      <div><div class="hsn">Cat<em> 5</em></div><div class="hsl">Nivel máximo probado</div></div>
+      <div><div class="hsn">0</div><div class="hsl">Fallas en inst. correctas</div></div>
+    </div>
+  </div>
+  <div class="fcard">
+    <h3>Solicite su evaluación gratuita</h3>
+    <p>Sin costo · Sin compromiso · Presencial o videollamada</p>
+    <form data-form="lead" action="/api/lead" method="POST" novalidate>
+      <input type="text" name="hp_field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+      <input type="hidden" name="source" value="Landing Home" />
+      <input type="hidden" name="ts" value="<%= Date.now() %>" />
+      <div class="frow">
+        <div class="fg"><label for="lead-nombre">Nombre</label><input id="lead-nombre" type="text" name="nombre" placeholder="Nombre" required></div>
+        <div class="fg"><label for="lead-apellido">Apellido</label><input id="lead-apellido" type="text" name="apellido" placeholder="Apellido"></div>
+      </div>
+      <div class="fg"><label for="lead-phone">Teléfono / WhatsApp</label><input id="lead-phone" type="tel" name="phone" placeholder="+52 984 000 0000" required></div>
+      <div class="fg"><label for="lead-email">Correo electrónico</label><input id="lead-email" type="email" name="email" placeholder="correo@empresa.com" required></div>
+      <div class="fg"><label for="lead-tipo">Tipo de propiedad</label>
+        <select id="lead-tipo" name="tipo_propiedad" required><option value="">Seleccione...</option><option>Hotel / Resort</option><option>Empresa con múltiples ubicaciones</option><option>Residencia de lujo</option><option>Agencia de autos</option><option>Hospital / Clínica</option><option>Desarrollo inmobiliario</option><option>Apertura gran escala (AquaGrid)</option><option>Otro</option></select>
+      </div>
+      <div class="fg"><label for="lead-zona">Zona</label>
+        <select id="lead-zona" name="zona"><option value="">¿Dónde está su propiedad?</option><option>Riviera Maya / Playa del Carmen</option><option>Cancún</option><option>Cozumel</option><option>Los Cabos</option><option>Puerto Vallarta</option><option>Mazatlán</option><option>Acapulco</option><option>Otra</option></select>
+      </div>
+      <button type="submit" class="fsub">Solicitar evaluación gratuita →</button>
+      <p class="fnote">Le contactamos en menos de 24 horas.</p>
+    </form>
+  </div>
+</div></div>
+
+<div class="trust"><div class="trust-in">
+  <div class="ti"><div class="tic">★</div>Único Level E en México</div>
+  <div class="ti"><div class="tic">✓</div>Miami-Dade Aprobado</div>
+  <div class="ti"><div class="tic">M</div>Único miembro IHPA en México</div>
+  <div class="ti"><div class="tic">P</div>Sistema Patentado</div>
+  <div class="ti"><div class="tic">G</div>Garantía hasta 10 años</div>
+</div></div>
+
+<section><div class="wrap">
+  <div class="stag reveal">Por qué Hurricane Solution</div>
+  <h2 class="stit reveal">Somos los expertos. <span>No hay segundo lugar.</span></h2>
+  <p class="sintro reveal">En protección contra huracanes, la diferencia entre un sistema que funciona y uno que falla puede ser semanas de cierre y millones en daños.</p>
+  <div class="wgrid">
+    <div class="card wcard reveal"><div class="wnum">01</div><h3>El único Level E en México</h3><p>Miami-Dade y Florida Building Code prueban viento, agua, proyectiles y presión barométrica — pero por separado. Level E los prueba todos al mismo tiempo. Somos los únicos en México con esta certificación.</p></div>
+    <div class="card wcard reveal"><div class="wnum">02</div><h3>Funciona. Siempre.</h3><p>Más de 30 tormentas hasta Categoría 5. Cero fallas en instalaciones correctamente ejecutadas. Las únicas fallas documentadas ocurren cuando la estructura cede antes que el sistema — o cuando no fuimos nosotros quienes instalamos.</p></div>
+    <div class="card wcard reveal"><div class="wnum">03</div><h3>Se puede desplegar a tiempo</h3><p>Un sistema que no puede instalarse antes de la tormenta no es protección. Cada instalación está diseñada para que su propio equipo lo despliegue en horas. Capacitamos a su personal y dejamos un manual escrito.</p></div>
+    <div class="card wcard reveal"><div class="wnum">04</div><h3>Ingeniería real, no solo ventas</h3><p>Somos una empresa de construcción. Nuestros ingenieros resuelven problemas que otros no pueden. La fachada de 14 metros sin solución — la creamos. El hotel de 2,500 habitaciones en un día — lo logramos.</p></div>
+  </div>
+</div></section>
+
+<section class="stats-band"><div class="wrap">
+  <div class="stag reveal" style="color:var(--accent)">Historial comprobado</div>
+  <h2 class="stit reveal" style="color:#fff">30+ tormentas. <span style="color:var(--accent)">Cero fallas en instalaciones correctas.</span></h2>
+  <p class="sintro reveal" style="color:rgba(255,255,255,.6)">Nuestros sistemas han estado presentes en cada tormenta significativa en la Riviera Maya desde 2008.</p>
+  <div class="sgrid reveal">
+    <div class="sbox"><div class="sbig">30<em>+</em></div><div class="sdesc">Tormentas superadas</div></div>
+    <div class="sbox"><div class="sbig">Cat<em> 5</em></div><div class="sdesc">Nivel máximo probado</div></div>
+    <div class="sbox"><div class="sbig">2008</div><div class="sdesc">Operando en México</div></div>
+    <div class="sbox"><div class="sbig">10<em>yr</em></div><div class="sdesc">Garantía escrita</div></div>
+  </div>
+  <div class="storms reveal">
+    <span class="st major">Delta 2020 — Cat 2, Puerto Morelos</span>
+    <span class="st major">Odile 2014 — Cat 3, Los Cabos</span>
+    <span class="st major">Irma 2017 — Cat 5</span>
+    <span class="st major">Ian 2022 — Cat 4</span>
+    <span class="st major">Michael 2018 — Cat 5</span>
+    <span class="st major">Milton 2024 — Cat 5</span>
+    <span class="st">Gamma 2020</span><span class="st">Franklin 2017</span>
+    <span class="st">Grace 2021</span><span class="st">Nicole 2022</span>
+    <span class="st">Zeta 2020</span><span class="st">Dorian 2019</span><span class="st">+ 18 más</span>
+  </div>
+</div></section>
+
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Nuestros sistemas</div>
+  <h2 class="stit reveal">La protección correcta <span>para cada propiedad</span></h2>
+  <p class="sintro reveal">Tres sistemas. Todos fabricados en EUA. Somos honestos sobre cuál necesita su propiedad.</p>
+  <div class="pgrid">
+    <div id="hs-1500" class="card pcard feat reveal"><div class="pbadge b1">Nuestro sistema insignia</div><div class="pbody"><div class="pname">HS-1500</div><div class="prat">Certificación Level E · Cat 5</div><p class="pdesc">Tela balística — el mismo material del airbag de su automóvil. El único sistema en México con certificación Level E.</p><ul class="pfeats"><li>Más de 1,500 psi (Cat 5 = 1,200 psi)</li><li>Certificación Level E — Instalaciones Esenciales</li><li>Miami-Dade NOA y Florida Building Code</li><li>Anclaje flexible patentado — 8 puntos</li><li>100% fabricado en EUA · Garantía 10 años</li></ul><div class="pideal"><strong>Ideal para:</strong> Hoteles de playa, edificios corporativos, primera línea.</div></div></div>
+    <div id="hs-1250" class="card pcard reveal"><div class="pbadge b2">Cat 5 · Disponible en blanco</div><div class="pbody"><div class="pname">HS-1250</div><div class="prat">Certificación Cat 5 · Translúcido</div><p class="pdesc">Cat 5 certificado, translúcido y disponible en blanco. Ideal cuando la estética es prioridad.</p><ul class="pfeats"><li>Resistencia Cat 5 certificada</li><li>Disponible en blanco — sin degradación UV</li><li>Translúcido — visibilidad durante la tormenta</li><li>Miami-Dade Aprobado</li><li>Anclaje flexible patentado · Garantía 7 años</li></ul><div class="pideal"><strong>Ideal para:</strong> Hoteles modernos, condominios, propiedades de diseño.</div></div></div>
+    <div id="hs-875" class="card pcard reveal"><div class="pbadge b3">Residencial · Presupuesto controlado</div><div class="pbody"><div class="pname">HS-875</div><div class="prat">Certificación Cat 3 · Polipropileno</div><p class="pdesc">Más accesible. Honestamente: no para hoteles de playa — un Cat 5 supera su límite. Para residencias alejadas de la costa, es sólido.</p><ul class="pfeats"><li>Resistencia hasta 875 psi</li><li>Certificación Categoría 3</li><li>Translúcido — visibilidad durante la tormenta</li><li>Florida Building Code Aprobado</li><li>Anclaje flexible patentado · Garantía 5 años</li></ul><div class="pideal"><strong>Ideal para:</strong> Residencias a 3+ km de la costa, presupuesto controlado.</div></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="stag reveal">Cómo trabajamos</div>
+  <h2 class="stit reveal">Simple. <span>Sin sorpresas.</span></h2>
+  <p class="sintro reveal">Hacemos lo que decimos, cuando lo decimos.</p>
+  <div class="proc">
+    <div class="pstep reveal"><div class="pcirc">1</div><h4>Evaluación gratuita</h4><p>Visitamos su propiedad o videollamada. Sin costo, sin compromiso.</p></div>
+    <div class="pstep reveal"><div class="pcirc">2</div><h4>Propuesta de ingeniería</h4><p>Plan específico. Sin venderle más de lo necesario.</p></div>
+    <div class="pstep reveal"><div class="pcirc">3</div><h4>Instalación certificada</h4><p>Nuestro equipo. Cada pantalla a medida. Fechas respetadas.</p></div>
+    <div class="pstep reveal"><div class="pcirc">4</div><h4>Capacitación y manual</h4><p>Capacitamos a su personal. Manual escrito para la próxima tormenta.</p></div>
+  </div>
+</div></section>
+
+<section class="segs"><div class="wrap">
+  <div class="stag reveal">A quién servimos</div>
+  <h2 class="stit reveal">Tres tipos de cliente. <span>Un mismo estándar.</span></h2>
+  <div class="sgr">
+    <div class="card seg reveal"><div class="seg-ico">🏨</div><h3>Hoteles y Resorts</h3><p>Grandes propiedades con cientos o miles de habitaciones. Despliegue masivo en horas con su propio personal.</p><div class="seg-ex">Vidanta · Barceló · Iberostar · Marriott</div></div>
+    <div class="card seg reveal"><div class="seg-ico">🏢</div><h3>Empresas Multi-ubicación</h3><p>Cadenas con decenas o cientos de sucursales. Programas corporativos estandarizados.</p><div class="seg-ex">Agencias de autos · Hospitales · Desarrollos</div></div>
+    <div class="card seg reveal"><div class="seg-ico">🏠</div><h3>Residencias de Lujo</h3><p>Propiedades de alto valor donde la estética importa tanto como la protección.</p><div class="seg-ex">Villas · Penthouses · Frente al mar</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="stag reveal">Lo que dicen nuestros clientes</div>
+  <h2 class="stit reveal">Resultados reales. <span>Propiedades reales.</span></h2>
+  <div class="tgrid">
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Cuando Delta tocó tierra en Puerto Morelos en 2020, nuestro hotel estaba completamente protegido. Nuestros vecinos tardaron semanas en reabrir. Nosotros abrimos al tercer día."</p><div class="tau"><strong>Director de Operaciones</strong><span>Hotel, Puerto Morelos, Q. Roo</span></div></div>
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"Teníamos una fachada de vidrio de 14 metros sin solución en el mercado. Hurricane Solution la diseñó desde cero. No existía el sistema. Lo inventaron para nosotros."</p><div class="tau"><strong>Gerente General</strong><span>Hotel de lujo, Riviera Maya</span></div></div>
+    <div class="card tcard reveal"><div class="tstars">★★★★★</div><p class="tq">"La instalación fue rápida y profesional. Lo que más nos gustó fue la confianza del especialista al explicarnos todo. Se nota que es un producto serio."</p><div class="tau"><strong>Karla L.</strong><span>Residente, Ciudad Mayakoba</span></div></div>
+  </div>
+</div></section>
+
+<section style="background:var(--off)"><div class="wrap">
+  <div class="cov">
+    <div class="reveal">
+      <div class="stag">Dónde operamos</div>
+      <h2 class="stit">Basados en Riviera Maya. <span>Viajamos a toda la costa.</span></h2>
+      <p style="color:var(--gray);font-size:.9rem;line-height:1.7;margin-top:.65rem">Playa del Carmen es nuestra base. Desde Los Cabos hasta Acapulco, mismo equipo y mismos estándares.</p>
+      <div class="zones"><span class="zt">Riviera Maya</span><span class="zt">Cancún</span><span class="zt">Cozumel</span><span class="zt">Los Cabos</span><span class="zt">Vallarta</span><span class="zt">Mazatlán</span><span class="zt">Acapulco</span></div>
+    </div>
+    <div class="map-box reveal" aria-hidden="true">
+      <div class="mdot" style="top:44%;left:70%"></div>
+      <div class="mdot" style="top:39%;left:66%;animation-delay:.5s"></div>
+      <div class="mdot" style="top:34%;left:25%;animation-delay:1s"></div>
+      <div class="mdot" style="top:47%;left:20%;animation-delay:1.5s"></div>
+      <div class="mdot" style="top:58%;left:30%;animation-delay:.3s"></div>
+      <div class="mdot" style="top:67%;left:42%;animation-delay:.8s"></div>
+      <div class="mlab">Cobertura Nacional<br>México Costa a Costa</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="stag reveal">Certificaciones</div>
+  <h2 class="stit reveal">Los papeles respaldan <span>lo que el huracán confirma</span></h2>
+  <div class="cgrid">
+    <div class="card ccer hl reveal"><div class="cname">Level E</div><div class="cdesc">Certificación militar de EUA. La única que prueba las 4 fuerzas simultáneamente. Somos los únicos en México.</div></div>
+    <div class="card ccer reveal"><div class="cname">Miami-Dade NOA</div><div class="cdesc">Notice of Acceptance del condado con la normativa de huracanes más exigente de EUA.</div></div>
+    <div class="card ccer reveal"><div class="cname">IHPA</div><div class="cdesc">Únicos miembros de la International Hurricane Protection Association fuera de los Estados Unidos.</div></div>
+    <div class="card ccer reveal"><div class="cname">Florida Building Code</div><div class="cdesc">El estándar de referencia internacional para zonas de huracanes. Nuestros tres sistemas cumplen.</div></div>
+  </div>
+</div></section>
+
+<div class="cta-band">
+  <h2>¿Cuándo va a proteger su propiedad?</h2>
+  <p>La evaluación es gratuita. La tormenta no avisa con más de 48 horas.</p>
+  <div class="cta-btns">
+    <a href="/contacto" class="btn-w">Solicitar evaluación gratuita</a>
+    <a href="<%= site.whatsapp.url %>" class="btn-wout" rel="noopener" target="_blank">💬 Escribir por WhatsApp</a>
+  </div>
+</div>
