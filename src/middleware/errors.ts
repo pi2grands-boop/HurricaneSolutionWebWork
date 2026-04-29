@@ -16,6 +16,7 @@ export const notFoundHandler: RequestHandler = (req, res) => {
       status: 404,
       message: 'Página no encontrada',
       title: 'Página no encontrada · Hurricane Solution',
+      layout: false,
     });
     return;
   }
@@ -65,6 +66,7 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
       status: 500,
       message,
       title: 'Error · Hurricane Solution',
+      layout: false,
     });
     return;
   }

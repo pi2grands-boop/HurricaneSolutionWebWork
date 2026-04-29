@@ -19,6 +19,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import compression from 'compression';
+import expressLayouts from 'express-ejs-layouts';
 
 import { env, isProduction } from './config/env.js';
 import {
@@ -44,9 +45,13 @@ const app = express();
 // Esto permite a express-rate-limit ver la IP real del cliente.
 app.set('trust proxy', 1);
 
-// Vistas EJS
+// Vistas EJS + sistema de layouts
 app.set('view engine', 'ejs');
 app.set('views', path.join(projectRoot, 'views'));
+app.set('layout', 'layouts/base');
+app.set('layout extractScripts', false);
+app.set('layout extractStyles', false);
+app.use(expressLayouts);
 
 // Datos disponibles en TODAS las vistas vía res.locals
 app.use((req, res, next) => {

@@ -1,0 +1,25 @@
+<%
+  const navItems = [
+    { href: '/',            label: 'Inicio',          extraClass: '' },
+    { href: '/hoteles',     label: 'Hotelero',        extraClass: '' },
+    { href: '/residencial', label: 'Residencial',     extraClass: '' },
+    { href: '/comercial',   label: 'Comercial',       extraClass: '' },
+    { href: '/aquagrid',    label: 'AquaGrid',        extraClass: 'nav-ag' },
+    { href: '/rain',        label: 'Rain Protection', extraClass: '' },
+    { href: '/equipo',      label: 'El Equipo',       extraClass: '' },
+    { href: '/faq',         label: 'FAQ',             extraClass: '' },
+  ];
+  const isActive = (href) => href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(href + '/');
+%>
+<nav>
+  <div class="nav-logo"><a href="/" aria-label="Hurricane Solution — inicio">Hurricane<span>Solution</span></a></div>
+  <div class="nav-links">
+    <% navItems.forEach((item) => { %>
+      <a
+        href="<%= item.href %>"
+        class="<%= [item.extraClass, isActive(item.href) ? 'active' : ''].filter(Boolean).join(' ') %>"
+      ><%= item.label %></a>
+    <% }) %>
+    <a href="/cotizador" class="nav-cta">Cotizar Ahora</a>
+  </div>
+</nav>

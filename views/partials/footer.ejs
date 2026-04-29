@@ -1,0 +1,47 @@
+<footer>
+  <div class="fin wrap">
+    <div>
+      <div class="fbrand"><a href="/" style="color:inherit">Hurricane<span>Solution</span></a></div>
+      <p class="ftag">El único sistema con certificación militar Level E en México. Protegiendo hoteles, empresas y residencias desde 2008.</p>
+      <div style="display:flex;gap:.85rem;margin-top:1rem;flex-wrap:wrap">
+        <a href="<%= site.social.facebook %>" rel="noopener" target="_blank" style="font-size:.78rem;color:rgba(255,255,255,.45)">Facebook</a>
+        <a href="<%= site.social.instagram %>" rel="noopener" target="_blank" style="font-size:.78rem;color:rgba(255,255,255,.45)">Instagram</a>
+        <a href="<%= site.social.youtube %>" rel="noopener" target="_blank" style="font-size:.78rem;color:rgba(255,255,255,.45)">YouTube</a>
+        <a href="<%= site.social.tiktok %>" rel="noopener" target="_blank" style="font-size:.78rem;color:rgba(255,255,255,.45)">TikTok</a>
+      </div>
+    </div>
+    <div class="fc">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="/hoteles">Hotelero</a></li>
+        <li><a href="/residencial">Residencial</a></li>
+        <li><a href="/comercial">Comercial</a></li>
+        <li><a href="/aquagrid">AquaGrid</a></li>
+        <li><a href="/rain">Rain Protection</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="/equipo">El Equipo</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/#hs-1500">HS-1500</a></li>
+        <li><a href="/#hs-1250">HS-1250</a></li>
+        <li><a href="/#hs-875">HS-875</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="<%= site.phone.href %>"><%= site.phone.display %></a></li>
+        <li><a href="<%= site.whatsapp.url %>" rel="noopener" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+        <li><a href="/cotizador">Cotizar ahora</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot wrap">
+    <span>© <%= site.year %> <%= site.name %>. Todos los derechos reservados.</span>
+    <span><%= site.address.city %>, <%= site.address.state %>, <%= site.address.country %></span>
+  </div>
+</footer>
