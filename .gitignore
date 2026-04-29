@@ -1,0 +1,72 @@
+# ============================================
+# .gitignore — Hurricane Solution Web
+# Stack: Express + EJS + TypeScript + Zod
+# ============================================
+
+# ----- Dependencias -----
+node_modules/
+.pnp/
+.pnp.js
+
+# ----- Build output -----
+dist/
+build/
+*.tsbuildinfo
+
+# ----- Variables de entorno (NUNCA commitear) -----
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+
+# Solo .env.example va al repo (es plantilla con placeholders)
+
+# ----- Logs -----
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+
+# ----- Editor / IDE -----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# ----- Sistema operativo -----
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ----- Coverage / tests -----
+coverage/
+.nyc_output/
+*.lcov
+
+# ----- Cache -----
+.cache/
+.parcel-cache/
+.tsbuildinfo
+.eslintcache
+
+# ----- Temporales -----
+tmp/
+temp/
+*.tmp
+
+# ----- Hostinger / deploy -----
+.hostinger/
+deploy.log
+
+# ----- Generados por scripts -----
+public/js/*.js
+public/js/*.js.map
+!public/js/.gitkeep
