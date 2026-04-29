@@ -1,3 +1,12 @@
+/* ==========================================================================
+   Hurricane Solution — hoja de estilos principal
+   --------------------------------------------------------------------------
+   Fuente única de los estilos del sitio. Los nombres de clases legacy
+   (.fcard, .bcard, .wcard, .pcard, .tcard, etc.) NO se renombran porque
+   están entrelazados con los partials EJS y los stubs de páginas.
+   El widget cotizador trae sus propios estilos en Fase 7.
+   ========================================================================== */
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--navy:#0D2137;--navy2:#163552;--blue:#1B6CA8;--blue2:#2E8FD8;--accent:#E8A020;--white:#fff;--off:#F4F7FA;--gray:#6B7A8D;--light:#E8EDF2;--text:#1A2733;--border:#D4DCE5;--teal:#0E7C86}
 html{scroll-behavior:smooth}
@@ -177,4 +186,25 @@ footer{background:var(--navy);padding:2.75rem 2rem}
   .proc::before{display:none}
   .fin{grid-template-columns:1fr 1fr}
   .nav-links a:not(.nav-cta){font-size:.58rem;padding:.9rem .4rem}
+}
+
+/* ----- Accesibilidad ----- */
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+.btn-primary:focus-visible,.fsub:focus-visible,.btn-w:focus-visible{outline-color:var(--navy)}
+.wa:focus-visible{outline-color:#fff;outline-offset:3px}
+.lang-btn:focus-visible{outline-color:#fff}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ----- Print ----- */
+@media print{
+  .topbar,nav,.wa,.cta-band,.cta-btns{display:none!important}
+  body{font-size:11pt;color:#000}
+  a{color:#000;text-decoration:underline}
+  section{padding:1rem 0;break-inside:avoid}
+  .hero-wrap,.stats-band,footer{background:#fff!important;color:#000!important}
 }
