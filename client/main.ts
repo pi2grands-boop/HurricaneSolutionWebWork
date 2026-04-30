@@ -10,11 +10,13 @@
 import { initReveals } from './reveals.js';
 import { initFaq } from './faq.js';
 import { initCotizadorWidget } from './widget.js';
+import { initLeadForms } from './forms.js';
 
 const boot = (): void => {
   initReveals();
   initFaq();
   initCotizadorWidget();
+  initLeadForms();
 };
 
 if (document.readyState === 'loading') {
