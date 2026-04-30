@@ -1,6 +1,115 @@
-<%# STUB DE FASE 3 — el cotizador llega en Fase 7. %>
-<section style="padding: 4rem 2rem; max-width: 1180px; margin: 0 auto;">
-  <p class="stag">Cotizador</p>
-  <h1 class="stit"><%= title %></h1>
-  <p class="sintro"><%= description %></p>
-</section>
+<%# Cotizador — port del widget WordPress hurricane-solution-widget (Fase 5.10). %>
+<%# Markup adaptado para SSR EJS. La lógica vive en client/widget.ts. %>
+<%# El form NO postea directo a Make.com — pasa por /api/lead (Fase 7) para %>
+<%# ocultar el webhook real y aplicar Zod + honeypot + rate-limit en server. %>
+<%# PENDIENTE: portar CSS del widget desde el plugin a public/css/hurricane-widget.css. %>
+
+<div class="hurricane-widget-container">
+  <div class="container">
+
+    <section class="hero">
+      <h1>Protección De Lonas Contra Huracanes</h1>
+      <p>Fabricados en EE.UU. con patentes exclusivas. Instalados por expertos en México.</p>
+    </section>
+
+    <div class="badges-container">
+      <div class="badges-track">
+        <% const badges = [
+          { label: 'Certificado EE.UU.' },
+          { label: 'Patentes Exclusivas' },
+          { label: 'Garantía hasta 10 años' },
+          { label: '+500 Proyectos' }
+        ]; %>
+        <% for (let i = 0; i < 2; i++) { %>
+          <% badges.forEach(b => { %>
+            <div class="badge"><span><%= b.label %></span></div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="main-card">
+
+      <div class="intro-text">
+        <h2>¡Gracias por tu interés!</h2>
+        <p>Cuéntanos un poco sobre tu propiedad para darte un rango de precio estimado.</p>
+      </div>
+
+      <div id="hurricaneFormSection">
+
+        <div class="step">
+          <div class="step-label"><span class="step-number">1</span><span class="step-title">¿Dónde está ubicada tu propiedad?</span></div>
+          <div class="input-wrapper">
+            <input type="text" id="hurricaneLocationInput" placeholder="Escribe tu ciudad..." autocomplete="off">
+            <div class="autocomplete" id="hurricaneAutocomplete"></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-label"><span class="step-number">2</span><span class="step-title">Tipo de propiedad</span></div>
+          <div class="select-wrapper">
+            <select class="select-input" id="hurricanePropertySelect">
+              <option value="">Selecciona una opción</option>
+              <option value="casa">Casa</option>
+              <option value="departamento">Departamento</option>
+              <option value="hotel">Hotel</option>
+              <option value="comercio">Comercio</option>
+              <option value="proyecto_construccion">Proyecto en Construcción</option>
+              <option value="torre">Torre con varios Departamentos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="price-box" id="hurricanePriceBox">
+          <div class="price-badge">Estimado referencial · No oficial</div>
+          <p class="price-location">En <strong id="hurricanePriceLocation">tu ubicación</strong></p>
+          <p class="price-amount" id="hurricanePriceAmount">$130 - $170</p>
+          <p class="price-unit">Dólares USD por m²</p>
+          <p class="price-note" id="hurricanePriceNote">Puede variar una vez que nuestro equipo técnico evalúe la propiedad.</p>
+          <p class="price-cta-label">¿Te interesa una cotización más detallada?</p>
+          <button type="button" class="btn-interest" id="hurricaneInterestBtn">Sí, quiero cotizar sin compromiso</button>
+        </div>
+
+        <div class="contact-box" id="hurricaneContactBox">
+          <div class="contact-title">
+            <h3>¡Excelente elección!</h3>
+            <p>Déjanos tus datos y te contactamos por WhatsApp.</p>
+          </div>
+          <form id="hurricaneQuoteForm" data-form="quote" action="/api/lead" method="POST" novalidate>
+            <input type="text" name="hp_field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+            <input type="hidden" name="source" value="Landing Cotizador" />
+            <input type="hidden" name="ts" value="<%= Date.now() %>" />
+            <div class="form-row">
+              <input id="hurricaneNameInput" name="full_name" type="text" placeholder="Tu nombre" required>
+              <input id="hurricanePhoneInput" name="phone" type="tel" inputmode="tel" placeholder="WhatsApp (10 dígitos)" required>
+            </div>
+            <button type="submit" class="btn-whatsapp" id="hurricaneSubmitBtn" disabled>Enviar solicitud</button>
+            <p class="btn-hint">Un especialista te contactará por WhatsApp.</p>
+            <button type="button" class="btn-back" id="hurricaneBackBtn">← Volver atrás</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="success-box" id="hurricaneSuccessBox">
+        <div class="success-icon">✓</div>
+        <h3>¡Solicitud enviada!</h3>
+        <p>Un especialista de Hurricane Solution te contactará por WhatsApp para darte una cotización personalizada.</p>
+        <button type="button" class="btn-reload">Hacer otra consulta</button>
+      </div>
+
+    </div>
+
+    <div class="info-section">
+      <div class="warranty">
+        <div class="warranty-title">Garantías por sistema</div>
+        <div class="warranty-items">
+          <div class="warranty-item"><strong>HS-1500:</strong> 10 años</div>
+          <div class="warranty-item"><strong>HS-1250:</strong> 7 años</div>
+          <div class="warranty-item"><strong>HS-875:</strong> 5 años</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
