@@ -1,6 +1,46 @@
-<%# STUB DE FASE 3 — el contenido real se porta en Fase 5. %>
-<section style="padding: 4rem 2rem; max-width: 1180px; margin: 0 auto;">
-  <p class="stag">HS Rain Protection</p>
-  <h1 class="stit"><%= title %></h1>
-  <p class="sintro"><%= description %></p>
-</section>
+<%# Rain Protection — portada desde pages/rain.html legacy (Fase 5.5). %>
+
+<div class="ip-hero">
+  <h1>HS <em>Rain Protection</em></h1>
+  <p>Protección contra lluvia, arena y sol para terrazas, restaurantes, pergolas y áreas abiertas. Tres sistemas de operación para adaptarse a cualquier espacio y presupuesto.</p>
+  <a href="/contacto" class="btn-primary">Solicitar cotización</a>
+</div>
+
+<section><div class="wrap">
+  <div class="stag reveal">Por qué nos eligen</div>
+  <h2 class="stit reveal">Tres ventajas <span>que importan</span></h2>
+  <div class="ben3">
+    <div class="card bcard reveal"><h3>🌧 Más días de operación</h3><p>Sus áreas exteriores siguen funcionando durante lluvia intensa. Más mesas, más clientes, más ingresos — sin importar el clima. Para hoteles y restaurantes esto se traduce directamente en resultados.</p></div>
+    <div class="card bcard reveal"><h3>🎨 Sin afear el espacio</h3><p>Diseñado para integrarse a la arquitectura. Cuando no lo necesita, permanece recogido ordenadamente. Cuando lo necesita, se despliega en minutos sin herramientas especiales.</p></div>
+    <div class="card bcard reveal"><h3>🔧 Bajo mantenimiento</h3><p>Tela técnica resistente a UV, humedad y salinidad. Solo lavado ocasional con agua y jabón. No se oxida, no se decolora. Diseñado para el clima costero de México.</p></div>
+  </div>
+</div></section>
+
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Opciones de instalación</div>
+  <h2 class="stit reveal">Tres sistemas. <span>Una solución a su medida.</span></h2>
+  <div class="wgrid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card wcard reveal"><div class="wnum">01</div><h3>Sistema de Manivela</h3><p>Operación manual simple. Ideal para áreas donde se requiere control directo. Acción rápida con una sola persona. La opción más accesible de nuestra línea.</p></div>
+    <div class="card wcard reveal"><div class="wnum">02</div><h3>Sistema Mecánico</h3><p>Mayor comodidad para áreas medianas. Despliegue eficiente sin esfuerzo físico. Ideal para terrazas de hotel, restaurantes y áreas de piscina de uso intensivo.</p></div>
+    <div class="card wcard reveal"><div class="wnum">03</div><h3>Sistema Eléctrico</h3><p>Despliegue automático con control remoto. Para espacios donde la comodidad es prioridad. Puede programarse con sensores de lluvia para despliegue automático.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="stag reveal">Aplicaciones</div>
+  <h2 class="stit reveal">¿Dónde lo <span>necesita?</span></h2>
+  <div class="sgr">
+    <div class="card seg reveal"><div class="seg-ico">🏨</div><h3>Hoteles</h3><p>Protección para terrazas, restaurantes, bares y áreas de alberca. Mantenga sus espacios exteriores operativos durante la temporada de lluvias.</p></div>
+    <div class="card seg reveal"><div class="seg-ico">🍽</div><h3>Restaurantes</h3><p>Más mesas disponibles todo el año. Incluso durante lluvia intensa, sus clientes disfrutan del exterior.</p></div>
+    <div class="card seg reveal"><div class="seg-ico">🏠</div><h3>Residencial</h3><p>Ideal para patios, balcones, pérgolas y penthouses. Disfrute sus espacios exteriores sin importar el clima.</p></div>
+  </div>
+</div></section>
+
+<div class="cta-band">
+  <h2>Proteja sus espacios exteriores</h2>
+  <p>Solicite una cotización gratuita para su terraza, restaurante o área exterior.</p>
+  <div class="cta-btns">
+    <a href="/contacto" class="btn-w">Solicitar cotización</a>
+    <a href="<%= site.whatsapp.url %>" class="btn-wout" rel="noopener" target="_blank">💬 WhatsApp</a>
+  </div>
+</div>
