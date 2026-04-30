@@ -1,6 +1,65 @@
-<%# STUB DE FASE 3 — el formulario llega en Fase 8. %>
-<section style="padding: 4rem 2rem; max-width: 1180px; margin: 0 auto;">
-  <p class="stag">Contacto</p>
-  <h1 class="stit"><%= title %></h1>
-  <p class="sintro"><%= description %></p>
-</section>
+<%# Contacto — portada desde pages/contacto.html legacy (Fase 5.9). %>
+<%# Form preparado para /api/lead con source="Landing Contacto", honeypot y ts. %>
+<%# El submit real (validación + fetch) llega en Fase 6/8. %>
+
+<div class="ip-hero">
+  <h1>Solicite su <em>evaluación gratuita</em></h1>
+  <p>Sin costo, sin compromiso. Presencial o por videollamada. Le contactamos en menos de 24 horas.</p>
+</div>
+
+<section><div class="wrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+    <div class="fcard reveal">
+      <h3>Formulario de contacto</h3>
+      <p>Respuesta en menos de 24 horas hábiles</p>
+      <form data-form="lead" action="/api/lead" method="POST" novalidate>
+        <input type="text" name="hp_field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+        <input type="hidden" name="source" value="Landing Contacto" />
+        <input type="hidden" name="ts" value="<%= Date.now() %>" />
+        <div class="frow">
+          <div class="fg"><label for="ct-nombre">Nombre</label><input id="ct-nombre" type="text" name="nombre" placeholder="Nombre" required></div>
+          <div class="fg"><label for="ct-apellido">Apellido</label><input id="ct-apellido" type="text" name="apellido" placeholder="Apellido"></div>
+        </div>
+        <div class="fg"><label for="ct-phone">Teléfono / WhatsApp</label><input id="ct-phone" type="tel" name="phone" placeholder="+52 984 000 0000" required></div>
+        <div class="fg"><label for="ct-email">Correo electrónico</label><input id="ct-email" type="email" name="email" placeholder="correo@empresa.com" required></div>
+        <div class="fg"><label for="ct-tipo">Tipo de propiedad</label>
+          <select id="ct-tipo" name="tipo_propiedad" required><option value="">Seleccione...</option><option>Hotel / Resort</option><option>Empresa con múltiples ubicaciones</option><option>Residencia de lujo</option><option>Agencia de autos</option><option>Hospital / Clínica</option><option>Desarrollo inmobiliario</option><option>Apertura gran escala (AquaGrid)</option><option>Terraza / Área exterior (Rain)</option><option>Otro</option></select>
+        </div>
+        <div class="fg"><label for="ct-zona">Zona</label>
+          <select id="ct-zona" name="zona"><option value="">¿Dónde está su propiedad?</option><option>Riviera Maya / Playa del Carmen</option><option>Cancún</option><option>Cozumel</option><option>Tulum</option><option>Los Cabos</option><option>Puerto Vallarta</option><option>Mazatlán</option><option>Acapulco</option><option>Otra</option></select>
+        </div>
+        <div class="fg"><label for="ct-mensaje">Mensaje (opcional)</label><input id="ct-mensaje" type="text" name="mensaje" placeholder="Cuéntenos brevemente sobre su propiedad..."></div>
+        <button type="submit" class="fsub">Enviar solicitud →</button>
+        <p class="fnote">Le contactamos en menos de 24 horas.</p>
+      </form>
+    </div>
+    <div class="reveal">
+      <div class="stag">O contáctenos directamente</div>
+      <h2 class="stit" style="font-size:1.4rem">Le atendemos <span>de inmediato</span></h2>
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <a href="<%= site.whatsapp.url %>" rel="noopener" target="_blank" style="display:flex;align-items:center;gap:1rem;background:#25D366;color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">💬</span><div><div>WhatsApp</div><div style="font-weight:400;font-size:.78rem;opacity:.85"><%= site.whatsapp.display %> — Respuesta inmediata</div></div>
+        </a>
+        <a href="<%= site.phone.href %>" style="display:flex;align-items:center;gap:1rem;background:var(--blue);color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">📞</span><div><div>Teléfono</div><div style="font-weight:400;font-size:.78rem;opacity:.85"><%= site.phone.display %> — Lun a Vie 9am–6pm</div></div>
+        </a>
+        <a href="mailto:<%= site.email %>" style="display:flex;align-items:center;gap:1rem;background:var(--navy);color:#fff;padding:1.1rem 1.5rem;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem">
+          <span style="font-size:1.4rem">✉️</span><div><div>Correo electrónico</div><div style="font-weight:400;font-size:.78rem;opacity:.85"><%= site.email %></div></div>
+        </a>
+      </div>
+      <div style="margin-top:1.25rem;padding:1.5rem;background:var(--off);border-radius:6px;border:1.5px solid var(--border)">
+        <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem">📍 Nuestras oficinas</h4>
+        <p style="font-size:.84rem;color:var(--gray);line-height:1.65"><%= site.address.street %><br><%= site.address.neighborhood %>, <%= site.address.postalCode %> <%= site.address.city %>, Q.R.<br><%= site.address.country %></p>
+      </div>
+      <div style="margin-top:1rem;padding:1.25rem;background:var(--off);border-radius:6px;border:1.5px solid var(--border)">
+        <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:.5rem">📱 Redes sociales</h4>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.35rem">
+          <a href="<%= site.social.facebook %>" rel="noopener" target="_blank" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">Facebook</a>
+          <a href="<%= site.social.instagram %>" rel="noopener" target="_blank" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">Instagram</a>
+          <a href="<%= site.social.youtube %>" rel="noopener" target="_blank" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">YouTube</a>
+          <a href="<%= site.social.tiktok %>" rel="noopener" target="_blank" style="font-size:.78rem;color:var(--blue);font-family:'Montserrat',sans-serif;font-weight:600">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
