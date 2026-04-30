@@ -1,6 +1,23 @@
-<%# STUB DE FASE 3 — el contenido real se porta en Fase 5. %>
-<section style="padding: 4rem 2rem; max-width: 1180px; margin: 0 auto;">
-  <p class="stag">Preguntas frecuentes</p>
-  <h1 class="stit"><%= title %></h1>
-  <p class="sintro"><%= description %></p>
-</section>
+<%# FAQ — portada desde pages/faq.html legacy (Fase 5.7). %>
+<%# El acordeón usa onclick="toggleFaq(this)" — la función JS se implementa en Fase 6. %>
+
+<div class="ip-hero">
+  <h1>Preguntas <em>Frecuentes</em></h1>
+  <p>Todo lo que necesita saber sobre protección contra huracanes en México.</p>
+</div>
+
+<section><div class="wrap">
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué diferencia a Hurricane Solution de otras empresas en México?<span class="arr">▼</span></button><div class="faq-a"><p>Somos la única empresa en México con certificación militar Level E — la única que prueba las 4 fuerzas de un huracán al mismo tiempo. También somos el único miembro de la International Hurricane Protection Association fuera de los Estados Unidos, y nuestro sistema de anclaje es el único patentado en México. Llevamos operando desde 2008 con cero fallas en instalaciones correctamente ejecutadas.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué es la certificación Level E y por qué importa?<span class="arr">▼</span></button><div class="faq-a"><p>Level E es una certificación desarrollada por el ejército de los Estados Unidos para proteger instalaciones esenciales. Es la única certificación que prueba viento, lluvia, proyectiles y cambio de presión barométrica al mismo tiempo. Las otras certificaciones los prueban por separado. Somos los únicos en México con esta certificación.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuál es la diferencia entre HS-1500, HS-1250 y HS-875?<span class="arr">▼</span></button><div class="faq-a"><p>El HS-1500 es nuestra línea insignia — tela balística con certificación Level E, más de 1,500 psi y garantía de 10 años. El HS-1250 es Cat 5 certificado, disponible en blanco, garantía 7 años — ideal cuando la estética es prioridad. El HS-875 es más accesible, certificado hasta Cat 3, garantía 5 años — adecuado para residencias alejadas de la costa.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué es AquaGrid y cuándo lo necesito?<span class="arr">▼</span></button><div class="faq-a"><p>AquaGrid es un sistema de malla de alta resistencia para aperturas que los sistemas convencionales no pueden cubrir. Los sistemas estándar tienen un límite de 3.8 metros — AquaGrid puede cubrir más de 20 metros. Ideal para lobbies de hotel, showrooms de autos, hospitales y cualquier espacio con grandes aperturas.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿En cuánto tiempo se puede desplegar antes de una tormenta?<span class="arr">▼</span></button><div class="faq-a"><p>Para un hotel grande, un empleado por habitación puede proteger su espacio en 3 a 5 minutos. Para una residencia, el despliegue total suele tomar 1 a 3 horas con 2 personas. Capacitamos a su personal y dejamos un manual escrito.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Los sistemas ayudan a reducir el costo del seguro?<span class="arr">▼</span></button><div class="faq-a"><p>Sí. Aseguradoras como Chubb, AIG y Mapfre reconocen los sistemas HS-1500 como medida de mitigación certificada. Le proporcionamos la documentación necesaria para presentar a su aseguradora.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto dura el sistema y qué mantenimiento requiere?<span class="arr">▼</span></button><div class="faq-a"><p>La vida útil es de 15 a 20 años. El mantenimiento es mínimo: lavado ocasional con agua y jabón. Resistentes a UV, moho y salinidad — diseñados para el clima costero.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Dónde ofrecen servicio y cómo solicito una evaluación?<span class="arr">▼</span></button><div class="faq-a"><p>Estamos basados en Playa del Carmen y nos desplazamos a Los Cabos, Vallarta, Mazatlán y Acapulco. Puede solicitar su evaluación llamando al <%= site.phone.display %>, por WhatsApp al <%= site.whatsapp.display %>, o por el formulario en esta página. Sin costo y sin compromiso.</p></div></div>
+  </div>
+  <div style="margin-top:2.5rem" class="reveal">
+    <a href="/contacto" class="btn-primary">¿Más preguntas? Contáctenos</a>
+  </div>
+</div></section>
