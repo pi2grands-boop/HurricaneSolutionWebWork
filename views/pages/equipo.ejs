@@ -1,6 +1,52 @@
-<%# STUB DE FASE 3 — el contenido real se porta en Fase 5. %>
-<section style="padding: 4rem 2rem; max-width: 1180px; margin: 0 auto;">
-  <p class="stag">El Equipo</p>
-  <h1 class="stit"><%= title %></h1>
-  <p class="sintro"><%= description %></p>
-</section>
+<%# Equipo — portada desde pages/equipo.html legacy (Fase 5.8). %>
+<%# PENDIENTE: [Nombre del fundador] es placeholder real del legacy — reemplazar cuando %>
+<%# se reciban nombres, bios y fotos reales. No inventar datos. %>
+
+<div class="ip-hero">
+  <h1>El <em>Equipo</em></h1>
+  <p>Expertos en protección contra huracanes con más de 15 años operando en las costas de México. Somos una empresa de construcción que resuelve problemas de ingeniería.</p>
+</div>
+
+<section><div class="wrap">
+  <div class="stag reveal">Nuestro equipo</div>
+  <h2 class="stit reveal">Las personas detrás de <span>cada instalación</span></h2>
+  <p class="sintro reveal">Cuando Hurricane Solution llega a su propiedad, llegan expertos — no vendedores.</p>
+  <div class="team-grid">
+    <div class="card team-card reveal">
+      <div class="team-avatar">HS</div>
+      <h3>[Nombre del fundador]</h3>
+      <div class="role">Fundador y Director</div>
+      <p>Más de 15 años en protección contra huracanes en México. Ha estado presente en más de 30 tormentas y desarrollado soluciones que no existían en el mercado.</p>
+    </div>
+    <div class="card team-card team-placeholder reveal">
+      <div class="team-avatar" style="background:var(--light);color:var(--gray)">+</div>
+      <h3>Próximamente</h3>
+      <div class="role">Equipo de Ingeniería</div>
+      <p>Nuestros ingenieros y arquitectos trabajan en cada proyecto asegurando que la solución funcione — no solo que pase una prueba.</p>
+    </div>
+    <div class="card team-card team-placeholder reveal">
+      <div class="team-avatar" style="background:var(--light);color:var(--gray)">+</div>
+      <h3>Próximamente</h3>
+      <div class="role">Equipo de Instalación</div>
+      <p>Personal certificado con años de experiencia instalando en condiciones reales. Cada instalación supervisada desde el primer hasta el último ancla.</p>
+    </div>
+  </div>
+</div></section>
+
+<section style="background:var(--off)"><div class="wrap">
+  <div class="stag reveal">Nuestra filosofía</div>
+  <h2 class="stit reveal">Dos preguntas. <span>Siempre.</span></h2>
+  <div class="wgrid">
+    <div class="card wcard reveal"><div class="wnum">01</div><h3>¿Va a funcionar cuando llegue la tormenta?</h3><p>Cada decisión de instalación parte de esta pregunta. No cerramos un trabajo si la respuesta es no — aunque el cliente quiera algo diferente. Nuestra reputación vale más que un contrato.</p></div>
+    <div class="card wcard reveal"><div class="wnum">02</div><h3>¿Puede su equipo instalarlo a tiempo?</h3><p>Un sistema que no puede desplegarse antes de la tormenta no protege nada. Diseñamos cada instalación pensando en el personal que va a usarla — con o sin nosotros presentes.</p></div>
+  </div>
+</div></section>
+
+<div class="cta-band">
+  <h2>¿Quiere conocer al equipo?</h2>
+  <p>Solicite una visita o videollamada. Que hable el trabajo.</p>
+  <div class="cta-btns">
+    <a href="/contacto" class="btn-w">Agendar una visita</a>
+    <a href="<%= site.whatsapp.url %>" class="btn-wout" rel="noopener" target="_blank">💬 WhatsApp</a>
+  </div>
+</div>
