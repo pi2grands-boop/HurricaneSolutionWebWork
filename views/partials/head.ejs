@@ -29,6 +29,38 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="<%= pageTitle %>" />
 <meta name="twitter:description" content="<%= pageDescription %>" />
+<meta name="twitter:image" content="<%= ogImage %>" />
+
+<% if (currentPath === '/') { %>
+<!-- JSON-LD LocalBusiness -->
+<script type="application/ld+json">
+<%- JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.name,
+  description: site.description,
+  url: baseUrl,
+  telephone: site.phone.e164,
+  email: site.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    postalCode: site.address.postalCode,
+    addressCountry: 'MX',
+  },
+  areaServed: ['MX'],
+  image: ogImage,
+  sameAs: [
+    site.social.facebook,
+    site.social.instagram,
+    site.social.youtube,
+    site.social.tiktok,
+  ],
+}) %>
+</script>
+<% } %>
 
 <!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
