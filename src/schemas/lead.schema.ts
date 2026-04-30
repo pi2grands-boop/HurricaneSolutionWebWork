@@ -87,9 +87,18 @@ export type LeadInput = z.infer<typeof leadSchema>;
 
 /**
  * Construye el payload final que se envía al webhook Make.com.
- * Normaliza los dos shapes (clásico vs cotizador) a un objeto único.
+ *
+ * Garantiza que TODAS las claves esperadas por el escenario Make.com estén
+ * presentes y no vacías, aunque el formulario de origen no las traiga.
+ * Esto es crítico porque la plantilla de WhatsApp Cloud API (Meta) rechaza
+ * el mensaje con error #131008 si alguna variable {{n}} queda vacía.
+ *
+ * Para campos exclusivos del cotizador (ubicacion, precio_mostrado,
+ * es_prioritario) se usa el fallback "-" cuando el lead viene de otro form.
  */
-export function buildWebhookPayload(input: LeadInput): Record<string, unknown> {
+const FALLBACK = '-';
+
+export function buildWebhookPayload(input: LeadInput): Record<string, string> {
   const fullName =
     input.full_name?.trim() ||
     [input.nombre, input.apellido].filter(Boolean).join(' ').trim();
@@ -99,26 +108,23 @@ export function buildWebhookPayload(input: LeadInput): Record<string, unknown> {
     input.fecha_local ||
     new Date().toLocaleString('es-MX', { timeZone: 'America/Cancun' });
 
-  const payload: Record<string, unknown> = {
+  // `ubicacion` no existe en home/contacto pero `zona` sí (selector de zona).
+  // Si no hay ubicacion explícita, usamos la zona como mejor aproximación.
+  const ubicacion = input.ubicacion?.trim() || input.zona?.trim() || FALLBACK;
+
+  return {
     source: input.source,
-    full_name: fullName,
+    full_name: fullName || FALLBACK,
     phone: input.phone,
-    email: input.email,
-    tipo_propiedad: input.tipo_propiedad,
-    zona: input.zona,
-    ubicacion: input.ubicacion,
-    precio_mostrado: input.precio_mostrado,
-    es_prioritario: input.es_prioritario,
-    tipo_consulta: input.tipo_consulta,
-    mensaje: input.mensaje,
+    email: input.email || FALLBACK,
+    tipo_propiedad: input.tipo_propiedad?.trim() || FALLBACK,
+    zona: input.zona?.trim() || FALLBACK,
+    ubicacion,
+    precio_mostrado: input.precio_mostrado?.trim() || FALLBACK,
+    es_prioritario: input.es_prioritario || FALLBACK,
+    tipo_consulta: input.tipo_consulta?.trim() || FALLBACK,
+    mensaje: input.mensaje?.trim() || FALLBACK,
     timestamp: input.timestamp || nowIso,
     fecha_local: fechaLocal,
   };
-
-  // Limpia undefined para no enviar ruido al webhook.
-  for (const key of Object.keys(payload)) {
-    if (payload[key] === undefined) delete payload[key];
-  }
-
-  return payload;
 }
