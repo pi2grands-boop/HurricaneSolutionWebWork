@@ -17,6 +17,7 @@
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit && tsc -p client/tsconfig.json --noEmit",
     "clean": "rimraf dist public/js/*.js public/js/*.js.map",
+    "test:webhook": "node scripts/test-webhook.mjs",
     "postinstall": "npm run build"
   },
   "dependencies": {

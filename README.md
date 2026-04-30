@@ -49,6 +49,7 @@ El sitio queda disponible en `http://localhost:3000`.
 | `npm start` | Corre el server compilado (lo que usa Hostinger). |
 | `npm run typecheck` | Verifica tipos sin generar archivos. |
 | `npm run clean` | Borra `dist/` y los `.js` generados en `public/js/`. |
+| `npm run test:webhook` | Envía 2 payloads de prueba (cotizador + contacto) directo al `MAKE_WEBHOOK_URL` del `.env` para validar que Make.com los acepta antes de subir a Hostinger. Acepta una URL como argumento: `npm run test:webhook -- https://hook.us2.make.com/abc...`. |
 
 ---
 
