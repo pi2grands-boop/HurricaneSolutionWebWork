@@ -59,16 +59,18 @@ HurricaneSolutionWeb/
 ├── src/                    Código TypeScript del SERVIDOR
 │   ├── server.ts           Entry point Express
 │   ├── config/             Configuración tipada (env vars con Zod)
-│   ├── routes/             pages, api, seo
-│   ├── middleware/         security, logger, errors
-│   ├── services/           lead, analytics
-│   ├── schemas/            Zod schemas (lead, quote)
+│   ├── routes/             pages, api (POST /api/lead), seo (sitemap, robots)
+│   ├── middleware/         security (helmet, rate-limit, CORS), logger, errors
+│   ├── services/           lead.service.ts (proxy al webhook Make.com)
+│   ├── schemas/            lead.schema.ts (Zod schema unificado)
 │   ├── data/               Datos del sitio (contactos, productos, precios)
 │   └── types/              Tipos compartidos
 ├── client/                 Código TypeScript del NAVEGADOR
-│   ├── main.ts             Reveals, FAQ, nav
-│   ├── widget.ts           Cotizador completo
-│   ├── contact-form.ts     Validación + envío del formulario
+│   ├── main.ts             Boot: reveals, FAQ, widget, formularios
+│   ├── reveals.ts          IntersectionObserver para animaciones
+│   ├── faq.ts              Acordeón FAQ
+│   ├── widget.ts           Cotizador completo (autocomplete + precio)
+│   ├── forms.ts            Handler genérico form[data-form="lead"]
 │   └── tsconfig.json       Config TS independiente para el cliente
 ├── views/                  Templates EJS
 │   ├── layouts/            base.ejs (head, GA, FB Pixel)
@@ -138,6 +140,35 @@ git push origin main
 # 3. Click "Run npm run build"
 # 4. Click "Restart"
 ```
+
+### Verificación post-deploy
+
+Reemplazar `$SITE` por el dominio real:
+
+```bash
+SITE=https://orange-mandrill-877092.hostingersite.com
+
+# 1. Healthcheck
+curl -s $SITE/healthz
+# esperado: {"ok":true,"env":"production","uptime":...}
+
+# 2. Las 10 páginas devuelven 200
+for r in / /hoteles /residencial /comercial /aquagrid /rain /equipo /faq /contacto /cotizador; do
+  printf "%-15s %s\n" "$r" "$(curl -s -o /dev/null -w '%{http_code}' $SITE$r)"
+done
+
+# 3. SEO
+curl -sI $SITE/sitemap.xml | head -1
+curl -sI $SITE/robots.txt | head -1
+curl -s $SITE/robots.txt    # en producción debe permitir indexación
+
+# 4. Form end-to-end (debería llegar a Make.com)
+curl -s -X POST $SITE/api/lead -H "Content-Type: application/json" \
+  --data "{\"source\":\"Landing Home\",\"nombre\":\"Smoke\",\"phone\":\"9981234567\",\"email\":\"smoke@test.com\",\"hp_field\":\"\",\"ts\":\"$(($(date +%s%N)/1000000 - 10000))\"}"
+# esperado: {"ok":true} y aparición del lead en Make.com / Airtable
+```
+
+Si algún paso falla, revisar logs en Hostinger panel y verificar que las env vars estén bien escritas.
 
 ---
 
