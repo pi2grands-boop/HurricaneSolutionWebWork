@@ -53,6 +53,10 @@ app.set('layout extractScripts', false);
 app.set('layout extractStyles', false);
 app.use(expressLayouts);
 
+// Versión de assets para cache-busting. Se calcula al arrancar el server.
+// Cada deploy/restart fuerza al navegador a re-fetch los CSS/JS.
+const assetVersion = String(Date.now());
+
 // Datos disponibles en TODAS las vistas vía res.locals
 app.use((req, res, next) => {
   res.locals.site = site;
@@ -63,6 +67,7 @@ app.use((req, res, next) => {
     isProduction,
   };
   res.locals.currentPath = req.path;
+  res.locals.assetVersion = assetVersion;
   next();
 });
 
