@@ -40,7 +40,7 @@
         <div class="step">
           <div class="step-label"><span class="step-number">1</span><span class="step-title">¿Dónde está ubicada tu propiedad?</span></div>
           <div class="input-wrapper">
-            <input type="text" id="hurricaneLocationInput" placeholder="Escribe tu ciudad..." autocomplete="off">
+            <input type="text" class="text-input" id="hurricaneLocationInput" placeholder="Escribe tu ciudad..." autocomplete="off">
             <div class="autocomplete" id="hurricaneAutocomplete"></div>
           </div>
         </div>
@@ -80,8 +80,8 @@
             <input type="hidden" name="source" value="Landing Cotizador" />
             <input type="hidden" name="ts" value="<%= Date.now() %>" />
             <div class="form-row">
-              <input id="hurricaneNameInput" name="full_name" type="text" placeholder="Tu nombre" required>
-              <input id="hurricanePhoneInput" name="phone" type="tel" inputmode="tel" placeholder="WhatsApp (10 dígitos)" required>
+              <input id="hurricaneNameInput" class="form-input" name="full_name" type="text" placeholder="Tu nombre" required>
+              <input id="hurricanePhoneInput" class="form-input" name="phone" type="tel" inputmode="tel" placeholder="WhatsApp (10 dígitos)" required>
             </div>
             <button type="submit" class="btn-whatsapp" id="hurricaneSubmitBtn" disabled>Enviar solicitud</button>
             <p class="btn-hint">Un especialista te contactará por WhatsApp.</p>

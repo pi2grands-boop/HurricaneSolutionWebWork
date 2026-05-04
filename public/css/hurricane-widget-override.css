@@ -221,6 +221,7 @@
     background: #ffffff !important;
     border: 1px solid #e0e0e0 !important;
     color: #1a1a1a !important;
+    padding: 16px 18px !important;
 }
 
 .hurricane-widget-container .text-input::placeholder {
