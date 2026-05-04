@@ -267,14 +267,6 @@
 /* ========== SELECT ========== */
 .hurricane-widget-container .select-wrapper { position: relative; }
 
-.hurricane-widget-container .select-input {
-    display: none;
-}
-
-.hurricane-widget-container .select-arrow {
-    display: none;
-}
-
 /* ========== AUTOCOMPLETE ========== */
 .hurricane-widget-container .autocomplete {
     position: absolute;
