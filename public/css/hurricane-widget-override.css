@@ -3,6 +3,44 @@
 /* a propósito. En el plugin original el JS construía un .custom-select; aquí */
 /* usamos el <select> nativo, así que dejarlo oculto romperÃa el paso 2. */
 
+/* ========== STRUCTURAL RESETS — neutraliza reglas globales de styles.css ========== */
+/* styles.css (sitio principal) define .hero como grid 2 col y section con padding */
+/* gigante. En /cotizador esos selectores chocan y rompen el layout del widget.    */
+
+.hurricane-widget-container .hero {
+    display: block !important;
+    grid-template-columns: none !important;
+    max-width: none !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    align-items: initial !important;
+    text-align: center !important;
+    margin: 0 0 20px !important;
+}
+
+.hurricane-widget-container section {
+    padding: 0 !important;
+}
+
+.hurricane-widget-container .hero h1 {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    margin: 0 0 10px !important;
+    color: #0a0a0a !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.hurricane-widget-container .hero p {
+    font-size: 14px !important;
+    color: #555555 !important;
+    margin: 0 !important;
+}
+
+@media (min-width: 481px) {
+    .hurricane-widget-container .hero h1 { font-size: 30px !important; }
+}
+
 /* Native select styling para que se vea como el mockup light */
 .hurricane-widget-container .select-input {
     width: 100% !important;
