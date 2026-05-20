@@ -230,7 +230,43 @@ export const site = {
 
 ---
 
-## 10. Glosario
+## 10. Cotizador `/cotizador` — gotchas del widget portado
+
+El cotizador es un port del plugin WordPress `hurricane-solution-widget`. El plugin original construía un `.custom-select` dinámico vía JS y traía CSS pensado para esa lógica. En este repo usamos el `<select>` nativo. Esto deja tres trampas:
+
+### 10.1 No reintroducir `display: none` en `.select-input` ni `.select-arrow`
+El CSS base `public/css/hurricane-widget.css` traía estas reglas del plugin:
+
+```css
+.hurricane-widget-container .select-input { display: none; }
+.hurricane-widget-container .select-arrow { display: none; }
+```
+
+Existían porque el plugin escondía el `<select>` y mostraba un div custom. Aquí ocultan el step 2 "Tipo de propiedad" — síntoma: el título aparece pero el dropdown no.
+
+**Si en algún momento se vuelve a copiar CSS del plugin, eliminarlas.** El override CSS no basta porque solo redefine `background`/`border`, no `display`.
+
+### 10.2 Los `<input>` necesitan clases explícitas
+El CSS del widget estiliza vía clase, no por selector de tipo:
+
+- `#hurricaneLocationInput` → `class="text-input"`
+- `#hurricaneNameInput` y `#hurricanePhoneInput` → `class="form-input"`
+
+Sin esas clases los inputs salen "desnudos" (chiquitos, sin border-radius, padding mínimo) mientras el `<select>` se ve bien.
+
+Detalle: `.text-input` en el base CSS lleva `padding: 16px 18px 16px 48px` porque el plugin metía un SVG de pin como background-image. Como no portamos ese icono, el override `hurricane-widget-override.css` fuerza `padding: 16px 18px` simétrico.
+
+### 10.3 Cache-bust requiere restart del server
+`src/server.ts` calcula `assetVersion = String(Date.now())` **al arrancar** y lo expone vía `res.locals`. Las plantillas EJS lo usan como `?v=<assetVersion>` en `<link>` y `<script>`. Si cambias CSS/JS pero no reinicias el server (Hostinger Restart o matar `npm run dev`), el query string se queda igual y el browser sirve el archivo viejo del disk cache.
+
+**Validación rápida**: DevTools → Network → busca `hurricane-widget.css?v=<numero>`. Si el número no cambió tras tu deploy, no hubo restart.
+
+### 10.4 Carpeta de referencia
+`hurricane-solution-widget (1)/` (en la raíz `HS/`, fuera del repo) es el plugin WP original — solo lectura, fuente de verdad para portar markup/CSS/JS pendientes (initCustomSelect, SVG icons, thanksBox).
+
+---
+
+## 11. Glosario
 
 - **Level E** — certificación militar de EUA. Vector de venta del HS-1500.
 - **NOA (Notice of Acceptance)** — aprobación de Miami-Dade County.
