@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title><%= typeof title !== 'undefined' ? title : 'Admin · Hurricane Solution' %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --white:   #ffffff;
+      --accent:  #24b7db;
+      --gray-100: #f5f5f5;
+      --gray-200: #e0e0e0;
+      --gray-400: #9e9e9e;
+      --gray-600: #555;
+      --gray-800: #222;
+      --sidebar-w: 240px;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Lato', sans-serif;
+    }
+
+    body {
+      background: #111;
+      color: var(--white);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── SIDEBAR ── */
+    .adm-sidebar {
+      width: var(--sidebar-w);
+      background: var(--black);
+      border-right: 1px solid var(--gray-800);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+    }
+
+    .adm-sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--gray-800);
+    }
+    .adm-sidebar-logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    .adm-sidebar-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+
+    .adm-nav {
+      padding: 20px 0;
+      flex: 1;
+    }
+    .adm-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color .2s, background .2s;
+      border-left: 3px solid transparent;
+    }
+    .adm-nav a:hover,
+    .adm-nav a.active {
+      color: var(--white);
+      background: rgba(255,255,255,.04);
+      border-left-color: var(--accent);
+    }
+    .adm-nav a .ic { font-size: 16px; }
+
+    .adm-sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--gray-800);
+    }
+    .adm-sidebar-footer form button {
+      width: 100%;
+      background: none;
+      border: 1px solid var(--gray-800);
+      color: var(--gray-400);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 10px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: border-color .2s, color .2s;
+    }
+    .adm-sidebar-footer form button:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    /* ── MAIN ── */
+    .adm-main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .adm-topbar {
+      background: var(--black);
+      border-bottom: 1px solid var(--gray-800);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .adm-topbar-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: .04em;
+      color: var(--white);
+    }
+    .adm-topbar-meta {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .adm-content {
+      padding: 32px;
+      flex: 1;
+    }
+
+    /* ── FLASH ── */
+    .adm-flash {
+      background: rgba(36,183,219,.12);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 12px 16px;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .adm-flash.error {
+      background: rgba(220,50,50,.1);
+      border-color: #dc3232;
+      color: #ff6b6b;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="adm-sidebar">
+  <div class="adm-sidebar-logo">
+    <img src="/img/hs-logo.png" alt="Hurricane Solution" />
+    <div class="adm-sidebar-label">Panel de Admin</div>
+  </div>
+
+  <nav class="adm-nav">
+    <a href="/admin" class="<%= currentPath === '/admin' ? 'active' : '' %>">
+      <span class="ic">📋</span> Dashboard
+    </a>
+    <a href="/admin/post/new" class="<%= currentPath === '/admin/post/new' ? 'active' : '' %>">
+      <span class="ic">✏️</span> Nuevo Post
+    </a>
+    <a href="/blog" target="_blank">
+      <span class="ic">🌐</span> Ver Blog
+    </a>
+    <a href="/" target="_blank">
+      <span class="ic">🏠</span> Ver Sitio
+    </a>
+  </nav>
+
+  <div class="adm-sidebar-footer">
+    <form action="/admin/logout" method="POST">
+      <button type="submit">🚪 Cerrar Sesión</button>
+    </form>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="adm-main">
+  <div class="adm-topbar">
+    <div class="adm-topbar-title">
+      <%= typeof title !== 'undefined' ? title : 'Admin' %>
+    </div>
+    <div class="adm-topbar-meta">Hurricane Solution &mdash; Blog CMS</div>
+  </div>
+
+  <div class="adm-content">
+    <%- body %>
+  </div>
+</div>
+
+</body>
+</html>

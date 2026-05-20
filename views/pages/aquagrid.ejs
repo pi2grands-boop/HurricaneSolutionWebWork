@@ -1,84 +1,307 @@
-<%# AquaGrid — portada desde pages/aquagrid.html legacy (Fase 5.6). %>
-<%# PENDIENTE: imágenes ag1.jpg ... ag7.jpg faltan en public/img/. %>
-<%# Apuntan a /img/agN.jpg; al subirlas a public/img/ funcionarán automáticamente. %>
+<%# AquaGrid — Hurricane Solution — diseño premium v2 %>
 
-<div class="ip-hero" style="background:linear-gradient(135deg,#0a2a2e 0%,#0E4A52 100%)">
-  <h1 style="color:#fff">Aperturas que nadie más <em style="color:#4DD8E0">puede proteger.</em></h1>
-  <p>AquaGrid es el único sistema de protección para grandes aperturas donde las pantallas convencionales no funcionan — ni ingeniería ni logísticamente.</p>
-  <a href="/contacto" class="btn-primary" style="background:#4DD8E0;color:#0a2a2e">Solicitar información</a>
+<style>
+  /* SECTIONS */
+  .section-wrap{padding:100px 48px}
+  .section-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-500);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .section-label::before{content:'';display:block;width:24px;height:1px;background:var(--gray-500)}
+  .section-title{font-family:var(--font-display);font-size:clamp(36px,4vw,60px);line-height:1;letter-spacing:.02em;margin-bottom:16px}
+  .section-title em{font-style:normal;color:var(--accent)}
+  .section-body{font-size:15px;font-weight:400;color:var(--gray-800);line-height:1.75;max-width:720px}
+  .section-body p{margin-bottom:1.25rem}
+  .section-body p:last-child{margin-bottom:0}
+  .section-body strong{color:var(--black);font-weight:700}
+
+  /* DARK SECTION */
+  .section-wrap-dark{padding:100px 48px;background:var(--black);color:var(--white)}
+  .section-wrap-dark .section-label{color:var(--gray-600)}
+  .section-wrap-dark .section-label::before{background:var(--gray-600)}
+  .section-wrap-dark .section-title{color:var(--white)}
+  .section-wrap-dark .section-body{color:var(--gray-200)}
+  .section-wrap-dark .section-body strong{color:var(--white)}
+
+  /* AQUAGRID HERO — tratamiento especial teal */
+  .ip-hero{
+    background: #071c1f;
+    background-image:
+      linear-gradient(135deg, rgba(7,28,31,0.72) 35%, rgba(7,28,31,0.40) 100%),
+      url('/img/hs-aquagrid-hero-new.png');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    padding:100px 48px 80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .ip-hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 70% 80% at 20% 60%, rgba(36,183,219,.12), transparent);
+    pointer-events:none;
+  }
+  .ip-hero-inner{max-width:760px;position:relative;z-index:1}
+  .ip-hero .section-label{color:var(--accent);letter-spacing:.3em}
+  .ip-hero .section-label::before{background:var(--accent)}
+  .ip-hero-title{font-family:var(--font-display);font-size:clamp(42px,6vw,80px);line-height:1;letter-spacing:.02em;color:var(--white);margin-bottom:20px}
+  .ip-hero-title em{font-style:normal;color:var(--accent)}
+  .ip-hero-sub{font-size:16px;font-weight:400;color:rgba(255,255,255,.92);line-height:1.75;max-width:580px;margin-bottom:36px}
+  .ip-hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* BENEFITS DARK */
+  .ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+  .ben-card{background:rgba(255,255,255,.04);border:1px solid var(--gray-800);padding:48px 40px;transition:border-color .3s,background .3s}
+  .ben-card:hover{border-color:var(--accent);background:rgba(255,255,255,.06)}
+  .ben-icon{font-size:28px;margin-bottom:20px;display:block}
+  .ben-title{font-family:var(--font-display);font-size:22px;letter-spacing:.04em;color:var(--white);margin-bottom:12px}
+  .ben-body{font-size:13px;font-weight:400;color:var(--white);line-height:1.75}
+
+  /* STATS BAND */
+  .stats-band-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-800);margin-top:56px}
+  .band-stat{padding:48px 40px;border-right:1px solid var(--gray-800);text-align:center}
+  .band-stat:last-child{border-right:none}
+  .band-stat-num{font-family:var(--font-display);font-size:clamp(60px,7vw,96px);line-height:1;color:var(--white)}
+  .band-stat-num sup{font-size:.45em;color:var(--accent)}
+  .band-stat-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:8px}
+
+  /* PHOTO GRID */
+  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:36px}
+  .photo-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:2px}
+  .photo-tile{position:relative;overflow:hidden;height:280px;background:var(--gray-900)}
+  .photo-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;filter:brightness(.92)}
+  .photo-tile:hover img{transform:scale(1.04);filter:brightness(1)}
+
+  /* SEGMENTS */
+  .segments-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+  .seg-card{background:var(--white);border:1px solid var(--gray-200);padding:48px 40px;transition:border-color .3s}
+  .seg-card:hover{border-color:var(--black)}
+  .seg-icon{width:48px;height:48px;background:var(--black);margin-bottom:28px;display:flex;align-items:center;justify-content:center;font-size:22px}
+  .seg-title{font-family:var(--font-display);font-size:26px;letter-spacing:.03em;color:var(--black);margin-bottom:12px;line-height:1.1}
+  .seg-body{font-size:13px;font-weight:400;color:var(--gray-800);line-height:1.7}
+
+  /* FINAL CTA */
+  #final-cta{background:var(--black);padding:120px 48px;text-align:center;position:relative;overflow:hidden}
+  .final-cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 100%,rgba(36,183,219,.07),transparent);pointer-events:none}
+  .final-cta-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;position:relative}
+  .final-cta-title{font-family:var(--font-display);font-size:clamp(48px,7vw,100px);line-height:.95;letter-spacing:.01em;color:var(--white);margin-bottom:24px;position:relative}
+  .final-cta-sub{font-size:15px;font-weight:400;color:var(--white);line-height:1.7;max-width:560px;margin:0 auto 48px;position:relative}
+  .final-cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+  .btn-white{position:relative;overflow:hidden;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(36,183,219,.05);color:var(--white);border:1px solid rgba(36,183,219,.2);border-radius:9999px;padding:14px 36px;text-decoration:none;display:inline-block;transition:background .2s,border-color .3s}
+  .btn-white::before{content:'';position:absolute;top:0;left:12.5%;width:75%;height:1px;background:linear-gradient(to right,transparent,rgba(36,183,219,.8),transparent);opacity:0;transition:opacity .4s}
+  .btn-white::after{content:'';position:absolute;bottom:0;left:12.5%;width:75%;height:1px;background:linear-gradient(to right,transparent,rgba(36,183,219,.5),transparent);opacity:0;transition:opacity .4s}
+  .btn-white:hover{background:rgba(36,183,219,.0);border-color:rgba(36,183,219,.35);color:var(--white)}
+  .btn-white:hover::before,.btn-white:hover::after{opacity:1}
+  .btn-outline-white{position:relative;overflow:hidden;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(37,211,102,.05);color:#fff;border:1px solid rgba(37,211,102,.25);border-radius:9999px;padding:14px 36px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:background .2s,border-color .3s}
+  .btn-outline-white::before{content:'';position:absolute;top:0;left:12.5%;width:75%;height:1px;background:linear-gradient(to right,transparent,rgba(37,211,102,.8),transparent);opacity:0;transition:opacity .4s}
+  .btn-outline-white::after{content:'';position:absolute;bottom:0;left:12.5%;width:75%;height:1px;background:linear-gradient(to right,transparent,rgba(37,211,102,.5),transparent);opacity:0;transition:opacity .4s}
+  .btn-outline-white:hover{background:rgba(37,211,102,.0);border-color:rgba(37,211,102,.4);color:#fff}
+  .btn-outline-white:hover::before,.btn-outline-white:hover::after{opacity:1}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .ip-hero{
+      background-image:
+        linear-gradient(to bottom, rgba(7,28,31,0.92) 0%, rgba(10,60,68,0.88) 100%),
+        url('/img/hs-aquagrid-hero-mobile.jpg');
+      background-position:center top;
+      padding:72px 20px 56px;
+    }
+    .ip-hero-btns{flex-direction:column}
+    .ip-hero-btns a{text-align:center;width:100%}
+    .section-wrap,.section-wrap-dark{padding:64px 20px}
+    .ben-grid,.segments-grid,.photo-grid,.photo-grid-2{grid-template-columns:1fr}
+    .stats-band-grid{grid-template-columns:1fr}
+    .band-stat{border-right:none;border-bottom:1px solid var(--gray-800)}
+    .band-stat:last-child{border-bottom:none}
+    #final-cta{padding:80px 20px}
+    .final-cta-actions{flex-direction:column;align-items:center}
+  }
+</style>
+
+<!-- INNER PAGE HERO -->
+<section class="ip-hero">
+  <div class="ip-hero-inner">
+    <div class="section-label reveal">AquaGrid</div>
+    <h1 class="ip-hero-title reveal">APERTURAS QUE NADIE MÁS<br><em>PUEDE PROTEGER.</em></h1>
+    <p class="ip-hero-sub reveal">AquaGrid es el único sistema de protección para grandes aperturas donde las pantallas convencionales no funcionan, ni ingeniería ni logísticamente.</p>
+    <div class="ip-hero-btns reveal">
+      <a href="/cotizador" class="btn-white">Realizar una cotización</a>
+      <a href="<%= site.whatsapp.url %>" class="btn-outline-white" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section-wrap" style="background:var(--offwhite)">
+  <div class="reveal">
+    <div class="section-label">El problema que AquaGrid resuelve</div>
+    <h2 class="section-title">CUANDO EL SISTEMA ESTÁNDAR<br><em>NO PUEDE INSTALARSE.</em></h2>
+  </div>
+  <div class="section-body reveal" style="margin-top:24px">
+    <p>Los sistemas de pantalla convencionales tienen un límite de ingeniería: no pueden abarcar aperturas de más de 3.8 metros entre puntos de anclaje sin comprometer su integridad estructural.</p>
+    <p>En el mercado hay empresas que instalan sus sistemas a 20 metros de apertura cuando su propia ingeniería dice que fallarán a partir de 3. Nosotros nos negamos a hacer eso.</p>
+    <p><strong>AquaGrid fue desarrollado por Hurricane Solution para resolver lo que el mercado ignoraba:</strong> lobbies de hotel de doble altura, fachadas de vidrio de gran formato, aperturas curvas, concesionarios de autos y cualquier espacio donde la ingeniería convencional no alcanza.</p>
+  </div>
+</section>
+
+<!-- BENEFITS DARK -->
+<section class="section-wrap-dark">
+  <div class="reveal">
+    <div class="section-label">Ventajas clave</div>
+    <h2 class="section-title">TRES RAZONES POR LAS QUE<br><em>NO HAY ALTERNATIVA.</em></h2>
+  </div>
+  <div class="ben-grid">
+    <div class="ben-card reveal">
+      
+      <div class="ben-title">APERTURAS IMPOSIBLES</div>
+      <p class="ben-body">Protege aperturas de más de 20 metros entre puntos de anclaje. Donde cualquier otro sistema fallaría o no puede instalarse, AquaGrid funciona.</p>
+    </div>
+    <div class="ben-card reveal" style="transition-delay:.1s">
+      
+      <div class="ben-title">MAYOR RESISTENCIA TENSIL DE LA INDUSTRIA</div>
+      <p class="ben-body">7,800 lbs de resistencia tensil. Trama 50% abierta que permite pasar la mitad de la carga, reduciendo drásticamente las fuerzas sobre la estructura y los anclajes.</p>
+    </div>
+    <div class="ben-card reveal" style="transition-delay:.2s">
+      
+      <div class="ben-title">INGENIERÍA HONESTA</div>
+      <p class="ben-body">Desarrollamos AquaGrid porque nos negamos a instalar sistemas por encima de sus límites de ingeniería. Si su apertura supera lo que puede proteger el sistema estándar, AquaGrid es la respuesta, no la improvisación.</p>
+    </div>
+  </div>
+  <div class="stats-band-grid reveal">
+    <div class="band-stat"><div class="band-stat-num">20<sup>m+</sup></div><div class="band-stat-label">Apertura máxima cubierta</div></div>
+    <div class="band-stat"><div class="band-stat-num">7,800<sup>lbs</sup></div><div class="band-stat-label">Resistencia tensil</div></div>
+    <div class="band-stat"><div class="band-stat-num">50<sup>%</sup></div><div class="band-stat-label">Reducción de carga estructural</div></div>
+  </div>
+</section>
+
+<!-- PHOTO GRID -->
+<section class="section-wrap">
+  <div class="reveal">
+    <div class="section-label">Nuestro trabajo en campo</div>
+    <h2 class="section-title">CADA APERTURA<br><em>TIENE SOLUCIÓN.</em></h2>
+    <p class="section-body" style="margin-top:16px">Instalaciones reales del sistema AquaGrid, de fachadas completas a grandes lobbies, sin importar la escala.</p>
+  </div>
+  <div class="photo-grid reveal" style="margin-top:36px">
+    <div class="photo-tile ag-lb"><img src="/img/ag4.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+    <div class="photo-tile ag-lb"><img src="/img/ag5.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+    <div class="photo-tile ag-lb"><img src="/img/ag3.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+  </div>
+  <div class="photo-grid-2 reveal" style="margin-top:2px">
+    <div class="photo-tile ag-lb"><img src="/img/ag6.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+    <div class="photo-tile ag-lb"><img src="/img/ag7.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+  </div>
+  <div class="photo-grid-2 reveal" style="margin-top:2px">
+    <div class="photo-tile ag-lb"><img src="/img/ag1.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+    <div class="photo-tile ag-lb"><img src="/img/ag2.jpg" alt="Instalación AquaGrid" loading="lazy" /></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX AquaGrid Gallery -->
+<div id="ag-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:9999;align-items:center;justify-content:center;padding:24px;cursor:pointer;">
+  <button id="ag-lb-close" style="position:fixed;top:20px;right:24px;background:none;border:1px solid rgba(255,255,255,.4);color:#fff;font-size:18px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10000;">✕</button>
+  <button id="ag-lb-prev" style="position:fixed;left:20px;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:22px;width:48px;height:48px;cursor:pointer;z-index:10000;">‹</button>
+  <img id="ag-lb-img" src="" alt="" style="max-width:92vw;max-height:92vh;object-fit:contain;cursor:default;box-shadow:0 0 80px rgba(0,0,0,.9);" />
+  <button id="ag-lb-next" style="position:fixed;right:20px;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:22px;width:48px;height:48px;cursor:pointer;z-index:10000;">›</button>
+  <div id="ag-lb-counter" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.4);font-family:'Lato',sans-serif;"></div>
 </div>
 
-<section style="background:#f0f8f9"><div class="wrap">
-  <div class="stag reveal" style="color:var(--teal)">El problema que AquaGrid resuelve</div>
-  <h2 class="stit reveal">Cuando el sistema estándar <span style="color:var(--teal)">no puede instalarse.</span></h2>
-  <div style="max-width:720px" class="reveal">
-    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">Los sistemas de pantalla convencionales tienen un límite de ingeniería: no pueden abarcar aperturas de más de 3.8 metros entre puntos de anclaje sin comprometer su integridad estructural.</p><br>
-    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">En el mercado hay empresas que instalan sus sistemas a 20 metros de apertura cuando su propia ingeniería dice que fallarán a partir de 3. Nosotros nos negamos a hacer eso.</p><br>
-    <p style="color:var(--gray);font-size:.95rem;line-height:1.75"><strong style="color:var(--navy)">AquaGrid fue desarrollado por Hurricane Solution para resolver lo que el mercado ignoraba:</strong> lobbies de hotel de doble altura, fachadas de vidrio de gran formato, aperturas curvas, concesionarios de autos y cualquier espacio donde la ingeniería convencional no alcanza.</p>
-  </div>
-</div></section>
+<script>
+(function(){
+  var lb = document.getElementById('ag-lightbox');
+  var img = document.getElementById('ag-lb-img');
+  var counter = document.getElementById('ag-lb-counter');
+  var tiles = [];
+  var current = 0;
 
-<section style="background:#0a2a2e"><div class="wrap">
-  <div class="stag reveal" style="color:#4DD8E0">Ventajas clave</div>
-  <h2 class="stit reveal" style="color:#fff">Tres razones por las que <span style="color:#4DD8E0">no hay alternativa.</span></h2>
-  <div class="ben3" style="margin-top:2rem">
-    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(77,216,224,.2);border-top:3px solid #4DD8E0;border-radius:6px;padding:1.6rem" class="reveal">
-      <h3 style="color:#fff;font-size:.95rem;margin-bottom:.5rem">📐 Aperturas imposibles</h3>
-      <p style="color:rgba(255,255,255,.65);font-size:.87rem;line-height:1.65">Protege aperturas de más de 20 metros entre puntos de anclaje. Donde cualquier otro sistema fallaría o no puede instalarse, AquaGrid funciona.</p>
-    </div>
-    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(77,216,224,.2);border-top:3px solid #4DD8E0;border-radius:6px;padding:1.6rem" class="reveal">
-      <h3 style="color:#fff;font-size:.95rem;margin-bottom:.5rem">💪 Mayor resistencia tensil de la industria</h3>
-      <p style="color:rgba(255,255,255,.65);font-size:.87rem;line-height:1.65">7,800 lbs de resistencia tensil. Trama 50% abierta que permite pasar la mitad de la carga, reduciendo drásticamente las fuerzas sobre la estructura y los anclajes.</p>
-    </div>
-    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(77,216,224,.2);border-top:3px solid #4DD8E0;border-radius:6px;padding:1.6rem" class="reveal">
-      <h3 style="color:#fff;font-size:.95rem;margin-bottom:.5rem">✅ Ingeniería honesta</h3>
-      <p style="color:rgba(255,255,255,.65);font-size:.87rem;line-height:1.65">Desarrollamos AquaGrid porque nos negamos a instalar sistemas por encima de sus límites de ingeniería. Si su apertura supera lo que puede proteger el sistema estándar, AquaGrid es la respuesta — no la improvisación.</p>
-    </div>
-  </div>
-  <div class="ag-stats reveal">
-    <div class="ag-sbox"><div class="ag-num">20<em>m+</em></div><div class="ag-label">Apertura máxima cubierta</div></div>
-    <div class="ag-sbox"><div class="ag-num">7,800<em>lbs</em></div><div class="ag-label">Resistencia tensil</div></div>
-    <div class="ag-sbox"><div class="ag-num">50<em>%</em></div><div class="ag-label">Reducción de carga estructural</div></div>
-  </div>
-</div></section>
+  function buildList(){
+    document.querySelectorAll('.ag-lb img').forEach(function(el){ tiles.push(el.src); });
+  }
 
-<section><div class="wrap">
-  <div class="stag reveal" style="color:var(--teal)">Instalaciones reales</div>
-  <h2 class="stit reveal">AquaGrid en <span style="color:var(--teal)">campo</span></h2>
-  <p class="sintro reveal">Hoteles, condominios de lujo y edificios corporativos en la Riviera Maya y Los Cabos.</p>
-  <div class="photo-grid reveal">
-    <img src="/img/ag1.jpg" alt="AquaGrid instalación hotel lobby" loading="lazy">
-    <img src="/img/ag2.jpg" alt="AquaGrid fachada alta" loading="lazy">
-    <img src="/img/ag3.jpg" alt="AquaGrid instalación frente edificio" loading="lazy">
+  function open(idx){
+    current = idx;
+    img.src = tiles[current];
+    counter.textContent = (current+1) + ' / ' + tiles.length;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close(){
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  function prev(){ current = (current - 1 + tiles.length) % tiles.length; img.src = tiles[current]; counter.textContent = (current+1)+' / '+tiles.length; }
+  function next(){ current = (current + 1) % tiles.length; img.src = tiles[current]; counter.textContent = (current+1)+' / '+tiles.length; }
+
+  buildList();
+
+  document.querySelectorAll('.ag-lb').forEach(function(tile, i){
+    tile.style.cursor = 'zoom-in';
+    tile.addEventListener('click', function(){ open(i); });
+  });
+
+  document.getElementById('ag-lb-close').addEventListener('click', function(e){ e.stopPropagation(); close(); });
+  document.getElementById('ag-lb-prev').addEventListener('click', function(e){ e.stopPropagation(); prev(); });
+  document.getElementById('ag-lb-next').addEventListener('click', function(e){ e.stopPropagation(); next(); });
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if(lb.style.display==='flex'){
+      if(e.key==='Escape') close();
+      if(e.key==='ArrowLeft') prev();
+      if(e.key==='ArrowRight') next();
+    }
+  });
+})();
+</script>
+
+<!-- SEGMENTS -->
+<section class="section-wrap" style="background:var(--offwhite)">
+  <div class="reveal">
+    <div class="section-label">Ideal para</div>
+    <h2 class="section-title">¿SU PROPIEDAD TIENE<br><em>GRANDES APERTURAS?</em></h2>
   </div>
-  <div class="photo-grid-2 reveal">
-    <img src="/img/ag4.jpg" alt="AquaGrid interior hotel" loading="lazy">
-    <img src="/img/ag5.jpg" alt="AquaGrid fachada residencial" loading="lazy">
-  </div>
-  <div class="photo-grid reveal" style="margin-top:.75rem">
-    <img src="/img/ag6.jpg" alt="AquaGrid edificio residencial" loading="lazy">
-    <img src="/img/ag7.jpg" alt="AquaGrid instalación completa" loading="lazy">
-    <div style="background:var(--off);border:1.5px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;height:220px">
-      <div style="text-align:center;color:var(--gray)"><div style="font-size:2rem;margin-bottom:.5rem">📸</div><div style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em">Más fotos disponibles<br>en consulta</div></div>
+  <div class="segments-grid">
+    <div class="seg-card reveal">
+      
+      <div class="seg-title">AGENCIAS DE AUTOS</div>
+      <p class="seg-body">Los showrooms tienen aperturas masivas diseñadas para exhibición. AquaGrid las protege sin comprometer el diseño ni la operación del negocio.</p>
+    </div>
+    <div class="seg-card reveal" style="transition-delay:.1s">
+      
+      <div class="seg-title">LOBBIES DE HOTEL</div>
+      <p class="seg-body">Fachadas de doble altura, aperturas panorámicas y accesos de gran formato. Donde el HS-1500 no puede cubrir la distancia, AquaGrid resuelve.</p>
+    </div>
+    <div class="seg-card reveal" style="transition-delay:.2s">
+      
+      <div class="seg-title">HOSPITALES</div>
+      <p class="seg-body">Instalaciones esenciales que no pueden dejar de operar. AquaGrid fue diseñado con el mismo espíritu que las instalaciones militares — para mantenerse cuando más se le necesita.</p>
     </div>
   </div>
-</div></section>
+</section>
 
-<section style="background:var(--off)"><div class="wrap">
-  <div class="stag reveal" style="color:var(--teal)">Ideal para</div>
-  <h2 class="stit reveal">¿Su propiedad tiene <span style="color:var(--teal)">grandes aperturas?</span></h2>
-  <div class="sgr">
-    <div class="card seg reveal"><div class="seg-ico">🚗</div><h3>Agencias de Autos</h3><p>Los showrooms tienen aperturas masivas diseñadas para exhibición. AquaGrid las protege sin comprometer el diseño ni la operación del negocio.</p></div>
-    <div class="card seg reveal"><div class="seg-ico">🏨</div><h3>Lobbies de Hotel</h3><p>Fachadas de doble altura, aperturas panorámicas y accesos de gran formato. Donde el HS-1500 no puede cubrir la distancia, AquaGrid resuelve.</p></div>
-    <div class="card seg reveal"><div class="seg-ico">🏥</div><h3>Hospitales</h3><p>Instalaciones esenciales que no pueden dejar de operar. AquaGrid fue diseñado con el mismo espíritu que las instalaciones militares — para mantenerse cuando más se le necesita.</p></div>
+<!-- FINAL CTA -->
+<section id="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-label reveal">Consulta de ingeniería</div>
+  <h2 class="final-cta-title reveal">¿TIENE UNA APERTURA<br>QUE NADIE HA PODIDO<br>PROTEGER?</h2>
+  <p class="final-cta-sub reveal">Cuéntenos el desafío. Si hay solución, la encontramos.</p>
+  <div class="final-cta-actions reveal">
+    <a class="btn-white" href="/contacto">Realizar una cotización</a>
+    <a class="btn-outline-white" href="<%= site.whatsapp.url %>" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L0 24l6.335-1.652A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.016-1.378l-.36-.214-3.732.979.994-3.636-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      WhatsApp
+    </a>
   </div>
-</div></section>
+</section>
 
-<div class="cta-band" style="background:var(--teal)">
-  <h2>¿Tiene una apertura que nadie ha podido proteger?</h2>
-  <p>Cuéntenos el desafío. Si hay solución, la encontramos.</p>
-  <div class="cta-btns">
-    <a href="/contacto" class="btn-w" style="color:var(--teal)">Solicitar consulta de ingeniería</a>
-    <a href="<%= site.whatsapp.url %>" class="btn-wout" rel="noopener" target="_blank">💬 WhatsApp</a>
-  </div>
-</div>
+<script>
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>

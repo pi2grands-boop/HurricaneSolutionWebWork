@@ -8,18 +8,101 @@
     { href: '/rain',        label: 'Rain Protection', extraClass: '' },
     { href: '/equipo',      label: 'El Equipo',       extraClass: '' },
     { href: '/faq',         label: 'FAQ',             extraClass: '' },
+    { href: '/blog',        label: 'Blog',            extraClass: '' },
   ];
   const isActive = (href) => href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(href + '/');
 %>
-<nav>
-  <div class="nav-logo"><a href="/" aria-label="Hurricane Solution — inicio">Hurricane<span>Solution</span></a></div>
-  <div class="nav-links">
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="/" aria-label="Hurricane Solution — inicio">
+      <img src="/img/hs-logo.png" alt="Hurricane Solution" class="nav-logo-img" />
+    </a>
+  </div>
+  <ul class="nav-links">
     <% navItems.forEach((item) => { %>
-      <a
+      <li><a
         href="<%= item.href %>"
         class="<%= [item.extraClass, isActive(item.href) ? 'active' : ''].filter(Boolean).join(' ') %>"
-      ><%= item.label %></a>
+      ><%= item.label %></a></li>
     <% }) %>
-    <a href="/cotizador" class="nav-cta">Cotizar Ahora</a>
+  </ul>
+  <div class="nav-right-group">
+    <button type="button" class="lang-btn" aria-label="Switch language (coming soon)">EN</button>
+    <a href="/cotizador" class="nav-cta nav-cta-desk">Cotizar Ahora</a>
   </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+  <ul class="nav-drawer-list">
+    <% navItems.forEach((item) => { %>
+      <li><a
+        href="<%= item.href %>"
+        class="<%= [item.extraClass, isActive(item.href) ? 'active' : ''].filter(Boolean).join(' ') %>"
+      ><%= item.label %></a></li>
+    <% }) %>
+  </ul>
+  <a href="/cotizador" class="nav-drawer-cta">Cotizar Ahora</a>
+</div>
+<div class="nav-drawer-overlay" id="nav-drawer-overlay"></div>
+
+<style>
+  /* Grupo derecho: EN + Cotizar */
+  .nav-right-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  /* Logo proporcional a la barra de 80px */
+  .nav-logo-img {
+    height: 62px;
+    width: auto;
+    display: block;
+  }
+
+  /* ════════ TABLET / LAPTOP PEQUEÑA < 1100px → hamburguesa ════════ */
+  @media (max-width: 1100px) {
+    .nav-logo-img { height: 44px !important; }
+    nav { height: 68px !important; padding: 0 20px !important; }
+    .nav-links { display: none !important; }
+    .nav-right-group { display: none !important; }
+    .nav-burger { display: flex !important; }
+  }
+
+  /* ════════ MÓVIL < 768px ════════ */
+  @media (max-width: 768px) {
+    .nav-logo-img { height: 38px !important; }
+    nav { height: 60px !important; padding: 0 16px !important; }
+  }
+</style>
+
+<script>
+  (function () {
+    var btn = document.getElementById('nav-burger');
+    var drawer = document.getElementById('nav-drawer');
+    var overlay = document.getElementById('nav-drawer-overlay');
+    if (!btn || !drawer || !overlay) return;
+    function open() {
+      drawer.classList.add('is-open');
+      overlay.classList.add('is-show');
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      drawer.classList.remove('is-open');
+      overlay.classList.remove('is-show');
+      btn.classList.remove('is-active');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    btn.addEventListener('click', function () { drawer.classList.contains('is-open') ? close() : open(); });
+    overlay.addEventListener('click', close);
+    drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+  })();
+</script>

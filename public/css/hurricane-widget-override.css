@@ -1,379 +1,957 @@
-/* ========== LIGHT THEME OVERRIDES (port del plugin WP) ========== */
-/* NOTA: el bloque que ocultaba .select-input y .select-arrow del plugin se omitió */
-/* a propósito. En el plugin original el JS construía un .custom-select; aquí */
-/* usamos el <select> nativo, así que dejarlo oculto romperÃa el paso 2. */
+/* ========== HURRICANE WIDGET — OVERRIDE DISEÑO PREMIUM ========== */
+/* Transforma el widget al sistema de diseño del sitio:              */
+/* negro #0a0a0a · cyan #24b7db · Bebas Neue / Lato                 */
+/* IMPORTANTE: NO modificar — la lógica vive en client/widget.ts    */
 
-/* ========== STRUCTURAL RESETS — neutraliza reglas globales de styles.css ========== */
-/* styles.css (sitio principal) define .hero como grid 2 col y section con padding */
-/* gigante. En /cotizador esos selectores chocan y rompen el layout del widget.    */
-
+/* ── STRUCTURAL RESETS — neutraliza reglas de styles.css ── */
 .hurricane-widget-container .hero {
-    display: block !important;
-    grid-template-columns: none !important;
-    max-width: none !important;
-    padding: 0 !important;
-    gap: 0 !important;
-    align-items: initial !important;
-    text-align: center !important;
-    margin: 0 0 20px !important;
+  display: block !important;
+  grid-template-columns: none !important;
+  max-width: none !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  align-items: initial !important;
+  text-align: center !important;
+  margin: 0 0 20px !important;
 }
 
 .hurricane-widget-container section {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
-.hurricane-widget-container .hero h1 {
-    font-size: 26px !important;
-    font-weight: 700 !important;
-    line-height: 1.25 !important;
-    margin: 0 0 10px !important;
-    color: #0a0a0a !important;
-    font-family: 'Outfit', sans-serif !important;
-}
-
-.hurricane-widget-container .hero p {
-    font-size: 14px !important;
-    color: #555555 !important;
-    margin: 0 !important;
-}
-
-@media (min-width: 481px) {
-    .hurricane-widget-container .hero h1 { font-size: 30px !important; }
-}
-
-/* Native select styling para que se vea como el mockup light */
-.hurricane-widget-container .select-input {
-    width: 100% !important;
-    padding: 16px 48px 16px 18px !important;
-    background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important;
-    border-radius: 12px !important;
-    color: #1a1a1a !important;
-    font-family: 'Outfit', sans-serif !important;
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    cursor: pointer !important;
-    outline: none !important;
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
-    background-repeat: no-repeat !important;
-    background-position: right 18px center !important;
-}
-
-.hurricane-widget-container .select-input:focus {
-    border-color: #3b82f6 !important;
-}
-
-/* Custom Select - Force all styles (inactivo: no hay .custom-select en el DOM) */
-.hurricane-widget-container .custom-select {
-    position: relative !important;
-    width: 100% !important;
-    display: block !important;
-    margin: 0 !important;
-}
-
-.hurricane-widget-container .custom-select-display {
-    width: 100% !important;
-    padding: 16px 48px 16px 18px !important;
-    background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important;
-    border-radius: 12px !important;
-    color: #1a1a1a !important;
-    font-family: 'Outfit', sans-serif !important;
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    cursor: pointer !important;
-    outline: none !important;
-    user-select: none !important;
-    position: relative !important;
-    display: block !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    text-align: left !important;
-}
-
-.hurricane-widget-container .custom-select-display::after {
-    content: '' !important;
-    position: absolute !important;
-    right: 16px !important;
-    top: 50% !important;
-    transform: translateY(-50%) rotateZ(0deg) !important;
-    width: 0 !important;
-    height: 0 !important;
-    border-left: 6px solid transparent !important;
-    border-right: 6px solid transparent !important;
-    border-top: 6px solid #888888 !important;
-    pointer-events: none !important;
-}
-
-.hurricane-widget-container .custom-select.active .custom-select-display::after {
-    transform: translateY(-50%) rotateZ(180deg) !important;
-}
-
-.hurricane-widget-container .custom-select-display:hover {
-    border-color: #d0d0d0 !important;
-}
-
-.hurricane-widget-container .custom-select-display[data-value=""] {
-    color: #888888 !important;
-}
-
-.hurricane-widget-container .custom-select.active .custom-select-display {
-    border-color: #d0d0d0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
-
-.hurricane-widget-container .custom-select-menu {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important;
-    border-top: none !important;
-    border-bottom-left-radius: 12px !important;
-    border-bottom-right-radius: 12px !important;
-    max-height: 0 !important;
-    overflow: hidden !important;
-    z-index: 9999 !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-}
-
-.hurricane-widget-container .custom-select.active .custom-select-menu {
-    max-height: 280px !important;
-    overflow-y: auto !important;
-}
-
-.hurricane-widget-container .custom-select-option {
-    padding: 16px 18px !important;
-    color: #1a1a1a !important;
-    cursor: pointer !important;
-    font-family: 'Outfit', sans-serif !important;
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    display: block !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    background: transparent !important;
-    text-align: left !important;
-}
-
-.hurricane-widget-container .custom-select-option:hover {
-    background: rgba(0, 0, 0, 0.05) !important;
-}
-
-.hurricane-widget-container .custom-select-option.placeholder {
-    color: #888888 !important;
-}
-
-/* ========== MAIN ELEMENTS - Force white theme ========== */
-
+/* ── CONTENEDOR GLOBAL ── */
 .hurricane-widget-container,
 .hurricane-widget-container * {
-    box-sizing: border-box !important;
+  box-sizing: border-box !important;
 }
 
 .hurricane-widget-container {
-    background: #ffffff !important;
-    color: #1a1a1a !important;
+  background: #0a0a0a !important;
+  color: #ffffff !important;
+  font-family: 'Lato', sans-serif !important;
+  min-height: calc(100vh - 130px);
+  padding: 60px 0 80px !important;
 }
 
 .hurricane-widget-container .container {
-    background: #ffffff !important;
+  background: transparent !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+/* ── HERO ── */
+.hurricane-widget-container .hero {
+  margin-bottom: 32px !important;
 }
 
 .hurricane-widget-container .hero h1 {
-    color: #0a0a0a !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: clamp(36px, 5vw, 56px) !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: .02em !important;
+  color: #ffffff !important;
+  margin-bottom: 12px !important;
 }
 
 .hurricane-widget-container .hero p {
-    color: #555555 !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.55) !important;
+  margin: 0 !important;
 }
 
+/* ── BADGES CARRUSEL ── */
+.hurricane-widget-container .badge {
+  background: rgba(36,183,219,0.08) !important;
+  color: #24b7db !important;
+  border: 1px solid rgba(36,183,219,0.25) !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  padding: 8px 16px !important;
+  border-radius: 0 !important;
+}
+
+/* ── CARD PRINCIPAL ── */
 .hurricane-widget-container .main-card {
-    background: #f2f2f2 !important;
-    border: 1px solid #e0e0e0 !important;
-    color: #1a1a1a !important;
+  background: #111111 !important;
+  border: 1px solid #2a2a2a !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  padding: 36px !important;
+  margin-bottom: 2px !important;
+}
+
+/* ── INTRO TEXT ── */
+.hurricane-widget-container .intro-text {
+  border-bottom: 1px solid #2a2a2a !important;
+  padding-bottom: 24px !important;
+  margin-bottom: 28px !important;
 }
 
 .hurricane-widget-container .intro-text h2 {
-    color: #0a0a0a !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 28px !important;
+  letter-spacing: .04em !important;
+  color: #ffffff !important;
+  margin-bottom: 6px !important;
+  font-weight: 400 !important;
 }
 
 .hurricane-widget-container .intro-text p {
-    color: #555555 !important;
+  font-size: 13px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.5) !important;
+  line-height: 1.6 !important;
 }
 
-.hurricane-widget-container .step-title {
-    color: #1a1a1a !important;
+/* ── STEPS ── */
+.hurricane-widget-container .step {
+  margin-bottom: 24px !important;
+}
+
+.hurricane-widget-container .step-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
 }
 
 .hurricane-widget-container .step-number {
-    background: #3b82f6 !important;
-    color: #ffffff !important;
+  background: #24b7db !important;
+  color: #0a0a0a !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 16px !important;
+  letter-spacing: .04em !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
 }
 
-.hurricane-widget-container .text-input {
-    background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important;
-    color: #1a1a1a !important;
-    padding: 16px 18px !important;
+.hurricane-widget-container .step-title {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.8) !important;
 }
 
-.hurricane-widget-container .text-input::placeholder {
-    color: #888888 !important;
+/* ── INPUTS ── */
+.hurricane-widget-container .text-input,
+.hurricane-widget-container .form-input {
+  background: #0a0a0a !important;
+  border: 1px solid #2a2a2a !important;
+  color: #ffffff !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  padding: 14px 18px !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  transition: border-color .2s !important;
+  outline: none !important;
 }
 
-.hurricane-widget-container .text-input:focus {
-    border-color: #3b82f6 !important;
-    background: #ffffff !important;
+.hurricane-widget-container .text-input::placeholder,
+.hurricane-widget-container .form-input::placeholder {
+  color: rgba(255,255,255,0.3) !important;
 }
 
+.hurricane-widget-container .text-input:focus,
+.hurricane-widget-container .form-input:focus {
+  border-color: #24b7db !important;
+  background: #0a0a0a !important;
+}
+
+/* ── SELECT ── */
+.hurricane-widget-container .select-input {
+  width: 100% !important;
+  padding: 14px 48px 14px 18px !important;
+  background: #0a0a0a !important;
+  border: 1px solid #2a2a2a !important;
+  border-radius: 0 !important;
+  color: #ffffff !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  line-height: 1.6 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%2324b7db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 18px center !important;
+  transition: border-color .2s !important;
+}
+
+.hurricane-widget-container .select-input:focus {
+  border-color: #24b7db !important;
+}
+
+/* ── AUTOCOMPLETE ── */
 .hurricane-widget-container .autocomplete {
-    background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important;
+  background: #1a1a1a !important;
+  border: 1px solid #2a2a2a !important;
+  border-top: none !important;
+  border-radius: 0 !important;
 }
 
 .hurricane-widget-container .autocomplete-item {
-    color: #1a1a1a !important;
-    background: transparent !important;
+  color: rgba(255,255,255,0.8) !important;
+  background: transparent !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 13px !important;
+  padding: 12px 18px !important;
+  border-bottom: 1px solid #2a2a2a !important;
 }
 
 .hurricane-widget-container .autocomplete-item:hover {
-    background: rgba(0,0,0,0.04) !important;
+  background: rgba(36,183,219,0.08) !important;
+  color: #24b7db !important;
 }
 
 .hurricane-widget-container .autocomplete-name {
-    color: #0a0a0a !important;
+  color: #ffffff !important;
 }
 
+/* ── PRICE BOX ── */
 .hurricane-widget-container .price-box {
-    background: #f8f8f8 !important;
-    border: 1px solid #e0e0e0 !important;
-    color: #1a1a1a !important;
-}
-
-.hurricane-widget-container .price-location {
-    color: #555555 !important;
-}
-
-.hurricane-widget-container .price-location strong {
-    color: #0a0a0a !important;
-}
-
-.hurricane-widget-container .price-amount {
-    color: #0a0a0a !important;
-}
-
-.hurricane-widget-container .price-unit {
-    color: #555555 !important;
-}
-
-.hurricane-widget-container .price-note {
-    color: #888888 !important;
-}
-
-.hurricane-widget-container .price-disclaimer {
-    color: #555555 !important;
-}
-
-.hurricane-widget-container .price-cta-label {
-    color: #1a1a1a !important;
+  background: rgba(36,183,219,0.05) !important;
+  border: 1px solid rgba(36,183,219,0.25) !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  padding: 28px !important;
+  margin-top: 8px !important;
 }
 
 .hurricane-widget-container .price-badge {
-    background: rgba(0,0,0,0.04) !important;
-    color: #555555 !important;
-    border: 1px solid #e0e0e0 !important;
+  background: rgba(36,183,219,0.1) !important;
+  color: #24b7db !important;
+  border: 1px solid rgba(36,183,219,0.2) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  padding: 4px 10px !important;
+  display: inline-block !important;
+  margin-bottom: 16px !important;
+  border-radius: 0 !important;
 }
 
-.hurricane-widget-container .contact-box {
-    background: #f2f2f2 !important;
-    border: 1px solid #e0e0e0 !important;
+.hurricane-widget-container .price-location {
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.55) !important;
+  margin-bottom: 8px !important;
 }
 
-.hurricane-widget-container .contact-title h3 {
-    color: #0a0a0a !important;
+.hurricane-widget-container .price-location strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
 }
 
-.hurricane-widget-container .contact-title p {
-    color: #555555 !important;
+.hurricane-widget-container .price-amount {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 52px !important;
+  letter-spacing: .02em !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+  margin-bottom: 4px !important;
 }
 
-.hurricane-widget-container .form-input {
-    background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important;
-    color: #1a1a1a !important;
+.hurricane-widget-container .price-unit {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: #24b7db !important;
+  margin-bottom: 16px !important;
 }
 
-.hurricane-widget-container .form-input::placeholder {
-    color: #888888 !important;
+.hurricane-widget-container .price-note {
+  font-size: 12px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.4) !important;
+  line-height: 1.6 !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  padding-top: 16px !important;
+  margin-bottom: 20px !important;
 }
 
-.hurricane-widget-container .btn-hint {
-    color: #888888 !important;
+.hurricane-widget-container .price-cta-label {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: rgba(255,255,255,0.8) !important;
+  margin-bottom: 14px !important;
+  letter-spacing: .02em !important;
 }
 
-.hurricane-widget-container .info-section {
-    background: #f2f2f2 !important;
-    border: 1px solid #e0e0e0 !important;
-}
-
-.hurricane-widget-container .warranty-title {
-    color: #0a0a0a !important;
-}
-
-.hurricane-widget-container .warranty-item {
-    color: #555555 !important;
-}
-
-.hurricane-widget-container .warranty-item strong {
-    color: #0a0a0a !important;
-}
-
-.hurricane-widget-container .footer,
-.hurricane-widget-container .footer p,
-.hurricane-widget-container .footer a {
-    color: #888888 !important;
-}
-
-.hurricane-widget-container .badge {
-    background: rgba(0,0,0,0.04) !important;
-    color: #555555 !important;
-    border: 1px solid #e0e0e0 !important;
-}
-
-.hurricane-widget-container .success-box,
-.hurricane-widget-container .thanks-box {
-    background: #f2f2f2 !important;
-    border: 1px solid #e0e0e0 !important;
-    color: #1a1a1a !important;
-}
-
+/* ── BOTONES ── */
 .hurricane-widget-container .btn-interest {
-    background: #0a0a0a !important;
-    color: #ffffff !important;
-    border: none !important;
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border: none !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  padding: 16px 28px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: background .2s !important;
+  border-radius: 0 !important;
 }
 
 .hurricane-widget-container .btn-interest:hover {
-    background: #222222 !important;
+  background: #e5e5e5 !important;
 }
 
-.hurricane-widget-container .btn-interest svg {
-    stroke: #ffffff !important;
+.hurricane-widget-container .btn-whatsapp {
+  background: #25D366 !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  padding: 16px 28px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: background .2s !important;
+  border-radius: 0 !important;
+  margin-bottom: 8px !important;
 }
 
-.hurricane-widget-container .success-box h3,
-.hurricane-widget-container .thanks-box h3 {
-    color: #0a0a0a !important;
+.hurricane-widget-container .btn-whatsapp:hover {
+  background: #1fb855 !important;
 }
 
-.hurricane-widget-container .success-box p,
-.hurricane-widget-container .thanks-box p {
-    color: #555555 !important;
+.hurricane-widget-container .btn-whatsapp:disabled {
+  background: #1a1a1a !important;
+  color: rgba(255,255,255,0.3) !important;
+  cursor: not-allowed !important;
+}
+
+.hurricane-widget-container .btn-back {
+  background: transparent !important;
+  color: rgba(255,255,255,0.4) !important;
+  border: none !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  cursor: pointer !important;
+  padding: 8px 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+  transition: color .2s !important;
+}
+
+.hurricane-widget-container .btn-back:hover {
+  color: rgba(255,255,255,0.8) !important;
+}
+
+/* ── CONTACT BOX ── */
+.hurricane-widget-container .contact-box {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.hurricane-widget-container .contact-title {
+  border-bottom: 1px solid #2a2a2a !important;
+  padding-bottom: 20px !important;
+  margin-bottom: 24px !important;
+}
+
+.hurricane-widget-container .contact-title h3 {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 26px !important;
+  letter-spacing: .04em !important;
+  color: #ffffff !important;
+  margin-bottom: 4px !important;
+  font-weight: 400 !important;
+}
+
+.hurricane-widget-container .contact-title p {
+  font-size: 13px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+
+.hurricane-widget-container .form-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+.hurricane-widget-container .btn-hint {
+  font-size: 11px !important;
+  color: rgba(255,255,255,0.35) !important;
+  text-align: center !important;
+  margin-bottom: 12px !important;
+  letter-spacing: .04em !important;
+}
+
+/* ── SUCCESS BOX ── */
+.hurricane-widget-container .success-box {
+  background: rgba(36,183,219,0.05) !important;
+  border: 1px solid rgba(36,183,219,0.2) !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  padding: 40px 28px !important;
+  text-align: center !important;
+}
+
+.hurricane-widget-container .success-icon {
+  width: 52px !important;
+  height: 52px !important;
+  background: #24b7db !important;
+  color: #0a0a0a !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto 20px !important;
+  border-radius: 50% !important;
+}
+
+.hurricane-widget-container .success-box h3 {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 28px !important;
+  letter-spacing: .04em !important;
+  color: #ffffff !important;
+  margin-bottom: 10px !important;
+  font-weight: 400 !important;
+}
+
+.hurricane-widget-container .success-box p {
+  font-size: 13px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.6) !important;
+  line-height: 1.7 !important;
+  margin-bottom: 24px !important;
+}
+
+.hurricane-widget-container .btn-reload {
+  background: transparent !important;
+  color: #24b7db !important;
+  border: 1px solid rgba(36,183,219,0.4) !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  padding: 12px 24px !important;
+  cursor: pointer !important;
+  transition: border-color .2s, color .2s !important;
+  border-radius: 0 !important;
+}
+
+.hurricane-widget-container .btn-reload:hover {
+  border-color: #24b7db !important;
+  color: #ffffff !important;
+}
+
+/* ── INFO SECTION / WARRANTIES ── */
+.hurricane-widget-container .info-section {
+  background: #111111 !important;
+  border: 1px solid #2a2a2a !important;
+  border-top: none !important;
+  padding: 24px 36px !important;
+  border-radius: 0 !important;
+}
+
+.hurricane-widget-container .warranty-title {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.4) !important;
+  margin-bottom: 14px !important;
+}
+
+.hurricane-widget-container .warranty-items {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.hurricane-widget-container .warranty-item {
+  font-size: 12px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.6) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid #2a2a2a !important;
+  padding: 6px 14px !important;
+  border-radius: 0 !important;
+}
+
+.hurricane-widget-container .warranty-item strong {
+  color: #24b7db !important;
+  font-weight: 700 !important;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hurricane-widget-container {
+    padding: 40px 0 60px !important;
+  }
+  .hurricane-widget-container .main-card {
+    padding: 24px 20px !important;
+  }
+  .hurricane-widget-container .info-section {
+    padding: 20px !important;
+  }
+  .hurricane-widget-container .form-row {
+    grid-template-columns: 1fr !important;
+  }
+  .hurricane-widget-container .price-amount {
+    font-size: 42px !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   HW-PANEL — Cotizador embebido en el hero del home
+   El widget vive en un panel de 420px, no full-page
+   ══════════════════════════════════════════════════════ */
+
+/* Neutralizar el layout full-page del contenedor */
+.hw-panel .hurricane-widget-container {
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
+/* El contenedor interno ocupa el ancho completo del panel */
+
+/* Clip container — evita que los slides se derramen fuera del panel */
+.hw-panel {
+  overflow: hidden !important;
+}
+.hw-slide-outer {
+  overflow: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+.hw-panel .hurricane-widget-container .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Main card ajustada al panel */
+.hw-panel .hurricane-widget-container .main-card {
+  padding: 28px 28px 24px !important;
+  margin-bottom: 2px !important;
+  border-radius: 0 !important;
+}
+
+/* Intro más compacta */
+.hw-panel .hurricane-widget-container .intro-text {
+  margin-bottom: 20px !important;
+  padding-bottom: 16px !important;
+}
+
+.hw-panel .hurricane-widget-container .intro-text h2 {
+  font-size: 22px !important;
+}
+
+.hw-panel .hurricane-widget-container .intro-text p {
+  font-size: 12px !important;
+}
+
+/* Steps más compactos */
+.hw-panel .hurricane-widget-container .step {
+  margin-bottom: 16px !important;
+}
+
+/* Inputs */
+.hw-panel .hurricane-widget-container .text-input,
+.hw-panel .hurricane-widget-container .select-input,
+.hw-panel .hurricane-widget-container .form-input {
+  padding: 12px 16px !important;
+  font-size: 13px !important;
+}
+
+/* Select con ícono de flecha */
+.hw-panel .hurricane-widget-container .select-input {
+  padding-right: 40px !important;
+}
+
+/* Price box compacto */
+.hw-panel .hurricane-widget-container .price-box {
+  padding: 20px !important;
+}
+
+.hw-panel .hurricane-widget-container .price-amount {
+  font-size: 40px !important;
+}
+
+/* Info section debajo de la card */
+.hw-panel .hurricane-widget-container .info-section {
+  padding: 16px 28px !important;
+}
+
+.hw-panel .hurricane-widget-container .warranty-items {
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+/* Botones full width */
+.hw-panel .hurricane-widget-container .btn-interest,
+.hw-panel .hurricane-widget-container .btn-whatsapp {
+  padding: 14px 20px !important;
+  font-size: 11px !important;
+}
+
+/* Form row en 1 columna para que quepa bien */
+.hw-panel .hurricane-widget-container .form-row {
+  grid-template-columns: 1fr !important;
+}
+
+/* Scrollbar delgado estilo sitio */
+.hw-panel .hurricane-widget-container::-webkit-scrollbar { width: 3px; }
+.hw-panel .hurricane-widget-container::-webkit-scrollbar-track { background: #111; }
+.hw-panel .hurricane-widget-container::-webkit-scrollbar-thumb { background: #2a2a2a; }
+
+/* Success box compacto */
+.hw-panel .hurricane-widget-container .success-box {
+  padding: 28px 20px !important;
+}
+
+/* Responsive: en mobile el panel baja y ocupa ancho completo */
+@media (max-width: 1024px) {
+  .hw-panel .hurricane-widget-container {
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   COTIZADOR HERO — SLIDER LIBRO (2 PÁGINAS)
+   ══════════════════════════════════════════════════════ */
+
+/* Panel más ancho — neutraliza el scroll vertical */
+.hw-panel .hurricane-widget-container {
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
+/* Contenedor del slider — clip de desbordamiento */
+.hw-panel #hurricaneFormSection {
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Track: dos páginas lado a lado */
+.hw-panel .hw-slide-track {
+  display: flex !important;
+  width: 200% !important;
+  transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Estado activo — desliza a página 2 */
+.hw-panel .hw-slide-track.hw-at-price {
+  transform: translateX(-50%) !important;
+}
+
+/* Cada página ocupa la mitad del track = 100% del panel */
+.hw-panel .hw-slide {
+  width: 50% !important;
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+}
+
+/* Botón ← Regresar */
+.hw-panel .hw-back-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255,255,255,0.5) !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  padding: 0 0 16px 0 !important;
+  transition: color .2s !important;
+}
+.hw-panel .hw-back-arrow:hover {
+  color: #24b7db !important;
+}
+.hw-panel .hw-back-arrow svg {
+  stroke: currentColor !important;
+}
+
+/* Page 2: price-box no necesita margin-top extra */
+.hw-panel .hw-slide-price .price-box {
+  margin-top: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   TICKER HORIZONTAL — GARANTÍAS
+   ══════════════════════════════════════════════════════ */
+
+.hw-panel .hw-ticker-section {
+  padding: 14px 28px !important;
+  border-top: 1px solid #1a1a1a !important;
+  overflow: hidden !important;
+}
+
+.hw-panel .hw-ticker-section .warranty-title {
+  margin-bottom: 10px !important;
+}
+
+.hw-panel .hw-ticker {
+  overflow: hidden !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+.hw-panel .hw-ticker::before,
+.hw-panel .hw-ticker::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 32px !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+.hw-panel .hw-ticker::before {
+  left: 0 !important;
+  background: linear-gradient(to right, #111111, transparent) !important;
+}
+.hw-panel .hw-ticker::after {
+  right: 0 !important;
+  background: linear-gradient(to left, #111111, transparent) !important;
+}
+
+.hw-panel .hw-ticker-inner {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  white-space: nowrap !important;
+  animation: hw-tick-scroll 22s linear infinite !important;
+}
+.hw-panel .hw-ticker:hover .hw-ticker-inner {
+  animation-play-state: paused !important;
+}
+
+@keyframes hw-tick-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hw-panel .hw-tick-item {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.6) !important;
+  font-family: 'Lato', sans-serif !important;
+}
+.hw-panel .hw-tick-item strong {
+  color: #24b7db !important;
+  font-weight: 700 !important;
+}
+.hw-panel .hw-tick-sep {
+  color: rgba(255,255,255,0.2) !important;
+  font-size: 10px !important;
+}
+
+
+/* ══ PANEL ÚNICO — sin slider, show/hide controlado por widget.js ══════════ */
+/* hw-slide-outer, hw-slide-track y hw-slide-page ya no existen en el HTML   */
+
+/* ── Botón regresar ── */
+.hw-back-btn {
+  display: none !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255,255,255,.4) !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  padding: 0 0 16px 0 !important;
+  transition: color .2s !important;
+  width: auto !important;
+}
+.hw-back-btn.is-visible {
+  display: inline-flex !important;
+}
+.hw-back-btn:hover { color: #fff !important; }
+
+/* ── Visibilidad controlada por .active (widget.js) — NO forzar display:block ── */
+/* price-box: oculto por defecto en hurricane-widget.css → visible con .active  */
+/* contact-box: oculto por defecto en hurricane-widget.css → visible con .active */
+.hw-panel .hurricane-widget-container .success-box {
+  display: none !important;
+}
+.hw-panel .hurricane-widget-container .success-box.active {
+  display: block !important;
+}
+
+/* ══ TICKER DE GARANTÍAS — loop infinito sin salto ════════════════════════ */
+.hw-ticker-wrap {
+  overflow: hidden !important;
+  position: relative !important;
+  width: 100% !important;
+  white-space: nowrap !important;
+}
+
+.hw-ticker-wrap::before,
+.hw-ticker-wrap::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 32px !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.hw-ticker-wrap::before { left: 0; background: linear-gradient(to right, #111111, transparent) !important; }
+.hw-ticker-wrap::after  { right: 0; background: linear-gradient(to left, #111111, transparent) !important; }
+
+.hw-ticker {
+  display: inline-flex !important;   /* inline-flex → width = max-content real, igual que storm ticker */
+  gap: 0 !important;                  /* sin gap — el espaciado lo dan los separadores */
+  animation: hw-scroll 22s linear infinite !important;
+  white-space: nowrap !important;
+}
+
+.hw-tick-item {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.6) !important;
+  font-family: 'Lato', sans-serif !important;
+  padding: 0 20px !important;
+}
+
+.hw-tick-item strong {
+  color: #24b7db !important;
+  font-weight: 700 !important;
+}
+
+.hw-tick-sep {
+  color: rgba(255,255,255,0.2) !important;
+  font-size: 10px !important;
+  padding: 0 4px !important;
+  align-self: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+@keyframes hw-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Ocultar la info-section vieja si queda residuo */
+.hw-panel .hurricane-widget-container .warranty-items {
+  display: none !important;
+}
+
+
+/* ── Trust badges + cert strip dentro del panel ────────────────────────── */
+.hw-bottom-fill {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.hw-trust-row {
+  display: flex !important;
+  gap: 0 !important;
+  margin-top: 20px !important;
+  border-top: 1px solid #1e1e1e !important;
+  padding-top: 16px !important;
+}
+
+.hw-trust-item {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 0 8px 0 0 !important;
+}
+
+.hw-trust-num {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  color: #24b7db !important;
+  letter-spacing: .02em !important;
+  white-space: nowrap !important;
+}
+
+.hw-trust-num sup {
+  font-size: 13px !important;
+  vertical-align: super !important;
+}
+
+.hw-trust-lbl {
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,.4) !important;
+  line-height: 1.4 !important;
+}
+
+.hw-cert-strip {
+  display: flex !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  margin-top: 14px !important;
+  padding-top: 14px !important;
+  border-top: 1px solid #1e1e1e !important;
+}
+
+.hw-cert-strip span {
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,.3) !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid #222 !important;
+  padding: 4px 8px !important;
+}
+
+/* Slide 1: columna flexible para que info-section llene el espacio restante */
+.hw-slide-page:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.hw-slide-page:first-child .main-card {
+  flex-shrink: 0 !important;
+}
+.hw-slide-page:first-child .hw-bottom-fill {
+  flex: 1 !important;
 }

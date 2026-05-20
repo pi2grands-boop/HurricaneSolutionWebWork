@@ -15,6 +15,9 @@
 
 <title><%= pageTitle %></title>
 <meta name="description" content="<%= pageDescription %>" />
+<% if (typeof keywords !== 'undefined' && keywords) { %>
+<meta name="keywords" content="<%= keywords %>" />
+<% } %>
 <link rel="canonical" href="<%= canonicalUrl %>" />
 
 <!-- Open Graph -->
@@ -67,13 +70,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap"
   rel="stylesheet"
 />
 
 <!-- Estilos -->
 <link rel="stylesheet" href="/css/styles.css?v=<%= assetVersion %>" />
-<% if (currentPath === '/cotizador') { %>
+<% if (currentPath === '/' || currentPath === '/cotizador') { %>
 <link rel="stylesheet" href="/css/hurricane-widget.css?v=<%= assetVersion %>" />
 <link rel="stylesheet" href="/css/hurricane-widget-override.css?v=<%= assetVersion %>" />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />

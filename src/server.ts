@@ -29,9 +29,14 @@ import {
 import { logger, httpLogger } from './middleware/logger.js';
 import { notFoundHandler, errorHandler } from './middleware/errors.js';
 
+import expressSession from 'express-session';
+const sessionMiddleware = (expressSession as any).default ?? expressSession;
+
 import { pagesRouter } from './routes/pages.js';
 import { apiRouter } from './routes/api.js';
 import { seoRouter } from './routes/seo.js';
+import { blogRouter } from './routes/blog.js';
+import { adminRouter } from './routes/admin.js';
 
 import { site } from './data/site.js';
 
@@ -74,12 +79,17 @@ app.use((req, res, next) => {
 // Seguridad y logging
 app.use(helmetMiddleware);
 app.use(compression());
-app.use(corsMiddleware);
+// CORS — solo para rutas que no sean /admin
+// El panel admin es server-side rendered, no necesita CORS
+app.use((req, res, next) => {
+  if (req.path.startsWith('/admin')) return next();
+  corsMiddleware(req, res, next);
+});
 app.use(httpLogger);
 
-// Body parsers
-app.use(express.json({ limit: '32kb' }));
-app.use(express.urlencoded({ extended: true, limit: '32kb' }));
+// Body parsers (límite mayor para el editor de blog)
+app.use(express.json({ limit: '512kb' }));
+app.use(express.urlencoded({ extended: true, limit: '512kb' }));
 
 // Static — sirve /public en la raíz
 app.use(
@@ -94,9 +104,24 @@ app.get('/healthz', (_req, res) => {
   res.json({ ok: true, env: env.NODE_ENV, uptime: process.uptime() });
 });
 
+// Sesión para el panel admin del blog
+app.use(sessionMiddleware({
+  secret: env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: 'lax',
+    maxAge: 8 * 60 * 60 * 1000, // 8 horas
+  },
+}));
+
 // Rutas
 app.use('/', seoRouter); // /sitemap.xml, /robots.txt
 app.use('/api', apiRouter); // /api/quote, /api/lead
+app.use('/blog', blogRouter); // /blog, /blog/:slug
+app.use('/admin', adminRouter); // panel admin del blog
 app.use('/', pagesRouter); // /, /hoteles, /residencial, ...
 
 // 404 + error handler (siempre al final)

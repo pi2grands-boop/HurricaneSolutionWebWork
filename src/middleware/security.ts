@@ -1,29 +1,21 @@
-/**
- * Middleware de seguridad: Helmet + CORS + Rate limiting.
- *
- * Se monta SIEMPRE primero, antes de cualquier ruta.
- */
-
 import type { RequestHandler } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { env, isProduction } from '../config/env.js';
 
-/**
- * Helmet con CSP que permite los scripts inline necesarios para
- * GA4, Meta Pixel, y datos pre-renderizados desde EJS.
- */
 export const helmetMiddleware = helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: [
         "'self'",
-        "'unsafe-inline'", // necesario para scripts inline de GA / FB Pixel
+        "'unsafe-inline'",
         'https://www.googletagmanager.com',
         'https://www.google-analytics.com',
         'https://connect.facebook.net',
+        'https://cdn.quilljs.com',
+        'https://cdn.jsdelivr.net',
       ],
       connectSrc: [
         "'self'",
@@ -31,14 +23,14 @@ export const helmetMiddleware = helmet({
         'https://*.analytics.google.com',
         'https://*.facebook.com',
       ],
-      imgSrc: [
+      imgSrc: ["'self'", 'data:', 'https:'],
+      styleSrc: [
         "'self'",
-        'data:',
-        'https:',
-        'https://www.google-analytics.com',
-        'https://*.facebook.com',
+        "'unsafe-inline'",
+        'https://fonts.googleapis.com',
+        'https://cdn.quilljs.com',
+        'https://cdn.jsdelivr.net',
       ],
-      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
       fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
       frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
       objectSrc: ["'none'"],
@@ -46,32 +38,22 @@ export const helmetMiddleware = helmet({
       formAction: ["'self'"],
     },
   },
-  crossOriginEmbedderPolicy: false, // permite imágenes y videos externos
+  crossOriginEmbedderPolicy: false,
 });
 
-/**
- * CORS restrictivo: solo orígenes de la lista ALLOWED_ORIGINS.
- */
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
-    // Permitir requests sin origin (server-to-server, mobile apps, curl)
     if (!origin) return callback(null, true);
-
     if (env.ALLOWED_ORIGINS.includes(origin)) {
       return callback(null, true);
     }
-
     return callback(new Error(`Origin not allowed: ${origin}`));
   },
   credentials: true,
   methods: ['GET', 'POST'],
-  maxAge: 86_400, // cache preflight 24h
+  maxAge: 86_400,
 });
 
-/**
- * Rate limiter para endpoints de leads.
- * Default: 5 envíos por IP por hora.
- */
 export const leadRateLimiter: RequestHandler = rateLimit({
   windowMs: env.RATE_LIMIT_WINDOW_MS,
   limit: env.RATE_LIMIT_MAX,
@@ -81,6 +63,5 @@ export const leadRateLimiter: RequestHandler = rateLimit({
     ok: false,
     error: 'Demasiados envíos. Intenta de nuevo en una hora.',
   },
-  // Trust proxy del provider (Hostinger). Esto se complementa con app.set('trust proxy').
   skip: () => !isProduction && false,
 });

@@ -52,6 +52,13 @@ const envSchema = z.object({
   LOG_LEVEL: z
     .enum(['trace', 'debug', 'info', 'warn', 'error', 'fatal'])
     .default('info'),
+
+  // Blog admin — contraseña de acceso al panel.
+  ADMIN_PASSWORD: z.string().min(8),
+
+  // Secreto para firmar las cookies de sesión del admin.
+  // Mínimo 32 caracteres. Genera uno con: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+  SESSION_SECRET: z.string().min(32),
 });
 
 const parsed = envSchema.safeParse(process.env);

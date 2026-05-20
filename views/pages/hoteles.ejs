@@ -1,45 +1,817 @@
-<%# Hoteles — portada desde pages/hoteles.html legacy (Fase 5.2). %>
+<%# Hoteles y Resorts — Hurricane Solution %>
 
-<div class="ip-hero">
-  <h1>Protección para <em>Hoteles y Resorts</em></h1>
-  <p>Una tormenta no destruye solo su edificio — destruye semanas de ingresos y la confianza de sus huéspedes. Nuestros sistemas están diseñados para que usted abra sus puertas al día siguiente.</p>
-  <a href="/contacto" class="btn-primary">Solicitar evaluación gratuita</a>
+<style>
+  .ip-hero {
+    background-image: linear-gradient(to right, rgba(10,10,10,0.88) 45%, rgba(10,10,10,0.40) 100%), url('/img/hs-hoteles-hero.png') !important;    background-size: cover;
+    background-size: cover !important;
+    background-repeat: no-repeat !important; 
+}
+</style>
+
+<!-- INNER PAGE HERO -->
+<section class="ip-hero">
+  <div class="ip-hero-inner">
+    <div class="section-label reveal">Sector Hotelero</div>
+    <h1 class="ip-hero-title reveal">PROTECCIÓN PARA<br><em>HOTELES Y RESORTS.</em></h1>
+    <p class="ip-hero-sub reveal">Una tormenta no destruye solo su edificio, destruye semanas de ingresos y la confianza de sus huéspedes. Nuestros sistemas están diseñados para que usted abra sus puertas al día siguiente.</p>
+    <div class="ip-hero-btns reveal">
+      <a href="/cotizador" class="btn-white">Realizar una cotización</a>
+      <a href="<%= site.whatsapp.url %>" class="btn-outline-white" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section-wrap">
+  <div class="reveal">
+    <div class="section-label">Por qué nos eligen los hoteles</div>
+    <h2 class="section-title">LO QUE MÁS IMPORTA<br>A SU OPERACIÓN.</h2>
+    <p class="section-body">Tres ventajas medibles para directores de operaciones que no pueden permitirse cerrar sus puertas.</p>
+  </div>
+  <div class="ben-grid">
+    <div class="ben-card reveal">
+      
+      <div class="ben-title">PROPIEDAD SEGURA</div>
+      <p class="ben-body">Prevenga daños estructurales, rotura de vidrios, inundaciones interiores y pérdida de contenidos. Mantenga su operación activa cuando la competencia cierra.</p>
+    </div>
+    <div class="ben-card reveal" style="transition-delay:.1s">
+      
+      <div class="ben-title">BAJO MANTENIMIENTO</div>
+      <p class="ben-body">Su propio personal de mantenimiento puede desplegar el sistema completo en horas, sin grúas ni especialistas externos. Lo capacitamos y dejamos un manual escrito para cuando cambie el equipo.</p>
+    </div>
+    <div class="ben-card reveal" style="transition-delay:.2s">
+      
+      <div class="ben-title">DESCUENTOS DE SEGURO</div>
+      <p class="ben-body">Aseguradoras como Chubb, AIG y Mapfre reconocen nuestros sistemas como medida de mitigación certificada. En muchos casos esto reduce significativamente la prima anual de su póliza.</p>
+    </div>
+    <div class="ben-card reveal" style="transition-delay:.3s">
+      <div class="ben-title">RAIN PROTECTION</div>
+      <p class="ben-body">Toldos verticales enrollables para terrazas, restaurantes y áreas de alberca. Mantenga sus espacios exteriores operativos durante la temporada de lluvias sin estructura permanente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM SPLIT -->
+<section class="section-wrap" style="background:var(--offwhite)">
+  <div class="prob-split">
+    <div class="prob-left reveal">
+      <div class="section-label">El problema real</div>
+      <h2 class="section-title">48 HORAS.<br>¿PUEDE DESPLEGARLO<br>A TIEMPO?</h2>
+      <p class="section-body" style="margin-bottom:1.5rem">La mayoría de los sistemas en el mercado tienen un problema que sus vendedores no mencionan: no pueden instalarse en tiempo real antes de una tormenta. Requieren grúas, andamios o especialistas que no estarán disponibles cuando los necesite.</p>
+      <p class="section-body" style="margin-bottom:2rem">Nuestros sistemas están diseñados desde el principio para ser desplegados por el personal de mantenimiento de su hotel. Cada pantalla está fabricada a medida y etiquetada para que el montaje sea simple y rápido.</p>
+    </div>
+    <div class="prob-right reveal" style="transition-delay:.15s">
+      <div class="prob-box">
+        <div class="prob-box-header">
+          <span class="prob-alert">!</span>
+          <span class="prob-box-title">LO QUE OTROS NO LE DICEN.</span>
+        </div>
+        <p class="prob-box-sub">Cinco preguntas que debe hacer antes de firmar cualquier contrato de protección.</p>
+        <ul class="prob-list">
+          <li>¿Quién instala el sistema cuando llega el aviso?</li>
+          <li>¿Cuántas personas se necesitan por habitación?</li>
+          <li>¿Requiere grúa, andamio o equipo especializado?</li>
+          <li>¿Mi personal puede desplegarlo sin ustedes?</li>
+          <li>¿Hay manual escrito para futuros cambios de equipo?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="section-wrap" style="background:var(--black);color:var(--white)">
+  <div class="cs-layout">
+    <div class="cs-left reveal">
+      <div class="section-label" style="color:var(--gray-600)">Caso de estudio</div>
+      <h2 class="section-title" style="color:var(--white)">HOTEL DE<br>2,500 HABITACIONES.<br>UN DÍA.</h2>
+      <p style="font-size:14px;font-weight:400;color:var(--white);line-height:1.8;margin-bottom:1.25rem">Un hotel con edificios de nueve pisos necesitaba proteger 2,500 habitaciones antes de una tormenta. Era humanamente imposible mover ese número de pantallas y subirlas nueve pisos en el tiempo disponible.</p>
+      <p style="font-size:14px;font-weight:400;color:var(--white);line-height:1.8;margin-bottom:1.25rem">Desarrollamos compartimentos de almacenamiento en el balcón de cada habitación. Cuando llega el aviso, un empleado por habitación desenvuelve la pantalla y la ancla. Esa habitación queda protegida.</p>
+      <p style="font-size:14px;font-weight:700;color:var(--white);line-height:1.8">Tiempo por habitación: 3 a 5 minutos. El hotel completo: un día.</p>
+    </div>
+    <div class="cs-right reveal" style="transition-delay:.15s">
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <div class="cs-num">2,500</div>
+          <div class="cs-label">Habitaciones protegidas</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-num">9<span style="font-size:.45em;color:var(--accent)">pisos</span></div>
+          <div class="cs-label">Altura del edificio</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-num">3–5<span style="font-size:.45em;color:var(--accent)">min</span></div>
+          <div class="cs-label">Por habitación</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRODUCTS -->
+<!-- LIGHTBOX -->
+<div id="hs-lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close-btn" aria-label="Cerrar">&#x2715;</button>
+  <img id="hs-lightbox-img" src="" alt="Vista ampliada" />
 </div>
 
-<section><div class="wrap">
-  <div class="stag reveal">Por qué nos eligen los hoteles</div>
-  <h2 class="stit reveal">Lo que más importa <span>a su operación</span></h2>
-  <div class="ben3">
-    <div class="card bcard reveal"><h3>🏗 Propiedad segura</h3><p>Prevenga daños estructurales, rotura de vidrios, inundaciones interiores y pérdida de contenidos. Mantenga su operación activa cuando la competencia cierra.</p></div>
-    <div class="card bcard reveal"><h3>🔧 Bajo mantenimiento</h3><p>Su propio personal de mantenimiento puede desplegar el sistema completo en horas, sin grúas ni especialistas externos. Lo capacitamos y dejamos un manual escrito para cuando cambie el equipo.</p></div>
-    <div class="card bcard reveal"><h3>📋 Descuentos de seguro</h3><p>Aseguradoras como Chubb, AIG y Mapfre reconocen nuestros sistemas como medida de mitigación certificada. En muchos casos esto reduce significativamente la prima anual de su póliza.</p></div>
-  </div>
-</div></section>
+<style>
+  .prod-visual { position:relative!important;width:100%!important;height:auto!important;min-height:unset!important;max-height:unset!important;overflow:visible!important;background:transparent!important;margin-bottom:20px!important;display:block!important; }
+  .prod-visual img { width:100%!important;height:auto!important;object-fit:unset!important;display:block!important;cursor:zoom-in!important; }
+  .cert-badges-wrap { display:flex;flex-direction:column;align-items:center;gap:16px;padding:12px 0; }
+  .cert-badge-img { width:85%!important;height:auto!important;display:block!important;cursor:zoom-in!important; }
+  .cert-badge-single { width:120%!important; }
+  @media(min-width:1200px){ .products-grid{grid-template-columns:repeat(6,1fr)!important;} }
+  @media(max-width:1200px) and (min-width:768px){ .products-grid{grid-template-columns:repeat(3,1fr)!important;} }
+  @media(max-width:768px){ .products-grid{grid-template-columns:repeat(2,1fr)!important;} }
+  #hs-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;align-items:center;justify-content:center;padding:24px;cursor:pointer;}
+  #hs-lightbox.is-open{display:flex;}
+  #hs-lightbox-img{max-width:90vw;max-height:90vh;object-fit:contain;cursor:default;box-shadow:0 0 80px rgba(0,0,0,.9);}
+  .lb-close{position:fixed;top:20px;right:24px;background:none;border:1px solid rgba(255,255,255,.4);color:#fff;font-size:18px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10000;}
+  .lb-close:hover{background:rgba(255,255,255,.15);}
+</style>
 
-<section style="background:var(--off)"><div class="wrap">
-  <div class="stag reveal">El problema real</div>
-  <h2 class="stit reveal">48 horas. <span>¿Puede desplegarlo a tiempo?</span></h2>
-  <p class="sintro reveal">La mayoría de los sistemas en el mercado tienen un problema que sus vendedores no mencionan: no pueden instalarse en tiempo real antes de una tormenta. Requieren grúas, andamios o especialistas que no estarán disponibles cuando los necesite.</p>
-  <br><br>
-  <p class="sintro reveal">Nuestros sistemas están diseñados desde el principio para ser desplegados por el personal de mantenimiento de su hotel. Cada pantalla está fabricada a medida y etiquetada para que el montaje sea simple y rápido.</p>
-  <div style="margin-top:1.75rem" class="reveal"><a href="/contacto" class="btn-primary">Ver cómo funciona en su hotel</a></div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="stag reveal">Caso de estudio</div>
-  <h2 class="stit reveal">Hotel de <span>2,500 habitaciones.</span> Un día.</h2>
-  <div style="max-width:720px" class="reveal">
-    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">Un hotel con edificios de nueve pisos necesitaba proteger 2,500 habitaciones antes de una tormenta. Era humanamente imposible mover ese número de pantallas y subirlas nueve pisos en el tiempo disponible.</p><br>
-    <p style="color:var(--gray);font-size:.95rem;line-height:1.75">Desarrollamos compartimentos de almacenamiento en el balcón de cada habitación. Cuando llega el aviso, un empleado por habitación desenvuelve la pantalla y la ancla. Esa habitación queda protegida.</p><br>
-    <p style="color:var(--gray);font-size:.95rem;line-height:1.75"><strong style="color:var(--navy)">Tiempo por habitación: 3 a 5 minutos. El hotel completo: un día.</strong></p>
+<!-- SYSTEM SHOWCASE -->
+<section id="hs-showcase" class="section-wrap" style="background:var(--black);color:var(--white)">
+  <div class="showcase-intro reveal">
+    <div class="section-label" style="color:var(--gray-600)">Seleccione su sistema</div>
+    <h2 class="section-title" style="color:var(--white)">CONOZCA CADA<br><em>SISTEMA EN DETALLE.</em></h2>
   </div>
-</div></section>
 
-<div class="cta-band">
-  <h2>¿Cuántas habitaciones tiene su hotel?</h2>
-  <p>Cuéntenos y diseñamos un programa específico para su propiedad.</p>
-  <div class="cta-btns">
-    <a href="/contacto" class="btn-w">Solicitar evaluación gratuita</a>
-    <a href="<%= site.whatsapp.url %>" class="btn-wout" rel="noopener" target="_blank">💬 WhatsApp</a>
+  <div class="showcase-layout">
+
+    <!-- Imagen izquierda -->
+    <div class="showcase-img-wrap">
+      <img id="sc-img" src="/img/hs-1500.png" alt="Sistema HS-1500" />
+      <div class="sc-progress-bar"><div id="sc-progress"></div></div>
+    </div>
+
+    <!-- Info central -->
+    <div class="showcase-info-wrap">
+      <div class="sc-tabs">
+        <button class="sc-tab active" data-sc="0">HS-1500</button>
+        <button class="sc-tab" data-sc="1">HS-1250</button>
+        <button class="sc-tab" data-sc="2">HS-875</button>
+        <button class="sc-tab" data-sc="3">HS-GRID</button>
+        <button class="sc-tab" data-sc="4">CLIP</button>
+        <button class="sc-tab" data-sc="5">RAIN</button>
+        <button id="sc-resume">Reanudar</button>
+      </div>
+      <div id="sc-paused-hint"></div>
+      <div class="sc-body">
+        <div class="sc-badge" id="sc-badge">Level E · Militar</div>
+        <div class="sc-model" id="sc-model">HS-1500</div>
+        <div class="sc-cert" id="sc-cert">Certificación Militar Level E · Categoría 5</div>
+        <p class="sc-desc" id="sc-desc">Tela balística — el mismo material del airbag de su automóvil. Más de 1,500 psi, diseñado para propiedades frente al mar y hoteles de primera línea.</p>
+        <ul class="sc-features" id="sc-features">
+          <li>Más de 1,500 psi (Cat 5 = 1,200 psi)</li>
+          <li>Certificación Level E — Instalaciones Esenciales</li>
+          <li>Miami-Dade NOA y Florida Building Code</li>
+          <li>Anclaje flexible patentado — 8 puntos</li>
+          <li>Garantía 10 años</li>
+        </ul>
+        <a class="sc-cta" id="sc-cta" href="/cotizador">Cotizar HS-1500</a>
+      </div>
+    </div>
+
+    <!-- Certificaciones fijas derecha -->
+    <div class="showcase-certs">
+      <div class="sc-certs-label">Certificaciones</div>
+      <img src="/img/cer-general.png" alt="Certificaciones Hurricane Solution" class="sc-cert-img sc-cert-single" />
+    </div>
+
   </div>
-</div>
+</section>
+
+<style>
+  /* ── SHOWCASE ── */
+  #hs-showcase { padding: 48px 48px 60px; }
+  .showcase-intro { margin-bottom: 36px; text-align: center; }
+
+  /* 3 columnas: imagen | info | certs */
+  .showcase-layout {
+    display: grid;
+    grid-template-columns: 35% 1fr 160px;
+    gap: 40px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Imagen centrada verticalmente */
+  .showcase-img-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .showcase-img-wrap img {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 220px);
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: opacity .4s ease;
+  }
+  .showcase-img-wrap img.fading { opacity: 0; }
+
+  .sc-progress-bar { display:none; }
+  #sc-progress { height:100%;background:var(--accent);width:0%; }
+
+  /* Tabs */
+  .sc-tabs { display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center; }
+  .sc-tab { font-family:var(--font-display);font-size:14px;letter-spacing:.08em;padding:10px 20px;background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s; }
+  .sc-tab:hover { border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.7); }
+  .sc-tab.active { border-color:var(--accent);color:var(--accent);background:rgba(36,183,219,.08); }
+  #sc-paused-hint { font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;min-height:14px; }
+  #sc-resume { display:none;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.4);padding:4px 10px;cursor:pointer;transition:all .2s;font-family:'Lato',sans-serif; }
+  #sc-resume:hover { border-color:var(--accent);color:var(--accent); }
+  #sc-resume.visible { display:inline-block; }
+
+  /* Info */
+  .sc-badge { display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--accent);color:var(--black);padding:4px 10px;margin-bottom:12px; }
+  .sc-model { font-family:var(--font-display);font-size:clamp(40px,5vw,72px);line-height:1;color:var(--white);margin-bottom:4px; }
+  .sc-cert { font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px; }
+  .sc-desc { font-size:13px;line-height:1.7;color:rgba(255,255,255,.88);margin-bottom:20px; }
+  .sc-features { list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:28px; }
+  .sc-features li { font-size:12px;color:rgba(255,255,255,.90);padding-left:18px;position:relative; }
+  .sc-features li::before { content:'✓';position:absolute;left:0;color:var(--accent);font-size:11px; }
+  .sc-cta { display:inline-block;font-family:var(--font-display);font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:12px 28px;background:var(--accent);color:var(--black);text-decoration:none;transition:background .2s; }
+  .sc-cta:hover { background:#1a93b0;color:#fff; }
+
+  /* ── CERTIFICACIONES (columna derecha fija) ── */
+  .showcase-certs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border-left: 1px solid rgba(255,255,255,.08);
+    padding-left: 24px;
+  }
+  .sc-certs-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.25);
+    margin-bottom: 4px;
+    align-self: flex-start;
+  }
+  .sc-cert-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .85;
+    filter: grayscale(20%);
+    transition: opacity .2s;
+  }
+  .sc-cert-single { width: 125%; margin: 0 auto; }
+  .sc-cert-img:hover { opacity: 1; filter: none; }
+
+  /* ── Responsive ── */
+  @media(max-width:1100px){
+    .showcase-layout{ grid-template-columns: 38% 1fr 140px; gap:28px; }
+  }
+  @media(max-width:768px){
+    #hs-showcase{ padding:48px 20px; }
+    .showcase-layout{ grid-template-columns:1fr;gap:24px; }
+    .showcase-certs{ flex-direction:row;flex-wrap:wrap;justify-content:center;border-left:none;border-top:1px solid rgba(255,255,255,.08);padding-left:0;padding-top:20px; }
+    .sc-cert-img{ width:28%; }
+    .sc-cert-single{ width:70%; }
+    .showcase-img-wrap img{ max-height:55vw; }
+    .sc-tab{ font-size:12px;padding:8px 14px; }
+  }
+  @media(max-width:480px){ .sc-tabs{flex-direction:column;} }
+</style>
+
+<script>
+(function(){
+  var DURATION=5000;
+  var systems=[
+    {img:'/img/hs-1500.png',badge:'Level E · Militar',model:'HS-1500',cert:'Certificación Militar Level E · Categoría 5',desc:'Tela balística — el mismo material del airbag de su automóvil. Más de 1,500 psi, diseñado para propiedades frente al mar y hoteles de primera línea.',features:['Más de 1,500 psi (Cat 5 = 1,200 psi)','Certificación Level E — Instalaciones Esenciales','Miami-Dade NOA y Florida Building Code','Anclaje flexible patentado — 8 puntos','Garantía 10 años'],cta:'Cotizar HS-1500'},
+    {img:'/img/hs-1250.png',badge:'Cat 5 · Translúcido',model:'HS-1250',cert:'Certificación Cat 5 · Translúcido',desc:'Poliéster con aramida. Disponible en blanco sin degradación UV, translúcido durante la tormenta. Ideal para hoteles modernos que cuidan la estética.',features:['Resistencia Cat 5 certificada','Disponible en blanco — sin degradación UV','Translúcido — visibilidad durante la tormenta','Miami-Dade Aprobado','Garantía 7 años'],cta:'Cotizar HS-1250'},
+    {img:'/img/hs-875.png',badge:'Cat 3 · Polipropileno',model:'HS-875',cert:'Certificación Cat 3 · Polipropileno',desc:'Solución de alto rendimiento para propiedades a 3+ km de la costa. Polipropileno de alta densidad con garantía de 5 años y presupuesto controlado.',features:['Resistencia hasta 875 psi','Certificación Categoría 3','Translúcido — visibilidad durante la tormenta','Florida Building Code Aprobado','Garantía 5 años'],cta:'Cotizar HS-875'},
+    {img:'/img/hs-grid.jpg',badge:'Grandes Superficies · Cat 5',model:'HS-GRID',cert:'Grandes Superficies · Fachadas',desc:'Sistema diseñado exclusivamente para grandes aperturas y fachadas completas. Donde cualquier otro sistema no puede instalarse, HS-GRID funciona.',features:['Grandes superficies y fachadas','Categoría 5 certificado','Alta resistencia tensil','Instalación sin grúas ni andamios','Próximamente disponible'],cta:'Consultar HS-GRID'},
+    {img:'/img/hs-clip.png',badge:'Tecnología de Anclaje Patentada · Cat 5',model:'CLIP',cert:'Tecnología de Anclaje Patentada',desc:'Sistema de anclaje patentado que permite instalar y desinstalar las pantallas sin herramientas especiales. La solución más rápida del mercado.',features:['Anclaje sin herramientas','Despliegue en minutos','Compatible con todos los sistemas HS','Categoría 5 certificado','Próximamente disponible'],cta:'Consultar CLIP'},
+    {img:'/img/hs-rain.jpeg',badge:'Protección Exterior · Manual',model:'RAIN PROTECTION',cert:'Toldos Verticales Enrollables · Uso Exterior',desc:'Toldo vertical enrollable para terrazas, restaurantes, balcones y zonas abiertas. Protege contra lluvia, arena y sol sin estructura permanente. Instalación en muro, pared, losa o techo.',features:['Tela diseñada para lluvia, arena y sol','Ideal para terrazas, restaurantes y pérgolas','Acción manual con manivela — sin electricidad','Longitud máxima 5.50 m por mecanismo','Instalación en muro, pared, losa o techo'],cta:'Consultar Rain Protection'}
+  ];
+  var current=0, timer=null, progTimer=null, startTime=null, paused=false;
+  var img=document.getElementById('sc-img'),
+      badge=document.getElementById('sc-badge'),
+      model=document.getElementById('sc-model'),
+      cert=document.getElementById('sc-cert'),
+      desc=document.getElementById('sc-desc'),
+      features=document.getElementById('sc-features'),
+      cta=document.getElementById('sc-cta'),
+      progress=document.getElementById('sc-progress'),
+      hint=document.getElementById('sc-paused-hint'),
+      resumeBtn=document.getElementById('sc-resume'),
+      tabs=document.querySelectorAll('.sc-tab');
+
+  function updateUI(idx,animate){
+    var s=systems[idx];
+    if(animate){img.classList.add('fading');setTimeout(function(){img.src=s.img;img.classList.remove('fading');},350);}
+    else{img.src=s.img;}
+    badge.textContent=s.badge; model.textContent=s.model; cert.textContent=s.cert;
+    desc.textContent=s.desc;   cta.textContent=s.cta;
+    features.innerHTML=s.features.map(function(f){return'<li>'+f+'</li>';}).join('');
+    tabs.forEach(function(t,i){t.classList.toggle('active',i===idx);});
+  }
+
+  function startProgress(){
+    progress.style.width='0%'; startTime=Date.now();
+    if(progTimer)clearInterval(progTimer);
+    progTimer=setInterval(function(){
+      if(!paused) progress.style.width=Math.min(100,(Date.now()-startTime)/DURATION*100)+'%';
+    },50);
+  }
+
+  function startAuto(){
+    if(timer)clearInterval(timer);
+    timer=setInterval(function(){
+      if(!paused){current=(current+1)%systems.length;updateUI(current,true);startProgress();}
+    },DURATION);
+    startProgress();
+  }
+
+  function pause(){
+    paused=true;
+    if(hint)hint.textContent='Rotación pausada — tomese su tiempo';
+    if(resumeBtn)resumeBtn.classList.add('visible');
+  }
+
+  function resume(){
+    paused=false;
+    if(hint)hint.textContent='';
+    if(resumeBtn)resumeBtn.classList.remove('visible');
+    startAuto();
+  }
+
+  updateUI(0,false); startAuto();
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var idx=parseInt(tab.getAttribute('data-sc'));
+      if(idx===current && paused) return;
+      current=idx; updateUI(current,true);
+      pause(); // pausa al hacer click manual
+    });
+  });
+
+  if(resumeBtn) resumeBtn.addEventListener('click', resume);
+})();
+</script>
+
+
+<!-- SECCIÓN CARACTERÍSTICAS + GALERÍA — HOTELERO -->
+<style>
+  /* ── 3 TARJETAS ─────────────────────────────── */
+  #hs-features { background: #fff; padding: 80px 64px; }
+  .feat-header { max-width: 400px; float: right; padding-left: 48px; }
+  .feat-header-label {
+    font-size: 10px; font-weight: 700; letter-spacing: .2em;
+    text-transform: uppercase; color: #24b7db; margin-bottom: 12px;
+  }
+  .feat-header-title {
+    font-size: 22px; font-weight: 700; color: #0a0a0a; line-height: 1.3; margin-bottom: 12px;
+  }
+  .feat-header-sub { font-size: 14px; color: #1c1c1c; line-height: 1.7; }
+
+  .feat-cards {
+    display: flex; gap: 4px; overflow: hidden;
+    float: left; width: calc(100% - 420px);
+  }
+  .feat-card {
+    position: relative; overflow: hidden; flex: 1;
+    min-height: 280px; cursor: pointer;
+  }
+  .feat-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .5s ease; filter: brightness(.55);
+  }
+  .feat-card:hover img { transform: scale(1.05); filter: brightness(.75); }
+  .feat-card-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 20px 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: .04em; color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+  }
+  .feat-card-label em {
+    font-style: normal; color: #24b7db; display: block;
+    font-size: 11px; font-family: 'Lato', sans-serif;
+    font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 4px; opacity: .8;
+  }
+  .feat-clearfix { clear: both; }
+
+  /* ── GALERÍA ─────────────────────────────────── */
+  #hs-gallery { background: #0a0a0a; padding: 80px 0; }
+  .gal-header { padding: 0 64px 40px; }
+  .gal-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: #24b7db;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .gal-eyebrow::before { content:''; width:28px; height:1px; background:#24b7db; box-shadow:0 0 6px rgba(36,183,219,.6); }
+  .gal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px,5vw,64px); line-height:.93; letter-spacing:.02em; color:#fff;
+  }
+  .gal-title em { font-style:normal; color:#24b7db; }
+  .gal-stage { position: relative; width: 100%; background: #0a0a0a; }
+  .gal-frame {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px; padding: 0 64px;
+    opacity: 0; transition: opacity .7s ease;
+  }
+  .gal-frame.active { display: grid; opacity: 1; }
+  .gal-frame img { width: 100%; height: auto; display: block; cursor: zoom-in; }
+  .gal-footer {
+    display: flex; align-items: center;
+    justify-content: space-between; padding: 16px 64px 0;
+  }
+  .gal-left { display: flex; align-items: center; gap: 20px; }
+  .gal-counter { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing:.15em; color:#444; }
+  .gal-counter span { color: #24b7db; }
+  .gal-dots { display: flex; gap: 7px; align-items: center; }
+  .gal-dot { width:22px; height:2px; background:#2a2a2a; cursor:pointer; transition:all .3s; }
+  .gal-dot.active { background:#24b7db; width:36px; box-shadow:0 0 6px rgba(36,183,219,.5); }
+  .gal-arrows { display: flex; gap: 8px; }
+  .gal-arrow {
+    width:44px; height:44px; border:1px solid #2a2a2a; background:transparent;
+    color:#666; cursor:pointer; display:flex; align-items:center;
+    justify-content:center; font-size:18px; transition:all .2s;
+  }
+  .gal-arrow:hover { border-color:#24b7db; color:#24b7db; box-shadow:0 0 10px rgba(36,183,219,.3); }
+
+  @media(max-width: 900px) {
+    #hs-features { padding: 56px 20px; }
+    .feat-cards { float:none; width:100%; margin-bottom:32px; }
+    .feat-header { float:none; width:100%; padding-left:0; max-width:100%; }
+    .gal-header { padding:0 20px 32px; }
+    .gal-frame { grid-template-columns:1fr; padding:0 20px; }
+    .gal-footer { padding:14px 20px 0; }
+  }
+</style>
+
+<!-- 3 TARJETAS -->
+<section id="hs-features">
+  <div class="feat-cards reveal">
+    <div class="feat-card">
+      <img src="/img/gallery/hot-card-1.jpg" alt="" />
+      <div class="feat-card-label">
+        <em>Protección garantizada</em>
+        Seguridad.
+      </div>
+    </div>
+    <div class="feat-card">
+      <img src="/img/gallery/hot-card-2.jpg" alt="" />
+      <div class="feat-card-label">
+        <em>Sin interrupciones</em>
+        Operatividad.
+      </div>
+    </div>
+    <div class="feat-card">
+      <img src="/img/gallery/hot-card-3.jpg" alt="" />
+      <div class="feat-card-label">
+        <em>Diseño integrado</em>
+        Estética.
+      </div>
+    </div>
+  </div>
+  <div class="feat-header reveal">
+    <div class="feat-header-label">Nuestra promesa</div>
+    <div class="feat-header-title">Cumpliendo con nuestras características más importantes.</div>
+    <div class="feat-header-sub">Tenemos una historia de instalaciones que pueden confirmar nuestra calidad de trabajo y productos.</div>
+  </div>
+  <div class="feat-clearfix"></div>
+</section>
+
+<!-- GALERÍA -->
+<section id="hs-gallery">
+  <div class="gal-header reveal">
+    <div class="gal-eyebrow">Galería de trabajos</div>
+    <h2 class="gal-title">INSTALACIONES<br><em>HOTELERAS.</em></h2>
+  </div>
+  <div class="gal-stage">
+    <div class="gal-frame active">
+      <img src="/img/gallery/hot-1.jpg" alt="" loading="lazy" />
+      <img src="/img/gallery/hot-2.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="gal-frame">
+      <img src="/img/gallery/hot-3.jpg" alt="" loading="lazy" />
+      <img src="/img/gallery/hot-4.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="gal-frame">
+      <img src="/img/gallery/hot-5.jpg" alt="" loading="lazy" />
+      <img src="/img/gallery/hot-6.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="gal-frame" style="grid-template-columns:1fr;">
+      <img src="/img/gallery/hot-7.jpg" alt="" loading="lazy" style="max-width:700px;margin:0 auto;" />
+    </div>
+  </div>
+  <div class="gal-footer">
+    <div class="gal-left">
+      <div class="gal-counter"><span id="gal-cur">1</span> / 4</div>
+      <div class="gal-dots">
+        <div class="gal-dot active" data-idx="0"></div>
+        <div class="gal-dot" data-idx="1"></div>
+        <div class="gal-dot" data-idx="2"></div>
+        <div class="gal-dot" data-idx="3"></div>
+      </div>
+    </div>
+    <div class="gal-arrows">
+      <button class="gal-arrow" id="gal-prev">&#8592;</button>
+      <button class="gal-arrow" id="gal-next">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var frames  = document.querySelectorAll('#hs-gallery .gal-frame');
+  var dots    = document.querySelectorAll('#hs-gallery .gal-dot');
+  var counter = document.getElementById('gal-cur');
+  var btnPrev = document.getElementById('gal-prev');
+  var btnNext = document.getElementById('gal-next');
+  var section = document.getElementById('hs-gallery');
+  if (!frames.length) return;
+  var current=0, total=frames.length, INTERVAL=5000, timer, paused=false;
+  function goTo(idx) {
+    frames[current].classList.remove('active'); dots[current].classList.remove('active');
+    current=(idx+total)%total;
+    frames[current].classList.add('active'); dots[current].classList.add('active');
+    if(counter) counter.textContent=current+1;
+  }
+  function startAuto() { clearInterval(timer); if(paused) return; timer=setInterval(function(){goTo(current+1);},INTERVAL); }
+  var stage=document.querySelector('#hs-gallery .gal-stage');
+  if(stage) stage.addEventListener('click',function(e){
+    if(e.target.tagName==='IMG') return;
+    paused=!paused; if(paused) clearInterval(timer); else startAuto();
+  });
+  window.addEventListener('scroll',function(){
+    if(!section||!paused) return;
+    var r=section.getBoundingClientRect();
+    if(r.bottom<0||r.top>window.innerHeight){paused=false;startAuto();}
+  });
+  dots.forEach(function(d){d.addEventListener('click',function(e){e.stopPropagation();goTo(parseInt(d.dataset.idx));paused=false;startAuto();});});
+  if(btnPrev) btnPrev.addEventListener('click',function(e){e.stopPropagation();goTo(current-1);paused=false;startAuto();});
+  if(btnNext) btnNext.addEventListener('click',function(e){e.stopPropagation();goTo(current+1);paused=false;startAuto();});
+  document.querySelectorAll('#hs-gallery .gal-frame img').forEach(function(img){
+    img.addEventListener('click',function(){
+      var lb=document.getElementById('hs-lightbox'),lbImg=document.getElementById('hs-lightbox-img');
+      if(lb&&lbImg){lbImg.src=img.src;lb.classList.add('is-open');document.body.style.overflow='hidden';}
+    });
+  });
+  startAuto();
+})();
+</script>
+
+<!-- FINAL CTA -->
+<section id="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-label reveal">¿Cuántas habitaciones tiene su hotel?</div>
+  <h2 class="final-cta-title reveal">CUÉNTENOS Y<br>DISEÑAMOS EL<br>PROGRAMA.</h2>
+  <div class="final-cta-actions reveal">
+    <a class="btn-white" href="/contacto">Realizar una cotización</a>
+    <a class="btn-outline-white" href="<%= site.whatsapp.url %>" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L0 24l6.335-1.652A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.016-1.378l-.36-.214-3.732.979.994-3.636-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</section>
+
+<style>
+  /* ── INNER PAGE HERO ── */
+  .ip-hero {
+    background: var(--black);
+    padding: 100px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ip-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(36,183,219,.06), transparent);
+    pointer-events: none;
+  }
+  .ip-hero-inner {
+    max-width: 760px;
+    position: relative;
+    z-index: 1;
+  }
+  .ip-hero .section-label { color: var(--gray-600); }
+  .ip-hero .section-label::before { background: var(--gray-600); }
+  .ip-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 1;
+    letter-spacing: .02em;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .ip-hero-title em { font-style: normal; color: var(--accent); }
+  .ip-hero-sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 36px;
+  }
+  .ip-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ── BENEFITS ── */
+  .ben-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 56px;
+  }
+  .ben-card {
+    background: var(--offwhite);
+    border: 1px solid var(--gray-200);
+    padding: 48px 40px;
+    transition: border-color .3s, background .3s;
+  }
+  .ben-card:hover { border-color: var(--black); background: var(--white); }
+  .ben-icon { font-size: 28px; margin-bottom: 20px; display: block; }
+  .ben-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: .04em;
+    color: var(--black);
+    margin-bottom: 12px;
+  }
+  .ben-body { font-size: 13px; font-weight: 400; color: var(--gray-800); line-height: 1.75; }
+
+  /* ── PROBLEM SPLIT ── */
+  .prob-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: stretch;
+  }
+  .btn-black {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    background: var(--black);
+    color: var(--white);
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .btn-black:hover { background: var(--gray-800); }
+  .prob-box {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    padding: 52px 44px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .prob-box-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .prob-alert {
+    width: 32px;
+    height: 32px;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .prob-box-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: .04em;
+    color: var(--black);
+    line-height: 1.1;
+  }
+  .prob-box-sub {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--gray-800);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .prob-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .prob-list li {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--gray-700);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .prob-list li::before {
+    content: '?';
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ── CASE STUDY ── */
+  .cs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .cs-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .cs-stat {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--gray-800);
+    padding: 40px 36px;
+  }
+  .cs-num {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 80px);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: -.01em;
+    margin-bottom: 8px;
+  }
+  .cs-label {
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .prob-split { grid-template-columns: 1fr; gap: 40px; }
+    .cs-layout { grid-template-columns: 1fr; gap: 40px; }
+    .cs-stats { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .ip-hero { padding: 72px 20px 56px; }
+    .ip-hero-btns { flex-direction: column; }
+    .ip-hero-btns a { text-align: center; }
+    .ben-grid { grid-template-columns: 1fr; }
+    .prob-split { grid-template-columns: 1fr; gap: 32px; }
+    .cs-layout { grid-template-columns: 1fr; gap: 32px; }
+    .cs-stats { grid-template-columns: 1fr; }
+    .section-wrap { padding: 64px 20px; }
+  }
+</style>
+
+<script>
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+  var mainNav = document.getElementById('main-nav');
+  if (mainNav) {
+    window.addEventListener('scroll', function() {
+      mainNav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  }
+
+  /* ── LIGHTBOX ── */
+  (function(){
+    var lb=document.getElementById('hs-lightbox');
+    var lbImg=document.getElementById('hs-lightbox-img');
+    var lbBtn=document.getElementById('lb-close-btn');
+    if(!lb) return;
+    function openLB(src){lbImg.src=src;lb.classList.add('is-open');document.body.style.overflow='hidden';}
+    function closeLB(){lb.classList.remove('is-open');document.body.style.overflow='';lbImg.src='';}
+    document.addEventListener('click',function(e){
+      var t=e.target;
+      if(t.matches('.prod-visual img,.cert-badge-img')){openLB(t.src);return;}
+      if(t===lb||t===lbBtn){closeLB();return;}
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+  })();
+
+</script>

@@ -70,3 +70,5 @@ deploy.log
 public/js/*.js
 public/js/*.js.map
 !public/js/.gitkeep
+
+data/posts.json

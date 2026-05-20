@@ -1,0 +1,477 @@
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+
+<style>
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .form-section {
+    background: #111;
+    border: 1px solid #222;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .form-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: .06em;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #222;
+  }
+
+  .field { margin-bottom: 20px; }
+  .field:last-child { margin-bottom: 0; }
+  label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  label span { color: #e53935; margin-left: 2px; }
+  .field-hint {
+    font-size: 11px;
+    color: #444;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  input[type="text"],
+  input[type="file"],
+  select,
+  textarea {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    outline: none;
+    transition: border-color .2s;
+  }
+  input[type="text"]:focus,
+  select:focus,
+  textarea:focus { border-color: #24b7db; }
+  textarea { resize: vertical; min-height: 80px; }
+  select option { background: #111; }
+
+  input[type="file"] {
+    padding: 10px 14px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  .image-preview {
+    margin-top: 12px;
+    display: none;
+  }
+  .image-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid #2a2a2a;
+  }
+  .image-current {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #555;
+  }
+  .image-current img {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    display: block;
+    margin-top: 8px;
+    border: 1px solid #2a2a2a;
+  }
+
+  /* Quill overrides para dark mode */
+  .ql-toolbar.ql-snow {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a !important;
+    border-bottom: none !important;
+  }
+  .ql-container.ql-snow {
+    border: 1px solid #2a2a2a !important;
+    background: #0a0a0a;
+  }
+  .ql-editor {
+    color: #e0e0e0;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 360px;
+  }
+  .ql-editor.ql-blank::before { color: #444; font-style: normal; }
+  .ql-snow .ql-stroke { stroke: #888; }
+  .ql-snow .ql-fill { fill: #888; }
+  .ql-snow .ql-picker { color: #888; }
+  .ql-snow .ql-picker-options { background: #1a1a1a; border-color: #333; }
+  .ql-snow.ql-toolbar button:hover .ql-stroke,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #24b7db; }
+  .ql-snow.ql-toolbar button:hover .ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-fill { fill: #24b7db; }
+  .ql-snow .ql-picker-label:hover,
+  .ql-snow .ql-picker-label.ql-active { color: #24b7db; }
+  .ql-editor h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: .04em; color: #fff; }
+  .ql-editor h3 { font-family: 'Lato', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
+  .ql-editor a { color: #24b7db; }
+  .ql-editor blockquote { border-left: 3px solid #24b7db; padding-left: 16px; color: #888; }
+
+  /* Status radio */
+  .radio-group { display: flex; gap: 12px; }
+  .radio-opt {
+    flex: 1;
+    border: 1px solid #2a2a2a;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #666;
+    transition: border-color .2s, color .2s;
+  }
+  .radio-opt input { display: none; }
+  .radio-opt.selected {
+    border-color: #24b7db;
+    color: #24b7db;
+    background: rgba(36,183,219,.06);
+  }
+  .radio-dot {
+    width: 14px; height: 14px;
+    border: 2px solid #444;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: border-color .2s;
+  }
+  .radio-opt.selected .radio-dot {
+    border-color: #24b7db;
+    background: #24b7db;
+  }
+
+  /* Char counters */
+  .char-counter {
+    font-size: 11px;
+    color: #444;
+    text-align: right;
+    margin-top: 4px;
+  }
+  .char-counter.warn { color: #f59e0b; }
+  .char-counter.over { color: #e53935; }
+
+  /* Submit */
+  .btn-save {
+    width: 100%;
+    background: #24b7db;
+    color: #000;
+    border: none;
+    padding: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    cursor: pointer;
+    transition: opacity .2s;
+    margin-bottom: 12px;
+  }
+  .btn-save:hover { opacity: .85; }
+  .btn-cancel {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #555;
+    text-decoration: none;
+    border: 1px solid #222;
+    transition: color .2s, border-color .2s;
+  }
+  .btn-cancel:hover { color: #fff; border-color: #555; }
+
+  .adm-flash.error {
+    background: rgba(220,50,50,.1);
+    border: 1px solid #dc3232;
+    color: #ff6b6b;
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  @media(max-width: 900px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="adm-flash error"><%= error %></div>
+<% } %>
+
+<form action="/admin/post/save" method="POST" enctype="multipart/form-data" id="post-form">
+  <% if (post && post.id) { %>
+    <input type="hidden" name="id" value="<%= post.id %>" />
+  <% } %>
+  <!-- Campo oculto que recibe el HTML de Quill -->
+  <input type="hidden" name="body" id="body-input" />
+
+  <div class="form-grid">
+
+    <!-- ── COLUMNA IZQUIERDA ── -->
+    <div>
+
+      <!-- Título + Slug -->
+      <div class="form-section">
+        <div class="form-section-title">Contenido</div>
+
+        <div class="field">
+          <label for="title">Título <span>*</span></label>
+          <input type="text" id="title" name="title"
+                 value="<%= post ? post.title : '' %>"
+                 placeholder="Ej: Cómo preparar tu hotel antes de la temporada"
+                 required />
+        </div>
+
+        <div class="field">
+          <label for="slug">URL del post (slug)</label>
+          <input type="text" id="slug" name="slug"
+                 value="<%= post ? post.slug : '' %>"
+                 placeholder="se-genera-automatico-del-titulo" />
+          <div class="field-hint">Tu post se verá en: /blog/<strong id="slug-preview"><%= post ? post.slug : '' %></strong></div>
+        </div>
+
+        <!-- Editor Quill -->
+        <div class="field">
+          <label>Contenido del artículo <span>*</span></label>
+          <div id="quill-initial-content" style="display:none"><%- post ? post.body : '' %></div>
+          <div id="quill-editor"></div>
+          <div class="field-hint">Usa los botones de la barra para dar formato. Lo que escribas aquí es lo que verá el lector.</div>
+        </div>
+
+      </div>
+
+      <!-- Imagen -->
+      <div class="form-section">
+        <div class="form-section-title">Imagen Principal</div>
+        <div class="field">
+          <label for="image">Subir imagen (JPG, PNG o WEBP · máx 5MB)</label>
+          <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.webp" />
+          <div class="image-preview" id="img-preview">
+            <img id="img-preview-img" src="" alt="Vista previa" />
+          </div>
+          <% if (post && post.image) { %>
+            <div class="image-current" id="img-current">
+              Imagen actual:
+              <img src="<%= post.image %>" alt="Imagen actual" />
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── COLUMNA DERECHA ── -->
+    <div>
+
+      <!-- Publicación -->
+      <div class="form-section">
+        <div class="form-section-title">Publicación</div>
+
+        <div class="field">
+          <label>Estado</label>
+          <div class="radio-group">
+            <label class="radio-opt <%= (!post || post.status === 'draft') ? 'selected' : '' %>" id="opt-draft">
+              <input type="radio" name="status" value="draft"
+                     <%= (!post || post.status === 'draft') ? 'checked' : '' %> />
+              <div class="radio-dot"></div> Borrador
+            </label>
+            <label class="radio-opt <%= (post && post.status === 'published') ? 'selected' : '' %>" id="opt-pub">
+              <input type="radio" name="status" value="published"
+                     <%= (post && post.status === 'published') ? 'checked' : '' %> />
+              <div class="radio-dot"></div> Publicado
+            </label>
+          </div>
+          <div class="field-hint">Borrador = solo visible en el admin. Publicado = visible en el blog.</div>
+        </div>
+
+        <div class="field">
+          <label for="category">Categoría</label>
+          <select id="category" name="category">
+            <%
+              const cats = ['General','Huracanes','Hoteles','Residencial','Comercial','Certificaciones','Consejos','Temporada'];
+              const selCat = post ? post.category : 'General';
+            %>
+            <% cats.forEach(function(c) { %>
+              <option value="<%= c %>" <%= selCat === c ? 'selected' : '' %>><%= c %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="tags">Tags</label>
+          <input type="text" id="tags" name="tags"
+                 value="<%= post && post.tags ? post.tags.join(', ') : '' %>"
+                 placeholder="huracán, cat5, hotel, preparación" />
+          <div class="field-hint">Separados por coma.</div>
+        </div>
+
+        <button type="submit" class="btn-save">
+          <%= post ? '💾  Guardar Cambios' : '🚀  Publicar Post' %>
+        </button>
+        <a href="/admin" class="btn-cancel">Cancelar</a>
+      </div>
+
+      <!-- SEO -->
+      <div class="form-section">
+        <div class="form-section-title">SEO</div>
+
+        <div class="field">
+          <label for="meta_title">Meta Title</label>
+          <input type="text" id="meta_title" name="meta_title"
+                 value="<%= post ? post.meta_title : '' %>"
+                 placeholder="Título para Google (50–60 caracteres)" />
+          <div class="char-counter" id="meta-title-count">0 / 60</div>
+          <div class="field-hint">Si lo dejas vacío se usa el título del post.</div>
+        </div>
+
+        <div class="field">
+          <label for="meta_description">Meta Description</label>
+          <textarea id="meta_description" name="meta_description"
+                    rows="3"
+                    placeholder="Descripción para Google (120–160 caracteres)"><%= post ? post.meta_description : '' %></textarea>
+          <div class="char-counter" id="meta-desc-count">0 / 160</div>
+        </div>
+
+        <div class="field">
+          <label for="keywords">Keywords</label>
+          <input type="text" id="keywords" name="keywords"
+                 value="<%= post ? post.keywords : '' %>"
+                 placeholder="protección huracanes, lonas cat5, México" />
+          <div class="field-hint">Palabras clave separadas por coma.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script>
+(function() {
+  // ── Quill editor ────────────────────────────────
+  // Leer contenido ANTES de que Quill inicialice (Quill limpia el div al arrancar)
+  var initialContent = document.getElementById('quill-initial-content').innerHTML.trim();
+
+  var quill = new Quill('#quill-editor', {
+    theme: 'snow',
+    placeholder: 'Escribe el contenido del artículo aquí...',
+    modules: {
+      toolbar: [
+        [{ header: [2, 3, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['link', 'blockquote'],
+        ['clean']
+      ]
+    }
+  });
+
+  // Pre-cargar contenido existente al editar
+  if (initialContent && initialContent !== '' && initialContent !== '<p><br></p>') {
+    quill.root.innerHTML = initialContent;
+  }
+
+  // Al enviar el form, pasar HTML de Quill al input hidden
+  var bodyInput = document.getElementById('body-input');
+  document.getElementById('post-form').addEventListener('submit', function(e) {
+    var html = quill.root.innerHTML;
+    if (!html || html === '<p><br></p>') {
+      e.preventDefault();
+      alert('El contenido del artículo no puede estar vacío.');
+      return;
+    }
+    bodyInput.value = html;
+  });
+
+  // ── Slug auto-generado desde título ──────────────
+  var titleInput = document.getElementById('title');
+  var slugInput  = document.getElementById('slug');
+  var slugPreview = document.getElementById('slug-preview');
+  var slugEdited = <%= post && post.slug ? 'true' : 'false' %>;
+
+  titleInput.addEventListener('input', function() {
+    if (slugEdited) return;
+    fetch('/admin/api/slug?title=' + encodeURIComponent(titleInput.value))
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        slugInput.value = d.slug;
+        slugPreview.textContent = d.slug;
+      });
+  });
+
+  slugInput.addEventListener('input', function() {
+    slugEdited = true;
+    slugPreview.textContent = slugInput.value;
+  });
+
+  // ── Vista previa de imagen ────────────────────────
+  document.getElementById('image').addEventListener('change', function() {
+    var file = this.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    var preview = document.getElementById('img-preview');
+    var previewImg = document.getElementById('img-preview-img');
+    var current = document.getElementById('img-current');
+    reader.onload = function(e) {
+      previewImg.src = e.target.result;
+      preview.style.display = 'block';
+      if (current) current.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ── Contadores de caracteres SEO ──────────────────
+  function updateCounter(inputId, counterId, max) {
+    var el = document.getElementById(inputId);
+    var counter = document.getElementById(counterId);
+    if (!el || !counter) return;
+    function update() {
+      var len = el.value.length;
+      counter.textContent = len + ' / ' + max;
+      counter.className = 'char-counter' +
+        (len > max ? ' over' : len > max * 0.9 ? ' warn' : '');
+    }
+    el.addEventListener('input', update);
+    update();
+  }
+  updateCounter('meta_title', 'meta-title-count', 60);
+  updateCounter('meta_description', 'meta-desc-count', 160);
+
+  // ── Radio buttons de estado ────────────────────────
+  document.querySelectorAll('input[name="status"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.querySelectorAll('.radio-opt').forEach(function(opt) {
+        opt.classList.remove('selected');
+      });
+      this.closest('.radio-opt').classList.add('selected');
+    });
+  });
+
+})();
+</script>

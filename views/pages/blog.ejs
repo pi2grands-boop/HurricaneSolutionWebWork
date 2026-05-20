@@ -1,0 +1,432 @@
+<style>
+/* ── VARIABLES ─────────────────────────────────────────────────────── */
+:root {
+  --accent: #24b7db;
+  --accent-glow: rgba(36,183,219,.5);
+  --accent-glow-soft: rgba(36,183,219,.15);
+}
+
+/* ── HERO ───────────────────────────────────────────────────────────── */
+.blog-hero {
+  background: #0a0a0a;
+  padding: 100px 64px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.blog-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 70% at 5% 80%, rgba(36,183,219,.07), transparent);
+  pointer-events: none;
+}
+.blog-hero-inner { max-width: 800px; position: relative; z-index: 1; }
+.blog-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.blog-hero-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+.blog-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: .92;
+  letter-spacing: .02em;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.blog-hero-title em {
+  font-style: normal;
+  color: var(--accent);
+  text-shadow: 0 0 30px var(--accent-glow);
+}
+.blog-hero-sub {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+/* ── NEON BUTTON ────────────────────────────────────────────────────── */
+.btn-neon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 26px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 0 8px rgba(36,183,219,.25), inset 0 0 8px rgba(36,183,219,.04);
+  white-space: nowrap;
+}
+.btn-neon:hover {
+  color: #fff;
+  background: rgba(36,183,219,.08);
+  box-shadow: 0 0 18px var(--accent-glow), 0 0 40px rgba(36,183,219,.2), inset 0 0 16px rgba(36,183,219,.08);
+  border-color: #5dd6ef;
+}
+.btn-neon svg { width: 14px; height: 14px; transition: transform .3s; }
+.btn-neon:hover svg { transform: translateX(4px); }
+
+/* ── BLOG SECTION ───────────────────────────────────────────────────── */
+.blog-section {
+  background: #f5f5f5;
+  padding: 80px 64px 120px;
+}
+.blog-section-inner { max-width: 1400px; margin: 0 auto; }
+
+/* ── FEATURED POST ──────────────────────────────────────────────────── */
+.featured-post {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 3px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .3s;
+  min-height: 420px;
+}
+.featured-post:hover { border-color: #0a0a0a; }
+.featured-post-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.featured-post-img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease;
+}
+.featured-post:hover .featured-post-img { transform: scale(1.03); }
+.featured-post-placeholder {
+  width: 100%;
+  min-height: 420px;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.featured-post-placeholder svg {
+  width: 64px;
+  height: 64px;
+  opacity: .15;
+}
+.featured-post-body {
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid #e0e0e0;
+}
+.featured-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #0a0a0a;
+  padding: 5px 12px;
+  margin-bottom: 24px;
+  align-self: flex-start;
+}
+.featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.post-cat {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(36,183,219,.1);
+  border: 1px solid rgba(36,183,219,.25);
+  padding: 4px 12px;
+}
+.post-date {
+  font-size: 11px;
+  color: #404040;
+  font-weight: 400;
+}
+.featured-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: .02em;
+  color: #0a0a0a;
+  margin-bottom: 16px;
+}
+.featured-excerpt {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a0a0a;
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 32px;
+}
+
+/* ── POSTS GRID ─────────────────────────────────────────────────────── */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.post-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .3s;
+  overflow: hidden;
+}
+.post-card:hover { border-color: #0a0a0a; }
+.post-card-img-wrap { overflow: hidden; }
+.post-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.post-card:hover .post-card-img { transform: scale(1.04); }
+.post-card-placeholder {
+  width: 100%;
+  height: 200px;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #333;
+}
+.post-card-body {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.post-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.1;
+  letter-spacing: .02em;
+  color: #0a0a0a;
+  margin-bottom: 10px;
+}
+.post-card-excerpt {
+  font-size: 13px;
+  font-weight: 400;
+  color: #0a0a0a;
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 24px;
+}
+.post-card-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-read-link {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .2s;
+}
+.post-card:hover .post-read-link { gap: 10px; }
+
+/* ── EMPTY STATE ────────────────────────────────────────────────────── */
+.blog-empty {
+  text-align: center;
+  padding: 100px 32px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+.blog-empty-icon { font-size: 48px; margin-bottom: 16px; }
+.blog-empty-text { font-size: 16px; color: #0a0a0a; }
+
+/* ── DIVIDER ────────────────────────────────────────────────────────── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.section-divider-line {
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+.section-divider-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+/* ── REVEAL ─────────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+@media(max-width: 1100px) {
+  .featured-post { grid-template-columns: 1fr; min-height: auto; }
+  .featured-post-img { min-height: 300px; }
+  .featured-post-body { border-left: none; border-top: 1px solid #e0e0e0; }
+  .posts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width: 768px) {
+  .blog-hero { padding: 64px 24px 56px; }
+  .blog-section { padding: 56px 24px 80px; }
+  .posts-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-hero-eyebrow reveal">Blog</div>
+    <h1 class="blog-hero-title reveal">CONSEJOS,<br>GUÍAS &amp;<br><em>NOVEDADES.</em></h1>
+    <p class="blog-hero-sub reveal">Información sobre protección contra huracanes, temporadas, certificaciones y todo lo que necesitas saber para proteger tu propiedad.</p>
+  </div>
+</section>
+
+<!-- POSTS -->
+<section class="blog-section">
+  <div class="blog-section-inner">
+
+  <% if (!posts || posts.length === 0) { %>
+    <div class="blog-empty reveal">
+      <div class="blog-empty-icon">📝</div>
+      <p class="blog-empty-text">Pronto publicaremos nuestro primer artículo. Vuelve a visitarnos.</p>
+    </div>
+
+  <% } else { %>
+    <%
+      var featured = posts[0];
+      var rest = posts.slice(1);
+    %>
+
+    <!-- POST DESTACADO -->
+    <a href="/blog/<%= featured.slug %>" class="featured-post reveal">
+      <div class="featured-post-img-wrap">
+        <% if (featured.image) { %>
+          <img class="featured-post-img" src="<%= featured.image %>" alt="<%= featured.title %>" loading="eager" />
+        <% } else { %>
+          <div class="featured-post-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+        <% } %>
+      </div>
+      <div class="featured-post-body">
+        <div>
+          <span class="featured-badge">Artículo Destacado</span>
+          <div class="featured-meta">
+            <span class="post-cat"><%= featured.category || 'General' %></span>
+            <span class="post-date"><%= featured.date %></span>
+          </div>
+          <h2 class="featured-title"><%= featured.title %></h2>
+          <p class="featured-excerpt"><%= featured.excerpt %></p>
+        </div>
+        <span class="btn-neon">
+          Leer artículo completo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <% if (rest.length > 0) { %>
+      <!-- RESTO DE POSTS -->
+      <div class="section-divider" style="margin-top:40px;">
+        <div class="section-divider-line"></div>
+        <span class="section-divider-label">Más artículos</span>
+        <div class="section-divider-line"></div>
+      </div>
+
+      <div class="posts-grid">
+        <% rest.forEach(function(post, i) { %>
+          <article class="post-card reveal" style="transition-delay:<%= (i % 3) * 0.07 %>s">
+            <div class="post-card-img-wrap">
+              <% if (post.image) { %>
+                <img class="post-card-img" src="<%= post.image %>" alt="<%= post.title %>" loading="lazy" />
+              <% } else { %>
+                <div class="post-card-placeholder">🌀</div>
+              <% } %>
+            </div>
+            <div class="post-card-body">
+              <div class="post-card-meta">
+                <span class="post-cat"><%= post.category || 'General' %></span>
+                <span class="post-date"><%= post.date %></span>
+              </div>
+              <h3 class="post-card-title"><%= post.title %></h3>
+              <p class="post-card-excerpt"><%= post.excerpt %></p>
+            </div>
+            <div class="post-card-footer">
+              <a href="/blog/<%= post.slug %>" class="post-read-link">
+                Leer artículo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+
+  <% } %>
+  </div>
+</section>
+
+<script>
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>
