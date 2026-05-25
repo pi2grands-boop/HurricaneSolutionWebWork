@@ -10,12 +10,12 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "dev:client": "tsc -p client/tsconfig.json --watch",
+    "dev:client": "npx tsc -p client/tsconfig.json --watch",
     "build": "npm run build:server && npm run build:client",
-    "build:server": "tsc",
-    "build:client": "tsc -p client/tsconfig.json",
+    "build:server": "npx tsc",
+    "build:client": "npx tsc -p client/tsconfig.json",
     "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit && tsc -p client/tsconfig.json --noEmit",
+    "typecheck": "npx tsc --noEmit && npx tsc -p client/tsconfig.json --noEmit",
     "clean": "rimraf dist public/js/*.js public/js/*.js.map",
     "postinstall": "npm run build"
   },
