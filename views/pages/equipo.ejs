@@ -1,3 +1,24 @@
+<!-- Schema Organization + ai-summary — equipo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "<%= t('equipo.hero_label') %> — Hurricane Solution",
+  "description": "Ingenieros y especialistas en protección contra huracanes operando en México desde 2008. Más de 30 tormentas superadas con cero fallas en instalaciones correctas.",
+  "about": {
+    "@type": "Organization",
+    "name": "Hurricane Solution",
+    "foundingDate": "2008",
+    "description": "Hurricane Solution es la única empresa en México con certificación militar Level E. Opera desde 2008 instalando sistemas de protección contra huracanes Cat 5 en la costa de México.",
+    "areaServed": ["Cancún","Playa del Carmen","Tulum","Riviera Maya","Los Cabos","Puerto Vallarta","Mazatlán","México"]
+  }
+}
+</script>
+
+<section class="ai-summary" aria-label="Resumen para búsqueda">
+  <p>El equipo de Hurricane Solution está formado por ingenieros y especialistas en protección contra huracanes con operaciones en México desde 2008. La empresa es el único miembro de la International Hurricane Protection Association (IHPA) fuera de los Estados Unidos y el único proveedor en México con certificación militar Level E. Ha superado más de 30 tormentas hasta Categoría 5 con cero fallas en instalaciones correctamente ejecutadas. Opera en Cancún, Playa del Carmen, Tulum, Riviera Maya, Los Cabos, Puerto Vallarta y Mazatlán.</p>
+</section>
+
 <%# El Equipo — Hurricane Solution — diseño premium v2 %>
 
 <style>
@@ -76,24 +97,24 @@
 <section class="ip-hero">
   <div class="ip-hero-inner">
     <div class="section-label reveal">El Equipo</div>
-    <h1 class="ip-hero-title reveal">EL EQUIPO<br><em>DETRÁS.</em></h1>
-    <p class="ip-hero-sub reveal">Expertos en protección contra huracanes con más de 15 años operando en las costas de México. Cada instalación, supervisada desde el primer hasta el último ancla.</p>
+    <h1 class="ip-hero-title reveal"><%- t('equipo.hero_title') %></h1>
+    <p class="ip-hero-sub reveal"><%= t('equipo.hero_body') %></p>
     <div class="ip-hero-btns reveal">
-      <a href="/cotizador" class="btn-white">Realizar una cotización</a>
+      <a href="/cotizador" class="btn-white"><%= t('common.cta_quote') %></a>
       <a href="<%= site.whatsapp.url %>" class="btn-outline-white" target="_blank" rel="noopener">WhatsApp</a>
     </div>
     <div class="ip-hero-stat reveal">
       <div class="ip-hero-stat-item">
         <div class="ip-hero-stat-num">15+</div>
-        <div class="ip-hero-stat-label">Años en operación</div>
+        <div class="ip-hero-stat-label"><%= t('equipo.stat1_lbl') %></div>
       </div>
       <div class="ip-hero-stat-item">
         <div class="ip-hero-stat-num">30+</div>
-        <div class="ip-hero-stat-label">Tormentas documentadas</div>
+        <div class="ip-hero-stat-label"><%= t('equipo.stat2_lbl') %></div>
       </div>
       <div class="ip-hero-stat-item">
         <div class="ip-hero-stat-num">A+</div>
-        <div class="ip-hero-stat-label">Calificación BBB</div>
+        <div class="ip-hero-stat-label"><%= t('equipo.stat3_lbl') %></div>
       </div>
     </div>
   </div>
@@ -101,39 +122,39 @@
 
 <!-- DIRECTOR GENERAL -->
 <section class="section-wrap">
-  <div class="section-label reveal">Liderazgo</div>
+  <div class="section-label reveal"><%= t('equipo.director_label') %></div>
   <h2 class="section-title reveal">DIRECTOR <em>GENERAL.</em></h2>
   <div class="director-layout reveal">
     <div>
       <div class="director-badges">
-        <span class="director-badge director-badge--accent">Certificación Militar EUA</span>
-        <span class="director-badge director-badge--accent">Tecnología Patentada</span>
-        <span class="director-badge">Calificación A+ BBB</span>
-        <span class="director-badge">Reconocimiento Asegurador</span>
+        <span class="director-badge director-badge--accent"><%= t('equipo.director_cert1') %></span>
+        <span class="director-badge director-badge--accent"><%= t('equipo.director_cert2') %></span>
+        <span class="director-badge"><%= t('equipo.director_cert3') %></span>
+        <span class="director-badge"><%= t('equipo.director_cert4') %></span>
       </div>
-      <div class="director-name">Fernando Loría</div>
-      <div class="director-role">Director General · Hurricane Solution</div>
-      <p class="director-bio">Fernando Loría es reconocido como una de las principales autoridades en México en protección contra huracanes Categoría 5, riesgo por vientos extremos y estrategias de mitigación en condiciones reales para edificios costeros e infraestructura crítica.</p>
-      <p class="director-bio">Su trayectoria conecta el desempeño estructural con la evaluación del riesgo asegurador, enfocándose en cómo la mitigación certificada impacta la exposición a pérdidas y la continuidad operativa. Colabora activamente con propietarios hoteleros, desarrolladores e inversionistas para alinear la protección física con los criterios de asegurabilidad.</p>
+      <div class="director-name"><%= t('equipo.director_name') %></div>
+      <div class="director-role"><%= t('equipo.director_role') %></div>
+      <p class="director-bio"><%= t('equipo.director_bio') %></p>
+      <p class="director-bio"><%= t('equipo.director_bio2') %></p>
       <div class="director-quote">
-        <p>"Elevar la protección contra huracanes en México de una mejora opcional a un requisito esencial del desarrollo costero responsable."</p>
+        <p><%= t('equipo.director_quote') %></p>
       </div>
       <div class="director-certs">
         <div class="director-cert">
-          <div class="director-cert-title">Certificación Militar</div>
-          <div class="director-cert-body">Único sistema con certificación militar de los Estados Unidos en México. Level E — el mismo estándar que instalaciones esenciales del ejército.</div>
+          <div class="director-cert-title"><%= t('equipo.director_feat1_title') %></div>
+          <div class="director-cert-body"><%= t('equipo.director_feat1_body') %></div>
         </div>
         <div class="director-cert">
-          <div class="director-cert-title">Reconocimiento Asegurador</div>
-          <div class="director-cert-body">Reconocido por Chubb, AIG y Mapfre como medida de mitigación certificada. Puede reducir significativamente la prima anual de su póliza.</div>
+          <div class="director-cert-title"><%= t('equipo.director_feat2_title') %></div>
+          <div class="director-cert-body"><%= t('equipo.director_feat2_body') %></div>
         </div>
         <div class="director-cert">
-          <div class="director-cert-title">Tecnología Patentada</div>
-          <div class="director-cert-body">Sistema de anclaje patentado que garantiza estándares de desempeño real. Fabricado en EUA, certificado Miami-Dade NOA y Florida Building Code.</div>
+          <div class="director-cert-title"><%= t('equipo.director_feat3_title') %></div>
+          <div class="director-cert-body"><%= t('equipo.director_feat3_body') %></div>
         </div>
         <div class="director-cert">
-          <div class="director-cert-title">Evaluación Técnica</div>
-          <div class="director-cert-body">Supervisa la evaluación técnica de sistemas certificados y la estrategia de implementación en proyectos institucionales y de gran escala.</div>
+          <div class="director-cert-title"><%= t('equipo.director_feat4_title') %></div>
+          <div class="director-cert-body"><%= t('equipo.director_feat4_body') %></div>
         </div>
       </div>
     </div>
@@ -143,28 +164,28 @@
 <!-- EQUIPO DE CAMPO -->
 <section class="section-wrap" style="background:var(--offwhite)">
   <div class="reveal">
-    <div class="section-label">Nuestro equipo</div>
-    <h2 class="section-title">LAS PERSONAS DETRÁS DE<br><em>CADA INSTALACIÓN.</em></h2>
-    <p class="section-body" style="margin-top:16px">Cuando Hurricane Solution llega a su propiedad, llegan expertos, no vendedores. Cada miembro está capacitado para instalar, supervisar y operar bajo presión real.</p>
+    <div class="section-label"><%= t('equipo.team_label') %></div>
+    <h2 class="section-title"><%- t('equipo.team_title') %></h2>
+    <p class="section-body" style="margin-top:16px"><%= t('equipo.team_body') %></p>
   </div>
   <div class="team-grid">
     <div class="team-card reveal">
       <div class="team-avatar">FL</div>
       <div class="team-name">Fernando Loría</div>
-      <div class="team-role">Fundador y Director General</div>
-      <p class="team-body">Más de 15 años en protección contra huracanes en México. Ha estado presente en más de 30 tormentas y desarrollado soluciones que no existían en el mercado. Autoridad en mitigación, seguros y riesgo extremo.</p>
+      <div class="team-role"><%= t('equipo.team1_role') %></div>
+      <p class="team-body"><%= t('equipo.team1_body') %></p>
     </div>
     <div class="team-card placeholder reveal" style="transition-delay:.1s">
       <div class="team-avatar">+</div>
-      <div class="team-name">Equipo de Ingeniería</div>
-      <div class="team-role">Diseño & Certificación</div>
-      <p class="team-body">Nuestros ingenieros trabajan en cada proyecto asegurando que la solución funcione en condiciones reales. Cada instalación está respaldada por cálculos certificados y supervisión técnica.</p>
+      <div class="team-name"><%= t('equipo.team2_name') %></div>
+      <div class="team-role"><%= t('equipo.team2_role') %></div>
+      <p class="team-body"><%= t('equipo.team2_body') %></p>
     </div>
     <div class="team-card placeholder reveal" style="transition-delay:.2s">
       <div class="team-avatar">+</div>
-      <div class="team-name">Equipo de Campo</div>
-      <div class="team-role">Instalación & Operación</div>
-      <p class="team-body">Personal certificado con años de experiencia instalando bajo condiciones costeras extremas. Cada integrante puede desplegar el sistema completo en horas, sin grúas ni especialistas externos.</p>
+      <div class="team-name"><%= t('equipo.team3_name') %></div>
+      <div class="team-role"><%= t('equipo.team3_role') %></div>
+      <p class="team-body"><%= t('equipo.team3_body') %></p>
     </div>
   </div>
 </section>
@@ -172,19 +193,19 @@
 <!-- FILOSOFÍA -->
 <section class="section-wrap-dark">
   <div class="reveal">
-    <div class="section-label">Nuestra filosofía</div>
-    <h2 class="section-title">DOS PREGUNTAS.<br><em>SIEMPRE.</em></h2>
+    <div class="section-label"><%= t('equipo.phil_label') %></div>
+    <h2 class="section-title"><%- t('equipo.phil_title') %></h2>
   </div>
   <div class="way-grid">
     <div class="way-card reveal">
       <div class="way-num">01</div>
-      <div class="way-title">¿VA A FUNCIONAR CUANDO LLEGUE LA TORMENTA?</div>
-      <p class="way-body">Cada decisión de instalación parte de esta pregunta. No cerramos un trabajo si la respuesta es no, aunque el cliente quiera algo diferente. Nuestra reputación vale más que un contrato. Quince años sin un sistema que haya fallado nos respaldan.</p>
+      <div class="way-title"><%= t('equipo.phil_q1') %></div>
+      <p class="way-body"><%= t('equipo.phil_a1') %></p>
     </div>
     <div class="way-card reveal" style="transition-delay:.1s">
       <div class="way-num">02</div>
-      <div class="way-title">¿PUEDE SU EQUIPO INSTALARLO A TIEMPO?</div>
-      <p class="way-body">Un sistema que no puede desplegarse antes de la tormenta no protege nada. Diseñamos cada instalación pensando en el personal que va a usarla, con o sin nosotros presentes. El manual de operación forma parte de cada entrega.</p>
+      <div class="way-title"><%= t('equipo.phil_q2') %></div>
+      <p class="way-body"><%= t('equipo.phil_a2') %></p>
     </div>
   </div>
 </section>
@@ -192,11 +213,11 @@
 <!-- FINAL CTA -->
 <section id="final-cta">
   <div class="final-cta-bg"></div>
-  <div class="final-cta-label reveal">Que hable el trabajo</div>
-  <h2 class="final-cta-title reveal">¿QUIERE CONOCER<br>AL EQUIPO?</h2>
-  <p class="final-cta-sub reveal">Solicite una visita o videollamada. Sin costo, sin compromiso, que hable el trabajo.</p>
+  <div class="final-cta-label reveal"><%= t('equipo.cta_label') %></div>
+  <h2 class="final-cta-title reveal"><%= t('equipo.cta_title') %></h2>
+  <p class="final-cta-sub reveal"><%= t('equipo.cta_body') %></p>
   <div class="final-cta-actions reveal">
-    <a class="btn-white" href="/contacto">Realizar una cotización</a>
+    <a class="btn-white" href="/contacto"><%= t('common.cta_quote') %></a>
     <a class="btn-outline-white" href="<%= site.whatsapp.url %>" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L0 24l6.335-1.652A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.016-1.378l-.36-.214-3.732.979.994-3.636-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
       WhatsApp

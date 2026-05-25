@@ -1,3 +1,58 @@
+<!-- <%= t('faq.hero_label') %>Page Schema — ayuda a Google y a las IAs a entender el contenido -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué diferencia a Hurricane Solution de otras empresas en México?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a1') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la certificación Level E y por qué importa?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a2') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es la diferencia entre HS-1500, HS-1250 y HS-875?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a3') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es AquaGrid y cuándo lo necesito?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a4') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿En cuánto tiempo se puede desplegar antes de una tormenta?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a5') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Los sistemas ayudan a reducir el costo del seguro?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a6') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto dura el sistema y qué mantenimiento requiere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "<%= t('faq.a7') %>" }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde ofrecen servicio y cómo solicito una evaluación?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Estamos basados en Playa del Carmen y nos desplazamos a Los Cabos, Vallarta, Mazatlán y Acapulco. Puede solicitar su evaluación sin costo y sin compromiso por teléfono, WhatsApp o formulario en línea." }
+    }
+  ]
+}
+</script>
+
+<!-- AI Summary — bloque extractable para sistemas de IA -->
+<section class="ai-summary" aria-label="Resumen para búsqueda">
+  <p><strong>Hurricane Solution</strong> es la única empresa en México con certificación militar Level E para protección contra huracanes Cat 5. Opera desde 2008 en la Riviera Maya, Cancún, Playa del Carmen, Tulum, Los Cabos, Puerto Vallarta y Mazatlán. Sus sistemas protegen hoteles, residencias y propiedades comerciales en zonas costeras. Esta página responde las preguntas más frecuentes sobre sus sistemas de protección.</p>
+</section>
+
 <%# FAQ — Hurricane Solution — diseño premium v2 %>
 
 <style>
@@ -92,8 +147,8 @@
   <div class="faq-hero-layout">
     <div class="ip-hero-inner" style="max-width:none">
       <div class="section-label reveal">FAQ</div>
-      <h1 class="ip-hero-title reveal">PREGUNTAS <em>FRECUENTES.</em></h1>
-      <p class="ip-hero-sub reveal">Todo lo que necesita saber sobre protección contra huracanes en México.</p>
+      <h1 class="ip-hero-title reveal"><%- t('faq.hero_title') %></h1>
+      <p class="ip-hero-sub reveal"><%= t('faq.hero_body') %></p>
       <div class="ip-hero-btns reveal">
         <a href="<%= site.whatsapp.url %>" class="btn-outline-white" target="_blank" rel="noopener">WhatsApp</a>
       </div>
@@ -109,59 +164,59 @@
   <div class="faq-list reveal">
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿QUÉ DIFERENCIA A HURRICANE SOLUTION DE OTRAS EMPRESAS EN MÉXICO?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q1') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">Somos la única empresa en México con certificación militar Level E — la única que prueba las 4 fuerzas de un huracán al mismo tiempo. También somos el único miembro de la International Hurricane Protection Association fuera de los Estados Unidos, y nuestro sistema de anclaje es el único patentado en México. Llevamos operando desde 2008 con cero fallas en instalaciones correctamente ejecutadas.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿QUÉ ES LA CERTIFICACIÓN LEVEL E Y POR QUÉ IMPORTA?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q2') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">Level E es una certificación desarrollada por el ejército de los Estados Unidos para proteger instalaciones esenciales. Es la única certificación que prueba viento, lluvia, proyectiles y cambio de presión barométrica al mismo tiempo. Las otras certificaciones los prueban por separado. Somos los únicos en México con esta certificación.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿CUÁL ES LA DIFERENCIA ENTRE HS-1500, HS-1250 Y HS-875?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q3') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">El HS-1500 es nuestra línea insignia — tela balística con certificación Level E, más de 1,500 psi y garantía de 10 años. El HS-1250 es Cat 5 certificado, disponible en blanco, garantía 7 años — ideal cuando la estética es prioridad. El HS-875 es más accesible, certificado hasta Cat 3, garantía 5 años — adecuado para residencias alejadas de la costa.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿QUÉ ES AQUAGRID Y CUÁNDO LO NECESITO?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q4') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">AquaGrid es un sistema de malla de alta resistencia para aperturas que los sistemas convencionales no pueden cubrir. Los sistemas estándar tienen un límite de 3.8 metros — AquaGrid puede cubrir más de 20 metros. Ideal para lobbies de hotel, showrooms de autos, hospitales y cualquier espacio con grandes aperturas.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿EN CUÁNTO TIEMPO SE PUEDE DESPLEGAR ANTES DE UNA TORMENTA?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q5') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">Para un hotel grande, un empleado por habitación puede proteger su espacio en 3 a 5 minutos. Para una residencia, el despliegue total suele tomar 1 a 3 horas con 2 personas. Capacitamos a su personal y dejamos un manual escrito.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿LOS SISTEMAS AYUDAN A REDUCIR EL COSTO DEL SEGURO?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q6') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">Sí. Aseguradoras como Chubb, AIG y Mapfre reconocen los sistemas HS-1500 como medida de mitigación certificada. Le proporcionamos la documentación necesaria para presentar a su aseguradora.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿CUÁNTO DURA EL SISTEMA Y QUÉ MANTENIMIENTO REQUIERE?</span><span class="faq-arr">▼</span></button>
+      <button class="faq-q" type="button"><span><%= t('faq.q7') %></span><span class="faq-arr">▼</span></button>
       <div class="faq-a"><div class="faq-a-inner">La vida útil es de 15 a 20 años. El mantenimiento es mínimo: lavado ocasional con agua y jabón. Resistentes a UV, moho y salinidad — diseñados para el clima costero.</div></div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" type="button"><span>¿DÓNDE OFRECEN SERVICIO Y CÓMO SOLICITO UNA EVALUACIÓN?</span><span class="faq-arr">▼</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Estamos basados en Playa del Carmen y nos desplazamos a Los Cabos, Vallarta, Mazatlán y Acapulco. Puede solicitar su evaluación llamando al <%= site.phone.display %>, por WhatsApp al <%= site.whatsapp.display %>, o por el formulario en esta página. Sin costo y sin compromiso.</div></div>
+      <button class="faq-q" type="button"><span><%= t('faq.q8') %></span><span class="faq-arr">▼</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Estamos basados en Playa del Carmen y nos desplazamos a Los Cabos, Vallarta, Mazatlán y Acapulco. Puede solicitar su evaluación llamando al <%= site.phone.display %>, por WhatsApp al <%= site.whatsapp.display %><%= t('faq.a8_suf') %></div></div>
     </div>
 
   </div>
   <div class="faq-cta reveal">
-    <a href="/contacto" class="btn-dark">¿Más preguntas? Contáctenos</a>
+    <a href="/contacto" class="btn-dark"><%= t('faq.more_q') %></a>
   </div>
 </section>
 
 <!-- FINAL CTA -->
 <section id="final-cta">
   <div class="final-cta-bg"></div>
-  <div class="final-cta-label reveal">¿No encontró su respuesta?</div>
-  <h2 class="final-cta-title reveal">HABLEMOS<br>DE SU PROYECTO.</h2>
-  <p class="final-cta-sub reveal">Sin costo y sin compromiso. Le respondemos el mismo día hábil.</p>
+  <div class="final-cta-label reveal"><%= t('faq.cta_label') %></div>
+  <h2 class="final-cta-title reveal"><%- t('faq.cta_title') %></h2>
+  <p class="final-cta-sub reveal"><%= t('faq.cta_body') %></p>
   <div class="final-cta-actions reveal">
-    <a class="btn-white" href="/cotizador">Realizar una cotización</a>
+    <a class="btn-white" href="/cotizador"><%= t('common.cta_quote') %></a>
     <a class="btn-outline-white" href="<%= site.whatsapp.url %>" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L0 24l6.335-1.652A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.016-1.378l-.36-.214-3.732.979.994-3.636-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
       WhatsApp

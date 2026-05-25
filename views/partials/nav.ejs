@@ -1,16 +1,17 @@
 <%
   const navItems = [
-    { href: '/',            label: 'Inicio',          extraClass: '' },
-    { href: '/hoteles',     label: 'Hotelero',        extraClass: '' },
-    { href: '/residencial', label: 'Residencial',     extraClass: '' },
-    { href: '/comercial',   label: 'Comercial',       extraClass: '' },
-    { href: '/aquagrid',    label: 'AquaGrid',        extraClass: 'nav-ag' },
-    { href: '/rain',        label: 'Rain Protection', extraClass: '' },
-    { href: '/equipo',      label: 'El Equipo',       extraClass: '' },
-    { href: '/faq',         label: 'FAQ',             extraClass: '' },
-    { href: '/blog',        label: 'Blog',            extraClass: '' },
+    { href: '/',            label: t('nav.home'),        extraClass: '' },
+    { href: '/hoteles',     label: t('nav.hotels'),      extraClass: '' },
+    { href: '/residencial', label: t('nav.residential'), extraClass: '' },
+    { href: '/comercial',   label: t('nav.commercial'),  extraClass: '' },
+    { href: '/aquagrid',    label: t('nav.aquagrid'),    extraClass: 'nav-ag' },
+    { href: '/rain',        label: t('nav.rain'),        extraClass: '' },
+    { href: '/equipo',      label: t('nav.team'),        extraClass: '' },
+    { href: '/faq',         label: t('nav.faq'),         extraClass: '' },
+    { href: '/blog',        label: t('nav.blog'),        extraClass: '' },
   ];
   const isActive = (href) => href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(href + '/');
+  const currentLang = locals.lang || 'es';
 %>
 <nav id="main-nav">
   <div class="nav-logo">
@@ -27,10 +28,10 @@
     <% }) %>
   </ul>
   <div class="nav-right-group">
-    <button type="button" class="lang-btn" aria-label="Switch language (coming soon)">EN</button>
-    <a href="/cotizador" class="nav-cta nav-cta-desk">Cotizar Ahora</a>
+    <button type="button" class="lang-btn" id="langToggleBtn" aria-label="Switch language"><%= t('nav.lang_switch') %></button>
+    <a href="/cotizador" class="nav-cta nav-cta-desk"><%= t('nav.cta') %></a>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+  <button class="nav-burger" id="nav-burger" aria-label="<%= t('nav.menu_open') %>" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -45,27 +46,22 @@
       ><%= item.label %></a></li>
     <% }) %>
   </ul>
-  <a href="/cotizador" class="nav-drawer-cta">Cotizar Ahora</a>
+  <a href="/cotizador" class="nav-drawer-cta"><%= t('nav.cta') %></a>
 </div>
 <div class="nav-drawer-overlay" id="nav-drawer-overlay"></div>
 
 <style>
-  /* Grupo derecho: EN + Cotizar */
   .nav-right-group {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
   }
-
-  /* Logo proporcional a la barra de 80px */
   .nav-logo-img {
     height: 62px;
     width: auto;
     display: block;
   }
-
-  /* ════════ TABLET / LAPTOP PEQUEÑA < 1100px → hamburguesa ════════ */
   @media (max-width: 1100px) {
     .nav-logo-img { height: 44px !important; }
     nav { height: 68px !important; padding: 0 20px !important; }
@@ -73,8 +69,6 @@
     .nav-right-group { display: none !important; }
     .nav-burger { display: flex !important; }
   }
-
-  /* ════════ MÓVIL < 768px ════════ */
   @media (max-width: 768px) {
     .nav-logo-img { height: 38px !important; }
     nav { height: 60px !important; padding: 0 16px !important; }
@@ -83,26 +77,40 @@
 
 <script>
   (function () {
+    // ── Mobile burger ──────────────────────────────────────────────────
     var btn = document.getElementById('nav-burger');
     var drawer = document.getElementById('nav-drawer');
     var overlay = document.getElementById('nav-drawer-overlay');
-    if (!btn || !drawer || !overlay) return;
-    function open() {
-      drawer.classList.add('is-open');
-      overlay.classList.add('is-show');
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+    if (btn && drawer && overlay) {
+      function open() {
+        drawer.classList.add('is-open');
+        overlay.classList.add('is-show');
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        drawer.classList.remove('is-open');
+        overlay.classList.remove('is-show');
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      btn.addEventListener('click', function () { drawer.classList.contains('is-open') ? close() : open(); });
+      overlay.addEventListener('click', close);
+      drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
     }
-    function close() {
-      drawer.classList.remove('is-open');
-      overlay.classList.remove('is-show');
-      btn.classList.remove('is-active');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+
+    // ── Language toggle ────────────────────────────────────────────────
+    var langBtn = document.getElementById('langToggleBtn');
+    if (langBtn) {
+      langBtn.addEventListener('click', function () {
+        var current = '<%= currentLang %>';
+        var next = current === 'es' ? 'en' : 'es';
+        // Set cookie for 1 year
+        document.cookie = 'lang=' + next + ';path=/;max-age=31536000;SameSite=Lax';
+        location.reload();
+      });
     }
-    btn.addEventListener('click', function () { drawer.classList.contains('is-open') ? close() : open(); });
-    overlay.addEventListener('click', close);
-    drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
   })();
 </script>

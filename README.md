@@ -191,21 +191,6 @@ Si alguno falla, **NO hacer push** y arreglar antes.
 
 ---
 
-## Troubleshooting
-
-### El `/cotizador` se ve roto en Hostinger pero bien en local
-Casi siempre es **caché de assets**. El cache-busting (`?v=<assetVersion>`) recalcula `assetVersion` solo al arrancar el server, así que un Pull from Git sin Restart deja el query string igual y el browser sirve el CSS viejo.
-
-**Fix:** panel Hostinger → Node.js app → **Restart**. Luego abrir `/cotizador` en ventana de incógnito. Validar en DevTools → Network que `hurricane-widget.css?v=<numero>` cambió de número.
-
-### El step 2 "Tipo de propiedad" no muestra el dropdown
-Síntoma del bug clásico al portar CSS del plugin WordPress: alguna regla `display: none` para `.select-input` se coló de vuelta. Buscar en `public/css/hurricane-widget*.css` y eliminarla. Más detalle en `CLAUDE.md` §10.
-
-### Los inputs del cotizador se ven minúsculos / sin estilo
-Los `<input>` en `views/pages/cotizador.ejs` necesitan `class="text-input"` (location) o `class="form-input"` (form-row). El CSS estiliza por clase, no por selector de tipo.
-
----
-
 ## Documentación adicional
 
 - **`CLAUDE.md`** — contexto y convenciones para agentes IA que trabajen en el repo.

@@ -15,6 +15,13 @@
 }) %>
 </script>
 
+<!-- AI Summary dinámica — usa datos del post para que los crawlers la lean -->
+<section class="ai-summary" aria-label="Resumen del artículo">
+  <p><strong><%= post.title %></strong> — <%= post.meta_description || post.excerpt %></p>
+  <p>Artículo publicado por Hurricane Solution, empresa certificada de protección contra huracanes en México. Operando desde 2008 en Cancún, Playa del Carmen, Tulum, Riviera Maya, Los Cabos y toda la costa de México.</p>
+</section>
+
+
 <style>
 :root { --accent: #24b7db; --accent-glow: rgba(36,183,219,.5); }
 

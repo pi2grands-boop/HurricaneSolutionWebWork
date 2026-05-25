@@ -8,8 +8,8 @@
   <div class="container">
 
     <section class="hero">
-      <h1>Protección De Lonas Contra Huracanes</h1>
-      <p>Fabricados en EE.UU. con patentes exclusivas. Instalados por expertos en México.</p>
+      <h1><%= t('cotizador.page_title') %></h1>
+      <p><%= t('widget.subtitle') %></p>
     </section>
 
     <div class="badges-container">
@@ -31,49 +31,49 @@
     <div class="main-card">
 
       <div class="intro-text">
-        <h2>COTICE SU PROYECTO</h2>
-        <p>Fabricados en EE.UU. con patentes exclusivas. Instalados por expertos en México.</p>
+        <h2><%= t('widget.title') %></h2>
+        <p><%= t('widget.subtitle') %></p>
       </div>
 
       <div id="hurricaneFormSection">
 
         <div class="step">
-          <div class="step-label"><span class="step-number">1</span><span class="step-title">¿Dónde está ubicada tu propiedad?</span></div>
+          <div class="step-label"><span class="step-number">1</span><span class="step-title"><%= t('widget.step1_title') %></span></div>
           <div class="input-wrapper">
-            <input type="text" class="text-input" id="hurricaneLocationInput" placeholder="Escribe tu ciudad..." autocomplete="off">
+            <input type="text" class="text-input" id="hurricaneLocationInput" placeholder="<%= t('widget.step1_placeholder') %>" autocomplete="off">
             <div class="autocomplete" id="hurricaneAutocomplete"></div>
           </div>
         </div>
 
         <div class="step">
-          <div class="step-label"><span class="step-number">2</span><span class="step-title">Tipo de propiedad</span></div>
+          <div class="step-label"><span class="step-number">2</span><span class="step-title"><%= t('widget.step2_title') %></span></div>
           <div class="select-wrapper">
             <select class="select-input" id="hurricanePropertySelect">
-              <option value="">Selecciona una opción</option>
-              <option value="casa">Casa</option>
-              <option value="departamento">Departamento</option>
-              <option value="hotel">Hotel</option>
-              <option value="comercio">Comercio</option>
-              <option value="proyecto_construccion">Proyecto en Construcción</option>
-              <option value="torre">Torre con varios Departamentos</option>
+              <option value=""><%= t('widget.step2_default') %></option>
+              <option value="casa"><%= t('widget.opt_house') %></option>
+              <option value="departamento"><%= t('widget.opt_apt') %></option>
+              <option value="hotel"><%= t('widget.opt_hotel') %></option>
+              <option value="comercio"><%= t('widget.opt_commercial') %></option>
+              <option value="proyecto_construccion"><%= t('widget.opt_project') %></option>
+              <option value="torre"><%= t('widget.opt_tower') %></option>
             </select>
           </div>
         </div>
 
         <div class="price-box" id="hurricanePriceBox">
-          <div class="price-badge">Rango de precio aproximado</div>
-          <p class="price-location">En <strong id="hurricanePriceLocation">tu ubicación</strong></p>
+          <div class="price-badge"><%= t('widget.price_badge') %></div>
+          <p class="price-location">En <strong id="hurricanePriceLocation"><%= t('widget.price_location') %></strong></p>
           <p class="price-amount" id="hurricanePriceAmount">$130 - $170</p>
-          <p class="price-unit">Dólares USD por m²</p>
-          <p class="price-note" id="hurricanePriceNote">El precio final depende de las características constructivas, arquitectónicas, el metraje total y el tipo de sistema de instalación. Este rango es aproximado y se ajustará tras la valoración técnica de nuestro experto.</p>
-          <p class="price-cta-label">¿Te interesa una cotización más detallada?</p>
-          <button type="button" class="btn-interest" id="hurricaneInterestBtn">Sí, quiero cotizar sin compromiso</button>
+          <p class="price-unit"><%= t('widget.price_unit') %></p>
+          <p class="price-note" id="hurricanePriceNote"><%= t('widget.price_note') %></p>
+          <p class="price-cta-label"><%= t('widget.price_cta_label') %></p>
+          <button type="button" class="btn-interest" id="hurricaneInterestBtn"><%= t('widget.price_cta_btn') %></button>
         </div>
 
         <div class="contact-box" id="hurricaneContactBox">
           <div class="contact-title">
-            <h3>¡Excelente elección!</h3>
-            <p>Déjanos tus datos y te contactamos por WhatsApp.</p>
+            <h3><%= t('widget.contact_title') %></h3>
+            <p><%= t('widget.contact_subtitle') %></p>
           </div>
           <form id="hurricaneQuoteForm" data-form="quote" action="/api/lead" method="POST" novalidate>
             <input type="text" name="hp_field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
@@ -83,9 +83,9 @@
               <input id="hurricaneNameInput" class="form-input" name="full_name" type="text" placeholder="Tu nombre" required>
               <input id="hurricanePhoneInput" class="form-input" name="phone" type="tel" inputmode="tel" placeholder="WhatsApp (10 dígitos)" required>
             </div>
-            <button type="submit" class="btn-whatsapp" id="hurricaneSubmitBtn" disabled>Enviar solicitud</button>
-            <p class="btn-hint">Un especialista te contactará por WhatsApp.</p>
-            <button type="button" class="btn-back" id="hurricaneBackBtn">← Volver atrás</button>
+            <button type="submit" class="btn-whatsapp" id="hurricaneSubmitBtn" disabled><%= t('widget.contact_submit') %></button>
+            <p class="btn-hint"><%= t('widget.contact_hint') %></p>
+            <button type="button" class="btn-back" id="hurricaneBackBtn"><%= t('widget.contact_back') %></button>
           </form>
         </div>
 
@@ -93,20 +93,20 @@
 
       <div class="success-box" id="hurricaneSuccessBox">
         <div class="success-icon">✓</div>
-        <h3>¡Solicitud enviada!</h3>
-        <p>Un especialista de Hurricane Solution te contactará por WhatsApp para darte una cotización personalizada.</p>
-        <button type="button" class="btn-reload">Hacer otra consulta</button>
+        <h3><%= t('widget.success_title') %></h3>
+        <p><%= t('widget.success_body') %></p>
+        <button type="button" class="btn-reload"><%= t('widget.success_btn') %></button>
       </div>
 
     </div>
 
     <div class="info-section">
       <div class="warranty">
-        <div class="warranty-title">Garantías por sistema</div>
+        <div class="warranty-title"><%= t('widget.warranty_title') %></div>
         <div class="warranty-items">
-          <div class="warranty-item"><strong>HS-1500:</strong> 10 años</div>
-          <div class="warranty-item"><strong>HS-1250:</strong> 7 años</div>
-          <div class="warranty-item"><strong>HS-875:</strong> 5 años</div>
+          <div class="warranty-item"><strong>HS-1500:</strong> <%= t('common.years_10') %></div>
+          <div class="warranty-item"><strong>HS-1250:</strong> <%= t('common.years_7') %></div>
+          <div class="warranty-item"><strong>HS-875:</strong> <%= t('common.years_5') %></div>
         </div>
       </div>
     </div>

@@ -1,3 +1,23 @@
+<!-- Schema CollectionPage + ai-summary — blog -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Blog — Hurricane Solution",
+  "description": "Artículos sobre protección contra huracanes, temporadas, consejos de preparación y sistemas de protección para hoteles y propiedades costeras en México.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hurricane Solution",
+    "url": "https://hurricanesolution.com"
+  },
+  "about": ["protección contra huracanes en México", "sistemas Cat 5", "hoteles en zona costera", "rain protection", "Riviera Maya"]
+}
+</script>
+
+<section class="ai-summary" aria-label="Resumen para búsqueda">
+  <p>El blog de Hurricane Solution publica artículos sobre protección contra huracanes en México, sistemas certificados Cat 5, preparación ante tormentas, protección de lluvia para hoteles y restaurantes, y guías para propiedades costeras en la Riviera Maya, Cancún, Los Cabos y toda la costa de México.</p>
+</section>
+
 <style>
 /* ── VARIABLES ─────────────────────────────────────────────────────── */
 :root {
@@ -329,8 +349,8 @@
 <section class="blog-hero">
   <div class="blog-hero-inner">
     <div class="blog-hero-eyebrow reveal">Blog</div>
-    <h1 class="blog-hero-title reveal">CONSEJOS,<br>GUÍAS &amp;<br><em>NOVEDADES.</em></h1>
-    <p class="blog-hero-sub reveal">Información sobre protección contra huracanes, temporadas, certificaciones y todo lo que necesitas saber para proteger tu propiedad.</p>
+    <h1 class="blog-hero-title reveal"><%- t('blog.hero_title') %></h1>
+    <p class="blog-hero-sub reveal"><%= t('blog.hero_sub') %></p>
   </div>
 </section>
 

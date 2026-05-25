@@ -69,6 +69,20 @@
     cursor: pointer;
     color: #888;
   }
+  input[type="datetime-local"] {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    outline: none;
+    transition: border-color .2s;
+  }
+  input[type="datetime-local"]:focus { border-color: #ffa000; }
+  #opt-sched.selected { border-color: #ffa000; }
+  #opt-sched.selected .radio-dot { background: #ffa000; box-shadow: 0 0 0 3px rgba(255,160,0,.2); }
 
   .image-preview {
     margin-top: 12px;
@@ -292,6 +306,35 @@
       <div class="form-section">
         <div class="form-section-title">Publicación</div>
 
+        <!-- Idioma -->
+        <div class="field">
+          <label>Idioma del post</label>
+          <div class="radio-group">
+            <label class="radio-opt <%= (!post || (post.lang || 'es') === 'es') ? 'selected' : '' %>" id="opt-es">
+              <input type="radio" name="lang" value="es"
+                     <%= (!post || (post.lang || 'es') === 'es') ? 'checked' : '' %> />
+              <div class="radio-dot"></div> 🇲🇽 Español
+            </label>
+            <label class="radio-opt <%= (post && post.lang === 'en') ? 'selected' : '' %>" id="opt-en">
+              <input type="radio" name="lang" value="en"
+                     <%= (post && post.lang === 'en') ? 'checked' : '' %> />
+              <div class="radio-dot"></div> 🇺🇸 English
+            </label>
+          </div>
+        </div>
+
+        <!-- canonical_slug -->
+        <div class="field">
+          <label for="canonical_slug">URL del post (canonical slug)</label>
+          <input type="text" id="canonical_slug" name="canonical_slug"
+                 value="<%= post ? (post.canonical_slug || post.slug || '') : '' %>"
+                 placeholder="se-genera-del-titulo" />
+          <div class="field-hint">
+            Misma URL para ES e EN. Los posts en ambos idiomas con el mismo slug se muestran como par.
+          </div>
+        </div>
+
+        <!-- Estado -->
         <div class="field">
           <label>Estado</label>
           <div class="radio-group">
@@ -300,13 +343,26 @@
                      <%= (!post || post.status === 'draft') ? 'checked' : '' %> />
               <div class="radio-dot"></div> Borrador
             </label>
+            <label class="radio-opt <%= (post && post.status === 'scheduled') ? 'selected' : '' %>" id="opt-sched">
+              <input type="radio" name="status" value="scheduled"
+                     <%= (post && post.status === 'scheduled') ? 'checked' : '' %> />
+              <div class="radio-dot"></div> ⏰ Programar
+            </label>
             <label class="radio-opt <%= (post && post.status === 'published') ? 'selected' : '' %>" id="opt-pub">
               <input type="radio" name="status" value="published"
                      <%= (post && post.status === 'published') ? 'checked' : '' %> />
               <div class="radio-dot"></div> Publicado
             </label>
           </div>
-          <div class="field-hint">Borrador = solo visible en el admin. Publicado = visible en el blog.</div>
+          <div class="field-hint">Borrador = solo en admin. Programar = se publica automáticamente a la hora elegida.</div>
+        </div>
+
+        <!-- Fecha de programación (visible solo si status=scheduled) -->
+        <div class="field" id="scheduled-at-field" style="<%= (post && post.status === 'scheduled') ? '' : 'display:none' %>">
+          <label for="scheduled_at">Fecha y hora de publicación</label>
+          <input type="datetime-local" id="scheduled_at" name="scheduled_at"
+                 value="<%= (post && post.scheduled_at) ? new Date(post.scheduled_at).toISOString().slice(0,16) : '' %>" />
+          <div class="field-hint">Se publicará automáticamente en esta fecha. Usa hora local.</div>
         </div>
 
         <div class="field">
@@ -464,6 +520,22 @@
   updateCounter('meta_description', 'meta-desc-count', 160);
 
   // ── Radio buttons de estado ────────────────────────
+  // Lang radio
+  document.querySelectorAll('input[name="lang"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.querySelectorAll('label[id^="opt-e"]').forEach(function(l) { l.classList.remove('selected'); });
+      if (this.checked) this.closest('label').classList.add('selected');
+    });
+  });
+
+  // Scheduling field toggle
+  document.querySelectorAll('input[name="status"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.getElementById('scheduled-at-field').style.display =
+        this.value === 'scheduled' ? '' : 'none';
+    });
+  });
+
   document.querySelectorAll('input[name="status"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
       document.querySelectorAll('.radio-opt').forEach(function(opt) {

@@ -39,6 +39,7 @@ import { blogRouter } from './routes/blog.js';
 import { adminRouter } from './routes/admin.js';
 
 import { site } from './data/site.js';
+import { i18nMiddleware } from './middleware/i18n.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -98,6 +99,9 @@ app.use(
     etag: true,
   }),
 );
+
+// i18n — detectar idioma y proveer t() a todas las vistas
+app.use(i18nMiddleware);
 
 // Healthcheck (antes de rutas con render para que no dependa de vistas)
 app.get('/healthz', (_req, res) => {

@@ -36,16 +36,17 @@
 <meta name="twitter:image" content="<%= ogImage %>" />
 
 <% if (currentPath === '/') { %>
-<!-- JSON-LD LocalBusiness -->
+<!-- JSON-LD Organization + LocalBusiness -->
 <script type="application/ld+json">
 <%- JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'Organization'],
   name: site.name,
   description: site.description,
   url: baseUrl,
   telephone: site.phone.e164,
   email: site.email,
+  foundingDate: '2008',
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.address.street,
@@ -54,7 +55,40 @@
     postalCode: site.address.postalCode,
     addressCountry: 'MX',
   },
-  areaServed: ['MX'],
+  areaServed: [
+    { '@type': 'City', name: 'Cancún' },
+    { '@type': 'City', name: 'Playa del Carmen' },
+    { '@type': 'City', name: 'Tulum' },
+    { '@type': 'City', name: 'Riviera Maya' },
+    { '@type': 'City', name: 'Los Cabos' },
+    { '@type': 'City', name: 'Puerto Vallarta' },
+    { '@type': 'City', name: 'Mazatlán' },
+    { '@type': 'City', name: 'Acapulco' },
+    { '@type': 'Country', name: 'México' },
+  ],
+  knowsAbout: [
+    'protección contra huracanes',
+    'sistemas de protección Cat 5',
+    'certificación Level E',
+    'tela balística para huracanes',
+    'protección de lluvia para hoteles',
+    'rain protection para restaurantes',
+    'AquaGrid para grandes aperturas',
+    'Miami-Dade NOA',
+    'Florida Building Code',
+    'hoteles en zonas costeras de México',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Sistemas de Protección Hurricane Solution',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'HS-1500 — Certificación Level E Cat 5' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'HS-1250 — Protección Cat 5 Translúcido' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'HS-875 — Protección Cat 3' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AquaGrid — Grandes aperturas' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Rain Protection — Terrazas y restaurantes' } },
+    ],
+  },
   image: ogImage,
   sameAs: [
     site.social.facebook,
@@ -66,6 +100,17 @@
 </script>
 <% } %>
 
+<style>
+  /* Bloque para crawlers de IA y buscadores — invisible para usuarios */
+  .ai-summary {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+  }
+</style>
 <!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

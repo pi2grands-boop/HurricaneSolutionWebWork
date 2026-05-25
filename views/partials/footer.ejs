@@ -4,7 +4,7 @@
       <a class="footer-logo" href="/" aria-label="Hurricane Solution — inicio">
         <img src="/img/hs-logo.png" alt="Hurricane Solution" class="footer-logo-img" />
       </a>
-      <p class="footer-desc">El único sistema con certificación militar Level E en México. Protegiendo hoteles, empresas y residencias desde 2008.</p>
+      <p class="footer-desc"><%= t('footer.desc') %></p>
       <div class="footer-social">
         <a href="<%= site.social.instagram %>" rel="noopener" target="_blank" class="social-icon-btn sib-instagram" aria-label="Instagram">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -21,37 +21,38 @@
       </div>
     </div>
     <div class="fc">
-      <div class="footer-col-title">Sistemas</div>
+      <div class="footer-col-title"><%= t('footer.col_systems') %></div>
       <ul class="footer-col-links">
-        <li><a href="/hoteles">Hotelero</a></li>
-        <li><a href="/residencial">Residencial</a></li>
-        <li><a href="/comercial">Comercial</a></li>
+        <li><a href="/hoteles"><%= t('footer.link_hotels') %></a></li>
+        <li><a href="/residencial"><%= t('nav.residential') %></a></li>
+        <li><a href="/comercial"><%= t('nav.commercial') %></a></li>
         <li><a href="/aquagrid">AquaGrid</a></li>
         <li><a href="/rain">Rain Protection</a></li>
       </ul>
     </div>
     <div class="fc">
-      <div class="footer-col-title">Empresa</div>
+      <div class="footer-col-title"><%= t('footer.col_company') %></div>
       <ul class="footer-col-links">
-        <li><a href="/equipo">El Equipo</a></li>
+        <li><a href="/equipo"><%= t('footer.link_team') %></a></li>
         <li><a href="/faq">FAQ</a></li>
         <li><a href="/#hs-1500">HS-1500</a></li>
         <li><a href="/#hs-1250">HS-1250</a></li>
         <li><a href="/#hs-875">HS-875</a></li>
+        <li><a href="/about-ai" style="opacity:.45;font-size:.75em">Sobre Hurricane Solution</a></li>
       </ul>
     </div>
     <div class="fc">
-      <div class="footer-col-title">Contacto</div>
+      <div class="footer-col-title"><%= t('footer.col_contact') %></div>
       <ul class="footer-col-links">
         <li><a href="<%= site.phone.href %>"><%= site.phone.display %></a></li>
         <li><a href="<%= site.whatsapp.url %>" rel="noopener" target="_blank">WhatsApp</a></li>
         <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
-        <li><a href="/cotizador">Cotizar ahora</a></li>
+        <li><a href="/cotizador"><%= t('footer.link_quote') %></a></li>
       </ul>
     </div>
   </div>
   <div class="fbot">
-    <span class="footer-copy">© <%= site.year %> <%= site.name %>. Todos los derechos reservados.</span>
+    <span class="footer-copy">© <%= site.year %> <%= site.name %>. <%= t('footer.rights') %></span>
     <span class="footer-copy"><%= site.address.city %>, <%= site.address.state %>, <%= site.address.country %></span>
   </div>
 </footer>
